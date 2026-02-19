@@ -3,91 +3,782 @@
 %           Capítulo 3: NOMBRE                   %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Diseño del experimento}
-En este capítulo, se presenta la introducción al desarrollo de la tesis, ya sea el modelo matemático o las bases del proyecto, etc.
-Ejemplo de cita  [\citet{latex}]
-Ejemplo de cita [\citeauthor{RR73}]
- % The \cite command functions as follows:
- %   \citet{key} ==>>                Jones et al. (1990)
- %   \citet*{key} ==>>               Jones, Baker, and Smith (1990)
- %   \citep{key} ==>>                (Jones et al., 1990)
- %   \citep*{key} ==>>               (Jones, Baker, and Smith, 1990)
- %   \citep[chap. 2]{key} ==>>       (Jones et al., 1990, chap. 2)
- %   \citep[e.g.][]{key} ==>>        (e.g. Jones et al., 1990)
- %   \citep[e.g.][p. 32]{key} ==>>   (e.g. Jones et al., p. 32)
- %   \citeauthor{key} ==>>           Jones et al.
- %   \citeauthor*{key} ==>>          Jones, Baker, and Smith
- %   \citeyear{key} ==>>             1990
+\chapter{Métodos}
+
+En este capítulo se describen los métodos matemáticos y numéricos empleados
+para analizar los sistemas dinámicos estudiados en este trabajo. Primero,
+se presentan los fundamentos teóricos, incluyendo el Teorema de la Función
+Implícita y la técnica de continuación por pseudo-longitud de arco. Luego,
+se desarrollan los sistemas extendidos para continuar ramas de equilibrio,
+detectar bifurcaciones y estudiar órbitas periódicas, incluyendo su
+duplicación de periodo. Finalmente, se introduce la sección de Poincaré
+como herramienta para visualizar la dinámica en el espacio de fases y
+reconocer estructuras periódicas y caóticas.
+
+\section{Teorema de la Función Implícita}
+
+Para establecer la existencia, unicidad, parametrización y diferenciabilidad
+de las soluciones de un sistema de ecuaciones no lineales, es fundamental recurrir
+a resultados clásicos del análisis funcional, en particular al Teorema de la
+Función Implícita y a sus extensiones \cite{Doedel2007}.
+
+\begin{theorem}[Teorema de la Función Implícita]
+    Sea $\mathbf{G} : \mathcal{B} \times \mathbb{R}^m \to \mathcal{B}$, donde
+    $\mathcal{B}$ es un espacio de Banach y $m \in \mathbb{N}$, que satisface
+    las siguientes condiciones:
+
+    \begin{itemize}
+        \item $ \mathbf{G}(\mathbf{u}_0, \boldsymbol{\lambda}_0) = 0 $, para
+              $ \mathbf{u}_0 \in \mathcal{B} $ y $ \boldsymbol{\lambda}_0 \in \mathbb{R}^m $.
+
+        \item $ \mathbf{G}_{\mathbf{u}}(\mathbf{u}_0, \boldsymbol{\lambda}_0) $ es
+              invertible con inversa acotada, es decir,
+              $ \|\mathbf{G}_{\mathbf{u}}(\mathbf{u}_0, \boldsymbol{\lambda}_0)^{-1} \| < M $
+              para algún $ M > 0 $.
+
+        \item $\mathbf{G}$ y $\mathbf{G}_{\mathbf{u}}$ son continuas de Lipschitz. En particular,
+              para todo $\mathbf{u}, \mathbf{v} \in S_\rho(\mathbf{u}_0) = \{\mathbf{u} \in
+                  \mathcal{B}\ |\ \|\mathbf{u}_0 - \mathbf{u}\| \leq \rho \} $ y para todo
+              $\boldsymbol{\lambda}, \boldsymbol{\mu} \in S_\rho(\boldsymbol{\lambda}_0)$,
+              existe una constante $K_L > 0$ tal que:
+              \begin{align*}
+                  \| \mathbf{G}(\mathbf{u},\boldsymbol{\lambda}) - \mathbf{G}(\mathbf{v},\boldsymbol{\mu})\| & \leq
+                  K_L\big(\|\mathbf{u}-\mathbf{v}\| + \|\boldsymbol{\lambda}-\boldsymbol{\mu}\|\big),                                                   \\[6pt]
+                  \| \mathbf{G}_{\mathbf{u}}(\mathbf{u},\boldsymbol{\lambda}) - \mathbf{G}_{\mathbf{u}}(\mathbf{v},
+                  \boldsymbol{\mu})\|                                                                        & \leq K_L\big(\|\mathbf{u}-\mathbf{v}\| +
+                  \|\boldsymbol{\lambda}-\boldsymbol{\mu}\|\big).
+              \end{align*}
+    \end{itemize}
+
+    Entonces, existe $\delta$, con $0 < \delta \leq \rho$, y una función
+    $\mathbf{u}(\boldsymbol{\lambda})$ única y continua en $S_{\delta}(\boldsymbol{\lambda}_0)$
+    tal que \deleted{\cite{Doedel2007}}:
+    \begin{itemize}
+        \item $\mathbf{u}(\boldsymbol{\lambda}_0) = \mathbf{u}_0$,
+        \item $\mathbf{G}(\mathbf{u}(\boldsymbol{\lambda}), \boldsymbol{\lambda}) = 0$
+              para toda $ \boldsymbol{\lambda} \in S_{\delta}(\boldsymbol{\lambda}_0)$.
+    \end{itemize}
+    \label{th:IFT}
+\end{theorem}
+
+\begin{theorem}
+    Bajo las hipótesis del Teorema de la Función Implícita, si además la
+    derivada $\mathbf{G}_{\boldsymbol{\lambda}}(\mathbf{u},\boldsymbol{\lambda})$ es continua
+    en $S_\rho(\mathbf{u}_0) \times S_\rho(\boldsymbol{\lambda}_0)$ \cite{Doedel2007},
+    entonces la rama de soluciones $\mathbf{u}(\boldsymbol{\lambda})$ posee una derivada
+    continua respecto de $\boldsymbol{\lambda}$, es decir,
+    $\mathbf{u}_{\boldsymbol{\lambda}}(\boldsymbol{\lambda})$, en
+    $S_\delta(\mathbf{u}_0) \times S_\delta(\boldsymbol{\lambda}_0)$.
+    \label{th:Differentiation}
+\end{theorem}
+
+En este contexto, si $\mathbf{G}(\mathbf{u},\boldsymbol{\lambda}_0)=0$ representa un sistema
+de ecuaciones y $\mathbf{G}_{\mathbf{u}}(\mathbf{u}_0,\boldsymbol{\lambda}_0)$ es invertible con
+inversa acotada, se dice que $\mathbf{u}_0$ es una \emph{solución aislada} de
+$\mathbf{G}(\mathbf{u},\boldsymbol{\lambda}_0)=0$ \cite{Doedel2007}. Bajo estas condiciones,
+y suponiendo la continuidad de Lipschitz de $\mathbf{G}$, el Teorema de la Función Implícita
+garantiza la existencia de una \emph{rama de soluciones}
+$\mathbf{u} = \mathbf{u}(\boldsymbol{\lambda})$ definida localmente, con
+$\mathbf{u}(\boldsymbol{\lambda}_0)=\mathbf{u}_0$ y única en un entorno de
+$\boldsymbol{\lambda}_0$ \cite{Doedel2007}.
+
+
+
+\section{Continuación por Pseudo-Longitud de Arco}
+
+Sea $ \mathbf{G} : \mathbb{R}^{n+1} \to \mathbb{R}^n$ una función que cumple
+las hipótesis del Teorema de la Función Implícita. \replaced{Sea}{Consideremos}
+$ \mathbf{u} \in \mathbb{R}^n $ y $ \lambda \in \mathbb{R} $, con $n \in \mathbb{N}$.
+En estas condiciones, la función $ \mathbf{u}(\lambda) \in \mathbb{R}^n $ existe,
+es continua y además derivable respecto a $\lambda$ \cite{Doedel2007,Allgower1990}.
+
+Para resolver el sistema $ \mathbf{G}(\mathbf{u}, \lambda) = 0 $ para un valor fijo de
+$ \lambda $, se utiliza el método de Newton-Rhapson, el cual se escribe como:
+
+\begin{equation}
+    \begin{cases}
+        \mathbf{G}_{\mathbf{u}}(\mathbf{u}^{(\nu)}, \lambda)
+        \Delta \mathbf{u}^{(\nu)} = - \mathbf{G}(\mathbf{u}^{(\nu)}, \lambda), \\
+        \mathbf{u}^{(\nu + 1)} = \mathbf{u}^{(\nu)} + \Delta \mathbf{u}^{(\nu)},
+        \qquad \nu = 0, 1, 2, \dots
+    \end{cases}
+    \label{eq:NR_parameter}
+\end{equation}
+
+La efectividad de este método depende crucialmente de la elección del punto inicial
+$ ( \mathbf{u}^{(0)}, \lambda ) $, pues de ello depende la convergencia del procedimiento.
+Una estrategia común consiste en partir de una solución conocida
+$ ( \mathbf{u}_0, \lambda_0 ) $ tal que $ \mathbf{G}( \mathbf{u}_0, \lambda_0 ) = 0 $.
+Gracias a la derivabilidad de $ \mathbf{u}(\lambda) $, se puede obtener un punto inicial
+$ \mathbf{u}^{(0)} $ suficientemente cercano a $ \mathbf{u} $ mediante una aproximación lineal:
+
+\begin{equation}
+    \mathbf{u}^{(0)} = \mathbf{u}_0 + (\lambda - \lambda_0)\left.\dfrac{d\mathbf{u}}{d\lambda}\right|_{\lambda_0}.
+    \label{eq:parameter_step}
+\end{equation}
+
+La convergencia será más rápida cuanto más próximo sea $ \lambda $ a $ \lambda_0 $.
+Una vez obtenida la solución mediante \eqref{eq:NR_parameter}, esta pasa a convertirse
+en el nuevo punto de partida en \eqref{eq:parameter_step}, permitiendo así calcular
+sucesivamente nuevas soluciones de la \emph{rama de soluciones}.
+Este procedimiento recibe el nombre de \emph{continuación de parámetro} \cite{Doedel2007,Keller1977}.
+
+Reescribiendo la notación, sea $\mathbf{x} = ( \mathbf{u}, \lambda )
+    \in \mathbb{R}^{n + 1} $. Una solución $\mathbf{x}_0$ de $\mathbf{G}(\mathbf{x}) = 0$
+se denomina \emph{regular} si la matriz Jacobiana $ \mathbf{G}_{\mathbf{x}}(\mathbf{x}_0) $,
+de tamaño $n \times (n+1)$, tiene rango máximo. Es decir, si
+\[
+    \mathrm{Rank}(\mathbf{G}_{\mathbf{x}}(\mathbf{x}_0)) = n
+    \quad \text{y} \quad
+    \mathrm{Nullity}(\mathbf{G}_{\mathbf{x}}(\mathbf{x}_0)) = 1.
+\]
+
+Como se establece en \cite{Doedel2007}, se cumple el siguiente resultado:
+
+\begin{theorem}
+    Sea $\mathbf{x}_0 \equiv (\mathbf{u}_0, \lambda_0)$ una solución regular
+    de $\mathbf{G}(\mathbf{x}) = 0$. Entonces, en un entorno de
+    $\mathbf{x}_0$, existe un continuo unidimensional de soluciones
+    $\mathbf{x}(s)$, denominado \emph{familia de soluciones} o \emph{rama de soluciones},
+    tal que $\mathbf{x}(0) = \mathbf{x}_0$.
+    \label{th:RegularSolution}
+\end{theorem}
+
+El teorema anterior garantiza que, aunque el Jacobiano
+$ \mathbf{G}_{\mathbf{u}}(\mathbf{x}_0) $ pueda volverse singular,
+en una solución regular sigue existiendo una parametrización en el sentido del
+Teorema de la Función Implícita. Esto se logra reemplazando una de las columnas linealmente
+dependientes del Jacobiano por la columna $ \mathbf{G}_{\lambda}(\mathbf{x}_0) $,
+lo que sugiere que el parámetro de la rama de soluciones puede pasar a ser una de las
+coordenadas de $\mathbf{u}_0$ en lugar de $ \lambda_0 $.
+
+Este resultado es fundamental, pues permite inducir una parametrización más general
+de $ \mathbf{x}(s) = ( \mathbf{u}(s), \lambda(s)) $, con
+$ \mathbf{G}(\mathbf{x}(s)) = 0 $ y $\mathbf{x}(0) = \mathbf{x}_0$ solución regular.
+Además, su derivada $\mathbf{x}' (0) = \tfrac{d\mathbf{x}_0}{ds}$
+existe y pertenece al espacio nulo de $ \mathbf{G}_{\mathbf{x}}(\mathbf{x}_0)$, es decir,
+\begin{equation}
+    \mathbf{G}'(0) = \mathbf{G}_{\mathbf{x}}(\mathbf{x}) \mathbf{x}'(0) = 0.
+    \label{eq:tangent_direction}
+\end{equation}
+
+Para llevar a cabo la continuación de soluciones regulares se utiliza el método de
+\emph{continuación por pseudo-longitud de arco} propuesto por Keller \cite{Keller1977}.
+\replaced{Si}{Supongamos que} se dispone de una solución regular $(\mathbf{u}_0, \lambda_0)$ de
+$\mathbf{G}(\mathbf{u}, \lambda) = 0$, junto con el vector tangente
+$(\mathbf{u}'_0, \lambda'_0)$ obtenido del espacio nulo en dicha solución.
+La continuación por pseudo-longitud de arco plantea el siguiente sistema para
+$(\mathbf{u}_1, \lambda_1)$:
+\begin{equation}
+    \begin{cases}
+        \mathbf{G}(\mathbf{u}_1, \lambda_1) = 0, \\
+        (\mathbf{u}_1 - \mathbf{u}_0)^T \mathbf{u}'_0 +
+        (\lambda_1 - \lambda_0) \lambda'_0
+        - \Delta s = 0,
+    \end{cases}
+    \label{eq:System_PALC}
+\end{equation}
+donde $\Delta s$ representa el paso en la parametrización a lo largo de la rama de soluciones.
+
+El método de Newton-Rhapson para resolver este sistema se escribe como:
+\begin{equation}
+    \begin{pmatrix}
+        \left(\mathbf{G}_{\mathbf{u}}^1\right)^{(\nu)} & \left(\mathbf{G}_{\lambda}^1\right)^{(\nu)} \\[6pt]
+        \mathbf{u}_0'^{\ T}                            & \lambda'_0
+    \end{pmatrix}
+    \begin{pmatrix}
+        \Delta \mathbf{u}_1^{(\nu)} \\[6pt]
+        \Delta \lambda_1^{(\nu)}
+    \end{pmatrix}
+    = -
+    \begin{pmatrix}
+        \mathbf{G}(\mathbf{u}_1^{(\nu)}, \lambda_1^{(\nu)}) \\[6pt]
+        (\mathbf{u}_1^{(\nu)} - \mathbf{u}_0)^T \mathbf{u}'_0 +
+        (\lambda_1^{(\nu)} - \lambda_0) \lambda'_0
+        - \Delta s
+    \end{pmatrix},
+    \label{eq:NR_PALC}
+\end{equation}
+donde
+\begin{equation}
+    \begin{pmatrix}
+        \mathbf{u}_1^{(0)} \\[6pt]
+        \lambda_1^{(0)}
+    \end{pmatrix} =
+    \begin{pmatrix}
+        \mathbf{u}_0 \\[6pt]
+        \lambda_0
+    \end{pmatrix}
+    + \Delta s
+    \begin{pmatrix}
+        \mathbf{u}'_0 \\[6pt]
+        \lambda'_0
+    \end{pmatrix}.
+    \label{eq:first_step_PALC}
+\end{equation}
+
+
+Con el fin de evitar el recálculo del espacio nulo del Jacobiano en cada iteración,
+se actualizan las direcciones resolviendo:
+\begin{equation}
+    \begin{pmatrix}
+        \mathbf{G}_{\mathbf{u}}^1 & \mathbf{G}_{\lambda}^1 \\[6pt]
+        \mathbf{u}_0'^{\ T}       & \lambda'_0
+    \end{pmatrix}
+    \begin{pmatrix}
+        \mathbf{u}'_1 \\[6pt]
+        \lambda'_1
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        0 \\[6pt] 1
+    \end{pmatrix},
+    \label{eq:new_directions}
+\end{equation}
+y posteriormente se reescala cada nueva dirección de manera que
+$ \lVert \mathbf{u}'_1 \rVert^2 + \lVert \lambda'_1 \rVert^2 = 1 $ \cite{Doedel2007}.
+
+
+\begin{algorithm}[H]
+    \caption{Continuación por Pseudo-Longitud de Arco (PALC)}
+    \KwIn{Solución regular inicial $(\mathbf{u}_0, \lambda_0)$, vector tangente $(\dot{\mathbf{u}}_0, \dot{\lambda}_0)$, paso $\Delta s$}
+    \KwOut{Rama de soluciones}
+
+    \textbf{Paso 1: Predicción} \\
+    Calcular el punto inicial para el paso de continuación:
+    \[
+        \begin{pmatrix} \mathbf{u}_1^{(0)} \\ \lambda_1^{(0)} \end{pmatrix} =
+        \begin{pmatrix} \mathbf{u}_0 \\ \lambda_0 \end{pmatrix}
+        + \Delta s
+        \begin{pmatrix} \dot{\mathbf{u}}_0 \\ \dot{\lambda}_0 \end{pmatrix}.
+    \]
+
+    \textbf{Paso 2: Corrección} \\
+    Resolver el sistema extendido usando Newton-Raphson:
+    \[
+        \begin{pmatrix}
+            \left(\mathbf{G}_{\mathbf{u}}^1\right)^{(\nu)} & \left(\mathbf{G}_{\lambda}^1\right)^{(\nu)} \\
+            \dot{\mathbf{u}}_0^T                           & \dot{\lambda}_0
+        \end{pmatrix}
+        \begin{pmatrix}
+            \Delta \mathbf{u}_1^{(\nu)} \\[6pt]
+            \Delta \lambda_1^{(\nu)}
+        \end{pmatrix}
+        = -
+        \begin{pmatrix}
+            \mathbf{G}(\mathbf{u}_1^{(\nu)}, \lambda_1^{(\nu)}) \\[6pt]
+            (\mathbf{u}_1^{(\nu)} - \mathbf{u}_0)^T \dot{\mathbf{u}}_0 +
+            (\lambda_1^{(\nu)} - \lambda_0) \dot{\lambda}_0
+            - \Delta s
+        \end{pmatrix}.
+    \]
+
+    \textbf{Paso 3 Tangente} \\
+    Calcular y normalizar nueva dirección tangente:
+    \[
+        \begin{pmatrix}
+            \mathbf{G}_{\mathbf{u}}^1 & \mathbf{G}_{\lambda}^1 \\
+            \dot{\mathbf{u}}_0^T      & \dot{\lambda}_0
+        \end{pmatrix}
+        \begin{pmatrix}
+            \dot{\mathbf{u}}_1 \\ \dot{\lambda}_1
+        \end{pmatrix}
+        =
+        \begin{pmatrix} 0 \\ 1 \end{pmatrix}, \quad
+        ||\dot{\mathbf{u}}_1||^2 + ||\dot{\lambda}_1||^2 = 1
+    \]
+
+    \textbf{Paso 4 Repetición} \\
+    Guardar el valor de $ (\mathbf{u}_1, \lambda_1) $, sustituir $ \mathbf{u}_0 \to \mathbf{u}_1 $
+    y $ \lambda_0 \to \lambda_1 $ y repetir los pasos 1–4 para continuar la rama de soluciones.
+    \label{al:PALC}
+\end{algorithm}
+
+\section{Ramas de equilibrio}
+
+Para estudiar una \emph{rama de equilibrio} del sistema \eqref{eq:differential_system},
+se debe fijar un parámetro de continuación respecto del cual dependa
+$\xi$, de modo que se cumpla
+\[
+    F(\xi(\lambda), \lambda) = 0,
+\]
+en un entorno de una solución de equilibrio \emph{regular}.
+En este caso, el parámetro de interés es $\tilde{k}$.
+
+Dado que la función $F$ satisface las hipótesis de los teoremas
+\ref{th:IFT}, \ref{th:Differentiation} y \ref{th:RegularSolution} para valores de $\psi_i \in (-\pi,\pi]$ y
+\[
+    (J_1,J_2) \in \left\{ (J_1, J_2) \in \mathbb{R}^2 \,\middle|\,
+    J_1 > 0,\; J_2 > 0,\; J_1 + J_2 < K \right\},
+\]
+se sigue que, en una solución de equilibrio regular
+$(\xi_0, \tilde{k}_0)$ con parámetros fijos $(\tilde{\omega}, \tilde{x}, K)$,
+existe una rama de equilibrio que puede calcularse mediante
+un procedimiento de continuación, implementando el
+Algoritmo~\ref{al:PALC}.
+
+\subsection{Sistema extendido para soluciones de equilibrio}
+
+El sistema extendido asociado a la continuación de soluciones de equilibrio está dado por
+\begin{equation}
+    \begin{cases}
+        F(\xi_1, \tilde{k}_1;\, \tilde{\omega}, \tilde{x}, K) = 0, \\[6pt]
+        (\xi_1 - \xi_0)^T \xi'_0 +
+        (\tilde{k}_1 - \tilde{k}_0)\tilde{k}'_0
+        - \Delta s = 0,
+    \end{cases}
+    \label{eq:System_equilibrium}
+\end{equation}
+donde $\Delta s$ representa el paso de pseudo-longitud de arco en la parametrización de la rama \cite{Doedel2007}.
+
+\subsection{Sistema extendido para puntos límite}
+
+Para detectar puntos límite a lo largo de una rama de soluciones de equilibrio,
+es necesario identificar un cambio de signo en cada paso de la continuación.
+Esto se logra mediante la función $ \phi_{LP} $, definida como:
+\begin{equation}
+    \phi_{LP}(i) = \tilde{k}'_i,
+    \label{LPtest}
+\end{equation}
+que indica la proximidad a un punto límite \cite{Meijer2011}. Una vez localizado uno de los dos
+puntos donde ocurre el cambio de signo, se toma como punto inicial $ ( \xi_{LP}^{(0)},
+    \tilde{k}_{LP}^{(0)} ) $ para resolver el sistema extendido mediante el método de Newton-Raphson:
+\begin{equation}
+    \begin{cases}
+        F(\xi_{LP}, \tilde{k}_{LP}; \tilde{\omega}, \tilde{x}, K) = 0,            \\[2mm]
+        F_{\xi}(\xi_{LP}, \tilde{k}_{LP}; \tilde{\omega}, \tilde{x}, K) \, v = 0, \\[1mm]
+        v \cdot v = 1,
+    \end{cases}
+    \label{eq:System_lp}
+\end{equation}
+donde se incluye el autovector $v$ del Jacobiano en $ ( \xi_{LP}, \tilde{k}_{LP} ) $
+como variable independiente, inicializando con el autovector $v^{(0)}$ correspondiente
+al autovalor cuya parte real está más cercana a cero en $ ( \xi_{LP}^{(0)}, \tilde{k}_{LP}^{(0)} ) $ \cite{Meijer2011}.
+
+\subsection{Sistema extendido para puntos de ramificación}
+
+De manera análoga a los puntos límite, un punto de ramificación se identifica mediante
+un cambio de signo de una función de prueba $ \phi_{BP} $, definida como
+\begin{equation}
+    \phi_{BP} = \det \left( \begin{bmatrix} F_{(\xi, \tilde{k})}(\xi_i, \tilde{k}_i; \tilde{\omega}, \tilde{x}, K) \\
+            ( \xi' , \tilde{k}' )^{T}
+        \end{bmatrix} \right),
+    \label{BPtest}
+\end{equation}
+que indica la cercanía a un punto de ramificación \cite{Meijer2011}. Una vez detectado un cambio de
+signo, se toma como punto inicial $ ( \xi_{BP}^{(0)}, \tilde{k}_{BP}^{(0)} ) $ para
+resolver el sistema extendido mediante Newton-Raphson:
+
+\begin{equation}
+    \begin{cases}
+        F(\xi_{BP}, \tilde{k}_{BP}; \tilde{\omega}, \tilde{x}, K) + b \psi = 0,             \\[1mm]
+        F_{\xi}(\xi_{BP}, \tilde{k}_{BP}; \tilde{\omega}, \tilde{x}, K)^{T} \psi = 0,       \\[1mm]
+        F_{\tilde{k}}(\xi_{BP}, \tilde{k}_{BP}; \tilde{\omega}, \tilde{x}, K)^{T} \psi = 0, \\[1mm]
+        \psi \cdot \psi = 1,
+    \end{cases}
+    \label{eq:System_bp}
+\end{equation}
+
+donde se incluye un parámetro de perturbación $ b $ que empieza en $ b^{(0)} = 0 $
+y el autovector $ \psi $ del Jacobiano transpuesto como variable independiente,
+inicializando con el autovector $ \psi^{(0)} $ correspondiente al autovalor del
+Jacobiano transpuesto cuya parte real es más cercana a cero en $ ( \xi_{BP}^{(0)}, \tilde{k}_{BP}^{(0)} ) $  \cite{Meijer2011}.
+
+\subsection{Cambio de rama de equilibrio}
+
+En un punto de ramificación, para continuar por una rama distinta a la principal es
+necesario determinar la dirección de la rama emergente. En este caso ya no es suficiente
+tomar un vector del espacio nulo, pues al ser un punto no regular dicho espacio nulo es
+de dimensión mayor y contiene múltiples direcciones posibles.
+
+Para caracterizar la dirección de la rama
+\((\dot{\xi}_1, \dot{\tilde{k}}_1)\), emergente a partir de la rama de equilibrio inicial,
+es necesario distinguir dos situaciones \cite{Meijer2011}:
+
+\begin{enumerate}
+    \item Si $\dim \mathcal{N}\big(F_\xi(\xi_{BP}, \tilde{k}_{BP}; \tilde{\omega}, \tilde{x}, K)\big) = 1$, entonces
+          \[
+              \xi'_0 = v_0, \quad \tilde{k}'_0 = 0, \quad
+              \xi'_1 = v_1, \quad \tilde{k}'_1 = q_1,
+          \]
+          donde $v_0$ genera el espacio nulo y $(v_1,q_1)$ se obtiene resolviendo
+          \begin{equation}
+              \begin{cases}
+                  F_\xi(\xi_{BP}, \tilde{k}_{BP}; \tilde{\omega}, \tilde{x}, K)\, v_1
+                  + F_{\tilde{k}}(\xi_{BP}, \tilde{k}_{BP}; \tilde{\omega}, \tilde{x}, K)\, q_1 = 0, \\[6pt]
+                  v_0^T v_1 = 0,
+              \end{cases}
+          \end{equation}
+          con la normalización $v_1^T v_1 + q_1^2 = 1$.
+
+    \item Si $\dim \mathcal{N}\big(F_\xi(\xi_{BP}, \tilde{k}_{BP}; \tilde{\omega}, \tilde{x}, K)\big) = 2$, entonces
+          \[
+              \xi'_0 = v_0, \quad \tilde{k}'_0 = 0, \quad
+              \xi'_1 = v_1, \quad \tilde{k}'_1 = 0,
+          \]
+          con $v_0, v_1$ vectores que generan el espacio nulo.
+\end{enumerate}
+
+\subsection{Continuación de bifurcaciones}
+
+Los sistemas \eqref{eq:System_lp} y \eqref{eq:System_bp} satisfacen también las condiciones de los
+teoremas \ref{th:IFT}, \ref{th:Differentiation} y \ref{th:RegularSolution}, por lo que son candidatos a continuación de soluciones. Para ello,
+se agrega la ecuación de proyección
+\begin{equation}
+    (\xi_1 - \xi_0)^T \xi'_0 +
+    (v_1 - v_0)^T v'_0 +
+    (\tilde{k}_1 - \tilde{k}_0)\tilde{k}'_0 +
+    (\lambda_1 - \lambda_0)\lambda'_0
+    - \Delta s = 0,
+\end{equation}
+\begin{equation}
+    (\xi_1 - \xi_0)^T \xi'_0 +
+    (\psi_1 - \psi_0)^T \psi'_0 +
+    (\tilde{k}_1 - \tilde{k}_0)\tilde{k}'_0 +
+    (\lambda_1 - \lambda_0)\lambda'_0
+    - \Delta s = 0,
+\end{equation}
+donde $\lambda$ representa un segundo parámetro del sistema (en este caso, $\tilde{\omega}$ o $\tilde{x}$).
+Con esta formulación es posible implementar el algoritmo \ref{al:PALC} para realizar la continuación \cite{Meijer2011}.
+
+\section{Ramas de órbitas periódicas}
+
+Para estudiar una \emph{rama de órbitas periódicas} del sistema \eqref{eq:differential_system},
+se introduce un parámetro de continuación respecto del cual dependen tanto
+$\xi$ como el periodo $T$. De esta forma, el problema se formula como
+\begin{equation}
+    \dfrac{d\xi}{dt} = F(\xi(t, \lambda), \lambda ; \tilde{\omega}, \tilde{x}, \tilde{k}, K), \quad
+    \xi(0) = \xi(T(\lambda), \lambda), \quad \forall t \in [0,T(\lambda)].
+    \label{eq:orbit_param}
+\end{equation}
+
+A diferencia de una solución de equilibrio, el sistema ahora considera como variables
+la trayectoria periódica $ \xi(\cdot) $, el periodo $ T > 0 $ y el parámetro de continuación $\lambda$.
+Con el fin de normalizar el intervalo temporal, se realiza el cambio de variable \cite{Doedel2007}
+\begin{equation}
+    \dfrac{d\xi}{dt} = T(\lambda)\, F(\xi(t, \lambda), \lambda ; \tilde{\omega}, \tilde{x}, \tilde{k}, K), \quad
+    \xi(0) = \xi(1, \lambda), \quad \forall t \in [0,1].
+    \label{eq:orbit_one}
+\end{equation}
+
+
+\subsection{Sistema extendido para soluciones de órbitas periódicas en sistemas conservativos}
+
+El sistema extendido para la continuación de órbitas periódicas se plantea como
+\begin{equation}
+    \begin{cases}
+        \dfrac{d\xi}{dt} = T F(\xi, \lambda; \tilde{\omega}, \tilde{x}, \tilde{k}, K), \\[1mm]
+        \xi(0) = \xi(1),                                                               \\[1mm]
+        \int_0^1 \xi(t)^{T} \dot{\xi}_0(t) \, dt = 0,                                  \\[1mm]
+        \int_0^1 (\xi(t) - \xi_0(t))^{T} \xi'_0(t)\, dt
+        + (T - T_0) T_0' + (\lambda - \lambda_0)\lambda_0' = \Delta s ,
+    \end{cases}
+    \label{eq:orbit_sistem}
+\end{equation}
+donde $ \xi_0(\cdot) $ es una órbita periódica de referencia con periodo $T_0$ y parámetro $\lambda_0$, mientras que
+$ \xi_0'(\cdot),\ T_0',\ \lambda_0' $ representan la dirección de continuación para calcular la siguiente órbita
+\cite{Doedel2007}.
+
+Como la variable desconocida es la trayectoria completa $ \xi $ en el intervalo del periodo, se requiere discretizarla.
+Para ello se implementa el método de \emph{múltiple disparo} \cite{FARANTOS1998240}. En primer lugar, se define el flujo
+
+\[
+    \varphi^{t}(\xi^{(0)}, T, \lambda),
+\]
+
+que satisface las siguientes propiedades:
+
+\begin{itemize}
+    \item $ \varphi^t:\mathbb{R}^{6} \to \mathbb{R}^{4} $,
+    \item $ \varphi^0(\xi^{(0)}, T, \lambda) = \xi^{(0)} $,
+    \item $ \varphi^{t+\tau}(\xi^{(0)}, T, \lambda) = \varphi^t(\varphi^{\tau}(\xi^{(0)}, T, \lambda), T, \lambda) $,
+    \item $ \dfrac{d}{dt}\varphi^{t}(\xi^{(0)}, T, \lambda) = T F(\varphi^t(\xi^{(0)}, T, \lambda), \lambda; \tilde{\omega}, \tilde{x}, \tilde{k}, K) $.
+\end{itemize}
+
+El método consiste en particionar uniformemente el intervalo $[0,1]$ en $N$ subintervalos de tamaño
+$\Delta t = 1/N$, y asociar a cada nodo $i$ el vector $\xi^{(i)} = \xi(i \Delta t)$, con $i = 0, \dots, N$.
+Cada nodo se considera como una variable independiente y se integra desde él para obtener el flujo
+$\varphi^{\Delta t}(\xi^{(i)}, T, \lambda)$. Con ello, se construye el sistema
+\begin{equation}
+    G(\xi, T, \lambda) =
+    \begin{cases}
+        \varphi^{\Delta t}(\xi^{(i)}, T, \lambda) - \xi^{(i+1)}, & i = 0, 1, \dots, N-1, \\[1mm]
+        \xi^{(N)} - \xi^{(0)},                                                           \\[1mm]
+        \frac{\Delta t}{2} \sum_{k \in \{0, N\}} \xi^{(k)^T} \dot{\xi}_{0}^{(k)}
+        + \Delta t \sum_{k=2}^{N-1} \xi^{(k)^T} \dot{\xi}_{0}^{(k)} ,
+    \end{cases}
+    \label{eq:multiple_shooting}
+\end{equation}
+junto con la ecuación de continuación discretizada
+\begin{equation}
+    \frac{\Delta t}{2} \sum_{k \in \{0, N\}}
+    (\xi^{(k)} - \xi_0^{(k)})^{T} \xi_0'^{(k)} +
+    \Delta t \sum_{k=1}^{N-1}
+    (\xi^{(k)} - \xi_0^{(k)})^{T} \xi_0'^{(k)}
+    + (T - T_0) T_0'
+    + (\lambda - \lambda_0) \lambda_0'
+    = \Delta s ,
+    \label{eq:arclenght_ms}
+\end{equation}
+lo que da un total de $4N + 5$ ecuaciones (sin incluir la condición de continuación) para un número de variables igual a $4N + 6$.
+
+Para determinar la dirección de continuación
+$(\xi_0'(\cdot), T_0', \lambda_0')$, se calcula el espacio nulo del jacobiano completo del sistema extendido $G$, es decir,
+
+\begin{equation}
+    G_{(\xi, T, \lambda)}(\xi_0, T_0, \lambda_0)
+    \begin{pmatrix}
+        \xi_0' \\[1mm] T_0' \\[1mm] \lambda_0'
+    \end{pmatrix} = 0.
+\end{equation}
+
+De esta manera, la dirección de continuación corresponde a un vector no trivial en el núcleo del Jacobiano
+completo $G_{(\xi, T, \lambda)}$, el cual garantiza que las nuevas iteraciones permanezcan sobre la curva de
+soluciones periódicas.
+
+
+Partiendo del dominio permitido para $J_i$ y $\psi_i$, se observa que el sistema
+\eqref{eq:multiple_shooting} no satisface los teoremas anteriores para ningún valor de los parámetros,
+ya que en un sistema conservativo toda órbita periódica no constituye una solución regular \cite{MUNOZALMARAZ20031}.
+En efecto, en cada órbita periódica el sistema \eqref{eq:multiple_shooting} presenta un espacio nulo
+de dimensión mayor a uno.
+
+Siguiendo el enfoque propuesto en \cite{MUNOZALMARAZ20031}, es posible introducir un parámetro de perturbación $\lambda$
+que permite formular las órbitas periódicas como soluciones regulares. Dicho parámetro, aunque siempre
+nulo en la práctica, habilita la continuación con respecto a la cantidad conservada en la órbita, es decir,
+la energía. El sistema perturbado se define como
+\begin{equation}
+    \tilde{G}(\xi, T, \lambda) =
+    \begin{cases}
+        \tilde{\varphi}^{\Delta t}(\xi^{(i)}, T, \lambda) - \xi^{(i+1)}, & i = 0, 1, ..., N-1 , \\[1mm]
+        \xi^{(N)} - \xi^{(0)},                                                                  \\[1mm]
+        \frac{\Delta t}{2} \sum_{k \in \{0, N\}} \xi^{(k)^T} \dot{\xi}_{0}^{(k)}
+        + \Delta t \sum_{k=2}^{N-1} \xi^{(k)^T} \dot{\xi}_{0}^{(k)},
+    \end{cases}
+    \label{eq:multiple_shooting_conservative}
+\end{equation}
+manteniendo la misma ecuación de continuación, pero con un flujo modificado $\tilde{\varphi}^{t}$ cuya
+derivada cumple \cite{MUNOZALMARAZ20031}
+
+\[
+    \dfrac{d}{dt}\tilde{\varphi}^{t}(\xi_0, T, \lambda)
+    = T \left( F(\tilde{\varphi}^t(\xi_0, T, \lambda), p)
+    + \lambda \nabla_{\xi} H(\tilde{\varphi}^t(\xi_0, T, \lambda), p) \right).
+\]
+
+De esta forma, las órbitas periódicas se convierten en soluciones regulares de
+\eqref{eq:multiple_shooting_conservative}, cumpliendo las hipótesis de los teoremas \ref{th:IFT}, \ref{th:Differentiation}
+y \ref{th:RegularSolution} para realizar la continuación de soluciones. En consecuencia, el sistema extendido final para continuar órbitas periódicas queda
+formulado como
+\begin{equation}
+    \begin{cases}
+        \tilde{\varphi}^{\Delta t}(\xi^{(i)}, T, \lambda) - \xi^{(i+1)} = 0 \qquad i = 0, 1, ..., N-1 , \\[1mm]
+        \xi^{(N)} - \xi^{(0)} = 0,                                                                      \\[1mm]
+        \frac{\Delta t}{2} \sum_{k \in \{0, N\}} \xi^{(k)^T} \dot{\xi}_{0}^{(k)}
+        + \Delta t \sum_{k=2}^{N-1} \xi^{(k)^T} \dot{\xi}_{0}^{(k)} = 0,                                \\[1mm]
+        \frac{\Delta t}{2} \sum_{k \in \{0, N\}}
+        (\xi^{(k)} - \xi_0^{(k)})^{T} \xi_0'^{(k)} +
+        \Delta t \sum_{k=2}^{N-1}
+        (\xi^{(k)} - \xi_0^{(k)})^{T} \xi_0'^{(k)}                                                      \\
+        + (T - T_0) T_0'
+        + (\lambda - \lambda_0) \lambda_0'
+        - \Delta s = 0.
+    \end{cases}
+    \label{eq:Orbit_System}
+\end{equation}
+Con esta formulación es posible implementar el algoritmo \ref{al:PALC} para realizar la continuación \cite{Meijer2011}.
+
+
+\subsection{Multiplicadores de Floquet}
+
+Para determinar la estabilidad de las órbitas periódicas y detectar bifurcaciones, es necesario calcular los \emph{multiplicadores de Floquet}.
+Estos se obtienen a partir de la \emph{matriz de Floquet}, construida mediante los flujos en cada nodo de la discretización \cite{FloquetMultipliers}.
+
+La matriz de Floquet se calcula como el producto sucesivo de los jacobianos de los flujos en cada nodo:
+\begin{equation}
+    M = M^{(N-1)} M^{(N-2)} \dots M^{(1)} M^{(0)},
+\end{equation}
+donde cada bloque \(M^{(k)}\) se define como
+
+\begin{equation}
+    M^{(k)}_{ij} = \frac{\partial}{\partial \xi^{(k)}_j} \tilde{\varphi}_{i}^{\Delta t}(\xi^{(k)}, T, \lambda).
+\end{equation}
+
+Los multiplicadores de Floquet son los autovalores de \(M\). Para un gran número de nodos, los errores numéricos en el
+cálculo de los autovalores se pueden reducir utilizando métodos de factorización estables; en este trabajo se
+empleó la \emph{descomposición de Schur} \cite{FloquetMultipliers}.
+
+
+\subsection{Sistema extendido para la duplicación de periodo}
+
+Para detectar bifurcaciones de duplicación de periodo, se define la siguiente \emph{función de prueba}:
+\begin{equation}
+    \phi_{PD}(i) = \prod_{i=1}^{4} (\mu_i + 1),
+    \label{PDtest}
+\end{equation}
+la cual cambia de signo al cruzar la bifurcación durante la continuación de la órbita periódica \cite{Meijer2011}.
+
+El sistema extendido para calcular bifurcaciones de duplicación de periodo se formula como
+\begin{equation}
+    \begin{cases}
+        \dfrac{d\xi_{PD}}{dt} = T_{PD} F(\xi_{PD}, \lambda_{PD}; \tilde{\omega}, \tilde{x}, \tilde{k}, K),      \\[1mm]
+        \xi_{PD}(0) = \xi_{PD}(1),                                                                              \\[1mm]
+        \int_0^1 \xi_{PD}(t)^{T} \dot{\xi}_0(t) \, dt = 0,                                                      \\[1mm]
+        \dfrac{dv}{dt} = T_{PD}\, F_{\xi}(\xi_{PD}, \lambda_{PD}; \tilde{\omega}, \tilde{x}, \tilde{k}, K)\, v, \\[1.5mm]
+        v(0) = -v(1),                                                                                           \\[1mm]
+        \int_0^1 v(t) \cdot v(t)\, dt = 1,
+    \end{cases}
+    \label{eq:pd_system_general}
+\end{equation}
+donde $v$ es la eigenfunción definida en \eqref{eq:variationaequation} \cite{Meijer2011}.
+Los puntos iniciales $\left(\xi_{PD}^{(0)}(\cdot), \lambda_{PD}^{(0)}, T_{PD}^{(0)}\right)$ corresponden a una
+solución de la continuación donde la función de prueba $\phi_{PD}$ cambia de signo, y $v^{(0)}(\cdot)$
+es la eigenfunción asociada al multiplicador de Floquet más cercano a $-1$ en ese mismo punto.
+
+Siguiendo la estrategia del \emph{método de múltiple disparo}, la versión discreta del sistema extendido se escribe como
+\begin{equation}
+    \begin{cases}
+        \tilde{\varphi}^{\Delta t}(\xi_{PD}^{(i)}, T_{PD}, \lambda_{PD}) - \xi_{PD}^{(i+1)} = 0, \quad i=0,1,\dots,N-1, \\[1mm]
+        \xi_{PD}^{(N)} - \xi_{PD}^{(0)} = 0,                                                                            \\[1mm]
+        \frac{\Delta t}{2} \sum_{k \in \{0, N\}} \xi_{PD}^{(k)^T} \dot{\xi}_{0}^{(k)}
+        + \Delta t \sum_{k=2}^{N-1} \xi_{PD}^{(k)^T} \dot{\xi}_{0}^{(k)} = 0,                                           \\[1mm]
+        \tilde{\Phi}^{\Delta t}(v^{(i)}, T_{PD}, \lambda_{PD}) - v^{(i+1)} = 0, \quad i=0,1,\dots,N-1,                  \\[1mm]
+        v^{(N)} + v^{(0)} = 0,                                                                                          \\[1mm]
+        \frac{\Delta t}{2} \sum_{k \in \{0, N\}} v^{(k)^T} v^{(k)} +
+        \Delta t \sum_{k=2}^{N-1} v^{(k)^T} v^{(k)} = 1,
+    \end{cases}
+    \label{eq:PD_System}
+\end{equation}
+donde \(\tilde{\Phi}^t(\cdot)\) representa el flujo perturbado análogo a \(\tilde{\varphi}^t(\cdot)\) aplicado a la eigenfunción $v$, y satisface la ecuación variacional
+
+\[
+    \dfrac{d}{dt}\, \tilde{\Phi}^{t}(v^{(0)}, T, \lambda)
+    = T \Big( F_\xi(\tilde{\varphi}^t(\xi^{(0)}, T, \lambda), p)
+    + \lambda \, \nabla^2_\xi \tilde{H}(\tilde{\varphi}^t(\xi^{(0)}, T, \lambda), p) \Big) \,
+    \tilde{\Phi}^{t}(v^{(0)}, T, \lambda).
+\]
+
+\subsection{Transición a la rama de doble periodo}
+
+Una vez detectada la bifurcación de duplicación de periodo
+\((\xi_{PD}(\cdot), \lambda_{PD}, T_{PD})\), se puede continuar hacia la rama emergente de doble periodo
+duplicando el periodo y seleccionando la dirección correcta para la continuación.
+
+\paragraph{Duplicación del periodo:}
+Duplicar el periodo implica establecer \(T = 2\,T_{PD}\) y, de manera consistente, duplicar el número de nodos en la discretización.
+Esto conduce a \(\Delta t = 1/(2N)\) y \(i = 0, 1, \dots, 2N\), con
+\begin{equation}
+    \xi^{(i)} =
+    \begin{cases}
+        \xi_{PD}^{(i)} ,  & i \leq N, \\[1mm]
+        \xi_{PD}^{(i-N)}, & i > N,
+    \end{cases}
+    \label{eq:doubling_nodes}
+\end{equation}
+para reconstruir la órbita inicial de doble periodo.
+
+\paragraph{Dirección de la rama emergente:}
+La dirección de la nueva rama se obtiene a partir de la eigenfunción \(v(\cdot)\) en la bifurcación:
+\begin{equation}
+    \xi_0'^{(i)} =
+    \begin{cases}
+        v^{(i)},    & i \leq N, \\[1mm]
+        -v^{(i-N)}, & i > N,
+    \end{cases}
+    \label{eq:2T_direction}
+\end{equation}
+mientras que \(\lambda_0' = 0\) y \(T_0' = 0\) \cite{Meijer2011}.
+
+\subsection{Continuación de doblamientos de periodo}
+
+El sistema \eqref{eq:PD_System}, de manera análoga a las bifurcaciones de equilibrio, también cumple con las hipótesis de los teoremas
+\ref{th:IFT}, \ref{th:Differentiation} y \ref{th:RegularSolution} \cite{Meijer2011}. Por lo tanto, es posible realizar la continuación numérica de este tipo de bifurcación.
+
+Para ello, se introduce la ecuación de proyección
+\begin{align}
+    \Delta s = & \frac{\Delta t}{2} \sum_{k \in \{0, N\}}
+    (\xi^{(k)} - \xi_0^{(k)})^{T} \xi_0'^{(k)}
+    + \Delta t \sum_{k=1}^{N-1} (\xi^{(k)} - \xi_0^{(k)})^{T} \xi_0'^{(k)} \nonumber \\
+               & \quad + \frac{\Delta t}{2} \sum_{k \in \{0, N\}}
+    (v^{(k)} - v_0^{(k)})^{T} v_0'^{(k)}
+    + \Delta t \sum_{k=1}^{N-1} (v^{(k)} - v_0^{(k)})^{T} v_0'^{(k)} \nonumber       \\
+               & \quad + (T - T_0) T_0'
+    + (\lambda - \lambda_0) \lambda_0'
+    + (\mu - \mu_0) \mu_0'
+\end{align}
+donde \(\mu\) representa un segundo parámetro del sistema (por ejemplo, \(\tilde{\omega}\), \(\tilde{k}\) o \(\tilde{x}\)).
+
+Con esta formulación, se puede aplicar directamente el algoritmo \ref{al:PALC} para llevar a
+cabo la continuación de la bifurcación de doblamiento de periodo.
+
+\section{Sección de Poincaré}
+
+Para visualizar la dinámica del sistema en el espacio de fases, en este trabajo se selecciona el plano
+\((\psi_2, J_2)\), de modo que el análisis se reduce a la intersección de una hipersuperficie de energía \(H = E\)
+con la superficie \(\psi_1 = 0\). En esta intersección pueden coexistir varias ramas de energía que cumplen
+\(H = E\), por lo que la dinámica se restringe a los puntos donde la velocidad de cruce en \(J_1\) es positiva
+y la curvatura de la energía respecto a \(J_1\) satisface una determinada condición de concavidad \cite{mossmann2006semiclassical}.
+
+Formalmente, las condiciones utilizadas para construir la sección de Poincaré de interés son:
+
+\begin{equation}
+    \begin{aligned}
+         & \psi_1 \in \{0, \pi\},                                      \\
+         & \tilde{H}(\psi_1, \psi_2, J_1, J_2) = \tilde{E},            \\
+         & \frac{\partial \tilde{H}}{\partial J_1} = \dot{\psi}_1 > 0, \\
+         & \frac{\partial^2 \tilde{H}}{\partial J_1^2} > 0.
+    \end{aligned}
+\end{equation}
+
+De manera explícita:
+\begin{enumerate}
+    \item La superficie de Poincaré se toma en \(\psi_1 = 0\) o en \(\psi_1 = \pi\), dependiendo de la situación.
+    \item Se restringe a la hipersuperficie de energía \(\tilde{H} = \tilde{E}\).
+    \item Se consideran solo los puntos donde la velocidad de cruce de \(J_1\) es positiva: \(\dot{\psi}_1 > 0\).
+    \item Se seleccionan los puntos donde la energía es localmente convexa respecto a \(J_1\): \(\partial^2 \tilde{H} / \partial J_1^2 > 0\).
+\end{enumerate}
+
+En esta sección, la dinámica del sistema puede visualizarse mediante distintos tipos de comportamiento en el espacio de fases:
+
+\begin{itemize}
+    \item \emph{Toros quasi-periódicos:} conjuntos de puntos que se acumulan a lo largo de curvas cerradas.
+    \item \emph{Órbitas periódicas:} puntos fijos o centrales alrededor de los toros.
+    \item \emph{Zonas caóticas:} regiones donde los puntos no muestran una estructura aparente.
+\end{itemize}
+
+La sección de Poincaré implementada en este trabajo se utiliza para localizar órbitas periódicas que sirvan como condiciones iniciales
+para la continuación. El procedimiento geométrico seguido es el siguiente:
+
+\begin{enumerate}
+    \item Se identifica un toro que contiene una órbita periódica cercana.
+    \item Se aproxima la órbita periódica mediante el \emph{punto promedio} del conjunto de puntos del toro.
+    \item Se genera un nuevo toro centrado en este punto promedio, más cercano a la órbita periódica real.
+    \item Se repite el proceso hasta que la desviación estándar del conjunto de puntos del toro sea suficientemente pequeña,
+          garantizando así una aproximación precisa de la órbita periódica.
+\end{enumerate}
+
+De esta manera, se obtiene una estimación confiable de la órbita periódica, que puede emplearse como semilla inicial
+para métodos de continuación numérica.
+
+Con el objetivo de visualizar las secciones de Poincaré de forma cerrada, se hace una transformación a
+coordenadas esféricas siguiendo las relaciones
+\begin{equation}
+    \begin{aligned}
+        X & = \dfrac{2 \sqrt{J_2 (K - J_2)} \cos(\psi_2)}{K}, \\
+        Y & = \dfrac{2 \sqrt{J_2 (K - J_2)} \sin(\psi_2)}{K}, \\
+        Z & = \dfrac{2 J_2 - K}{K}.
+    \end{aligned}
+    \label{eq:spherical_coordinates}
+\end{equation}
+
+Geométricamente, esta transformación mapea la sección de Poincaré en una esfera unitaria
+donde los polos corresponden a los valores extremos de \(J_2\) (es decir, \(J_2 = 0\) y \(J_2 = K\)),
+y el ecuador representa el valor intermedio \(J_2 = K/2\). Esta representación facilita la visualización
+y el análisis de la dinámica del sistema en el espacio de fases.
 
 
 
 
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                          Descripción de la planta                     %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Sección}
-El sistema blah, blah. Ejemplo de cita \citep{texbook}
-La figura (\ref{planta})                     %hace referencia a la imagen "planta" el número se inserta automáticamente
- ilustra los componentes de la planta.
-
-\begin{figure}
-  \centering
-    \includegraphics[scale=0.5]{Capitulo3/figs/planta.jpg}      %Ruta completa de la imagen, porque se compila desde el archivo tesis.tex
-  \caption{Descripción de la planta}            %Pie de imagen
-  \label{planta}                            %nombre de referencia
-\end{figure}
 
 
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                          Modelado                                     %
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{\textcolor{Azul}{Sección en color azul}}
-\subsection{Subsección}
-Antes de comenzar, se definen  en la tabla ~\ref{tab:tabla} los parámetros y variables utilizadas
-
-%%%%%%%%Tabla Nombres de parámetros
-\begin{table}[ht]                             %Inicia el entorno table debajo del texto
-\centering\                                     %   centra la tabla
-\begin{tabular}{||c | c ||}                     %inicia entorno tabular con doble línea en las orillas, 2 columnas con el contenido centrado (c)
-\hline                                          %inserta línea horizontal
-\hline
-Nombre Parámetro/Variable & Símbolo\\
-\hline
-\hline
-Masa del péndulo & $m$ \\
-\hline
-Masa del carro & $M$\\
-\hline
-Distancia del eje de giro al centro de masa & $l$ \\
-\hline
-Aceleración gravitatoria & $g$ \\
-\hline
-Momento de inercia péndulo respecto del eje de giro& $J$ \\
-\hline
-Ángulo del péndulo respecto del eje vertical & $\theta$\\
-\hline
-Velocidad angular del péndulo & $\dot{\theta}$, $\omega$\\
-\hline
-Distancia del carro respecto al centro del riel & x\\
-\hline
-Velocidad del carro & $\dot{x}$, $v$\\
-\hline
-\hline
-\end{tabular}
-\caption[Parámetros dinámicos del carro-péndulo]{\textbf{Parámetros dinámicos del carro-péndulo} - Estos son los valores de parámetros utilizados en el diseño y las simulaciones, corresponden a los valores reales.}
-\label{tab:tabla}                              %etiqueta para referencia
-\end{table}
-
-\blindtext
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%                          Subsección
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\subsection{Otra subsección}
-
-\Blindtext

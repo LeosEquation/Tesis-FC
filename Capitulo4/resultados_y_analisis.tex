@@ -1,3 +1,326 @@
-\chapter{Análisis de Resultados}
-\section{Resultados}
-\Blindtext
+\chapter{Análisis de resultados}
+
+\section{Soluciones de equilibrio sincronizadas}
+
+\subsection{Ramas de equilibrio}
+
+Los resultados obtenidos mediante la continuación numérica de las soluciones de equilibrio se muestran en la Figura~\ref{fig:EqBranchsS_EigS}. En este caso se presentan los equilibrios sincronizados, definidos por la condición $\psi_1=\psi_2=0$, o equivalentemente $\varphi_1=\varphi_2=\varphi_3$. Estas ramas están asociadas al equilibrio inicial $\tilde{\xi}_{S} = $ (agregar punto de equilibrio inicial) en $\tilde{k}=0$.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/S/EqBranchS.pdf}
+        \label{fig:EqBranchS}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/S/EigS.pdf}
+        \label{fig:EigS}
+    }
+    \caption{
+        (a) Ramas de equilibrio sincronizadas proyectadas en la coordenada $J_{2}$ en función de $\tilde{k}$.
+        (b) Espectro lineal correspondiente, proyectado en el plano complejo positivo en función de $\tilde{k}$.
+        Los puntos azules en (a) indican bifurcaciones de punto límite, los rojos bifurcaciones de ramificación, los negros bifurcaciones de Hopf hamiltoniana y los naranjas puntos en los que la solución alcanza la frontera del sistema~\eqref{eq:dynamical_system}.
+        Las bifurcaciones de Hopf hamiltoniana y los puntos de frontera se identifican de manera aproximada a partir de los valores más cercanos disponibles en la rama.
+        Los puntos azules en (b) indican que el espectro está en el plano imaginario o real mientras que los rojos indican que el espectro es un número complejo con componentes imaginaria y real no nulas.
+    }
+    \label{fig:EqBranchsS_EigS}
+\end{figure}
+
+La simbología empleada en las gráficas (que será utilizada de manera análoga en las siguientes secciones) consiste en una letra mayúscula que identifica el tipo de equilibrio, un superíndice que indica la clase espectral y un subíndice que señala el número de direcciones linealmente inestables.
+
+La continuación numérica revela la presencia de una bifurcación de punto límite, una bifurcación de ramificación y dos bifurcaciones de Hopf hamiltoniana. Estas últimas se localizan de forma aproximada mediante los puntos más cercanos en la discretización de la rama.
+
+La estructura de bifurcaciones permite distinguir tres regiones relevantes en el parámetro $\tilde{k}$:
+
+(i) Una región $\tilde{k} < (\mathrm{lp}.k)$ en la que no existen equilibrios asociados a $\tilde{\xi}_{S}$.
+
+(ii) Una región intermedia $(\mathrm{lp}.k) \leq \tilde{k} \leq (\mathrm{bp}.k)$ caracterizada por la coexistencia de equilibrios con distintos tipos de estabilidad lineal.
+
+(iii) Una región $(\mathrm{bp}.k) < \tilde{k} < 100$ en la que los equilibrios asociados no presentan direcciones linealmente inestables.
+
+En este contexto, adquiere particular interés la interpretación física e implementación experimental de valores $\tilde{k}<0$, ya que es en esta región donde se observa la mayor diversidad de configuraciones espectrales para los equilibrios sincronizados.
+
+\subsection{Ramas de bifurcación}
+
+La continuación numérica de las bifurcaciones de punto límite y de ramificación respecto a un segundo parámetro conduce a las ramas mostradas en la Figura~\ref{fig:BifBranchesS}.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/S/BifBranchesS_K.pdf}
+        \label{fig:BifBranchesS_K}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/S/BifBranchesS_x.pdf}
+        \label{fig:BifBranchesS_x}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.6\textwidth]{Capitulo4/figs/S/BifBranchesS_omega.pdf}
+        \label{fig:BifBranchesS_omega}
+    }
+    \caption{
+        Ramas de bifurcaciones asociadas a los equilibrios sincronizados en función de dos parámetros:
+        (a) $\tilde{k}$ y $K$,
+        (b) $\tilde{x}$,
+        (c) $\tilde{\omega}$.
+        Las curvas azules corresponden a bifurcaciones de punto límite, las rojas a bifurcaciones de ramificación y los círculos naranjas indican la intersección con la frontera del dominio permitido para las acciones $J_i$.
+    }
+    \label{fig:BifBranchesS}
+\end{figure}
+
+El análisis de las regiones delimitadas por estas ramas permite construir un diagrama de fases en el espacio de parámetros. En particular, pueden identificarse tres dominios cualitativamente distintos:
+
+(i) La región situada por debajo de la rama de puntos límite, donde no existen equilibrios que se continúen desde $\tilde{k}=0$.
+
+(ii) La región comprendida entre las ramas de punto límite y de ramificación, en la que coexisten equilibrios con diferentes configuraciones espectrales.
+
+(iii) La región por encima de la rama de ramificación, donde las soluciones presentes carecen de direcciones linealmente inestables.
+
+Es importante enfatizar que esta clasificación sólo es válida en los intervalos de parámetros donde coexisten simultáneamente las ramas de punto límite y de ramificación. Si alguna de ellas desaparece al alcanzar la frontera del dominio mientras la otra persiste, el carácter dinámico del sistema por encima o por debajo de la rama restante no puede determinarse únicamente a partir de la estructura de bifurcaciones y requiere un análisis directo de las ramas de equilibrio emergentes.
+
+\section{Soluciones de equilibrio antisincronizadas}
+
+\subsection{Ramas de equilibrios}
+
+La continuación numérica ahora para las soluciones de equilibrio antisincronizadas, aquellas con diferencias de fase máximas entre pozos $\psi_1=\psi_2=\pi$, asociadas a la solución de equilibrio $\tilde{\xi}_{AS} =$ (añadir equilibrio) se expone en la Figura~\ref{fig:EqBranchAS}.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/AS/EqBranchAS.pdf}
+        \label{fig:EqBranchAS}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/AS/EigAS.pdf}
+        \label{fig:EigAS}
+    }
+    \caption{Las ramas de equilibrio antisincronizadas (a) en la coordenada $J_{2}$ respecto a $\tilde{k}$ y su espectro (b) mapeado en el plano complejo. Los puntos azules en (a) indican bifurcaciones de tipo límite, los rojos de ramificación, los negros hopf hamiltoniana y los naranjas son puntos donde se llega a una frontera de $J_i$. }
+    \label{fig:EqBranchsAS_EigAS}
+\end{figure}
+
+Para valores de $\tilde{k} > 0$ se observa que las ramas antisincronizadas exhiben espectros de tipo silla--silla, silla--centro y centro--centro. Esto indica que, para esta configuración de fases, es posible la coexistencia de distintos tipos de estabilidad en regiones de acoplamiento positivo. Este comportamiento es consistente con el hecho de que la antisincronización maximiza la energía del sistema, lo cual favorece la aparición de inestabilidades. Como consecuencia, en este régimen de $\tilde{k}$ aparecen bifurcaciones que no están presentes en el caso sincronizado, aun cuando la rama sincronizada no colapsa en ninguna degeneración en esta región del parámetro.
+
+En $\tilde{k}=0$ se identifican tres equilibrios antisincronizados que presentan al menos una dirección inestable, junto con una degeneración en las variables $J_i$. Este resultado contrasta con el caso sincronizado, en el cual únicamente existe un equilibrio en este punto y no se observan direcciones inestables.
+
+Para valores negativos de $\tilde{k}$, las ramas antisincronizadas colapsan en una degeneración de las variables $J_i$, de manera análoga al caso sincronizado. No obstante, a diferencia de este último, en la región $\tilde{k}<0$ sólo se presentan bifurcaciones de punto límite, descartándose la existencia de ramas bifurcadas que crucen soluciones antisincronizadas en este régimen.
+
+A partir de las bifurcaciones de punto límite y de ramificación mostradas en la Figura~\ref{fig:EqBranchAS}, se calcularon las ramas asociadas a la variación de los demás parámetros del sistema. Estas se presentan en las Figuras~\ref{fig:BifBranchesAS_K} a \ref{fig:BifBranchesAS_omega}.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/AS/BifBranchesAS_K.pdf}
+        \label{fig:BifBranchesAS_K}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/AS/BifBranchesAS_x.pdf}
+        \label{fig:BifBranchesAS_x}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.6\textwidth]{Capitulo4/figs/AS/BifBranchesAS_omega.pdf}
+        \label{fig:BifBranchesAS_omega}
+    }
+    \caption{Ramas de bifurcaciones antisincronizadas en función de $\tilde{k}$ y $K$ (a), $\tilde{x}$ (b) y $\tilde{\omega}$ (c). Las ramas azules representan bifurcaciones de tipo límite, las rojas bifurcaciones de ramificación y los círculos naranjas fronteras de $J_i$.}
+    \label{fig:BifBranchesAS}
+\end{figure}
+
+En las Figuras~\ref{fig:BifBranchesAS_K} y \ref{fig:BifBranchesAS_x} se observa una nueva aproximación de bifurcación en la cual todos los autovalores del espectro se anulan simultáneamente. Esta propiedad puede inferirse a partir de la codificación cromática empleada: los tonos intensos indican espectros reales, mientras que los tonos claros corresponden a espectros puramente imaginarios. En consecuencia, el punto intermedio donde ocurre la transición entre ambos regímenes debe corresponder necesariamente a un espectro nulo, lo cual se confirma explícitamente en las Figuras~\ref{fig:EiglpAS_K} a \ref{fig:EigbpAS_x}.
+
+Además, se garantiza la existencia de multiestabilidad antisincronizada tanto en el régimen positivo como en el negativo de $\tilde{k}$ al variar los parámetros $\tilde{x}$ y $K$, siempre que estos superen los valores críticos asociados a las bifurcaciones degeneradas entre ramas con espectro imaginario y real. En particular, se destaca la aparición de equilibrios de tipo silla--silla, los cuales surgen de la conexión entre puntos límite y puntos de ramificación con espectro real. Esta conexión implica un cambio en el número de direcciones inestables, de una a dos.
+
+A diferencia del caso sincronizado, donde la rama de puntos límite desaparece primero por degeneración dejando un intervalo con puntos de ramificación aislados, en el caso antisincronizado los puntos de ramificación son los primeros en desaparecer al disminuir $\tilde{x}$ y $K$ por debajo de la degeneración del espectro. Esto deja inicialmente dos puntos límite conectados, los cuales eventualmente convergen en uno solo, mientras que un segundo punto límite aislado persiste hasta desaparecer finalmente en una degeneración de las variables $J_i$.
+
+Finalmente, en la Figura~\ref{fig:BifBranchesAS_omega} también se observan ramas con tonalidades diferenciadas; sin embargo, a diferencia de los casos anteriores, no se produce una conexión entre ramas con espectro real e imaginario. Esto se debe a la presencia de degeneraciones en las variables $J_i$, las cuales impiden la continuidad entre ramas de tonos intensos y tenues. En este caso, las regiones de multiestabilidad antisincronizada se encuentran delimitadas por dos figuras semicerradas formadas entre puntos límite y de ramificación. Al aumentar el parámetro $\tilde{\omega}$, desaparecen primero las regiones asociadas a bifurcaciones con espectro real, eliminando la garantía de existencia de equilibrios tipo silla--silla. Posteriormente, desaparecen las regiones con espectro imaginario, dejando finalmente un único punto límite aislado, el cual también colapsa al incrementar aún más el parámetro. Nuevamente, se observa que $\tilde{\omega}$ actúa de manera opuesta a $K$ y $\tilde{x}$ en lo que respecta a la separación de las bifurcaciones.
+
+\section{Soluciones de equilibrio con fase frustrada}
+
+Ls soluciones de equilibrio de fase frustrada cumplen las condiciones $\psi_1 = \psi_2 = \psi^* \neq 0, \pi$. Estas soluciones sólo se pueden obtener al continuar las ramas bifurcadas de los puntos de ramificación de las soluciones sincronizadas y antisincronizadas, donde el caso $F1$ corresponde a la rama bifurcada de las soluciones soncronizadas, el caso $F2$ corresponde a la rama bifurcada del punto de ramificación antisincronizado con espectro imaginario y $F3$ a la rama bifurcada del punto de ramificación antisincronizado con espectro real. Las ramas de equilibrio correspondientes se muestran en las Figuras~\ref{fig:EqBranchF1} a \ref{fig:EqBranchF3}, mientras que sus espectro asociados se presentas en las Figuras~\ref{fig:EigF1} a \ref{fig:EigF3}.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/F1/EqBranchF1.pdf}
+        \label{fig:EqBranchF1}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/F1/EigF1.pdf}
+        \label{fig:EigF1}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/F2/EqBranchF2.pdf}
+        \label{fig:EqBranchF2}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/F2/EigF2.pdf}
+        \label{fig:EigF2}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/F3/EqBranchF3.pdf}
+        \label{fig:EqBranchF3}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/F3/EigF3.pdf}
+        \label{fig:EigF3}
+    }
+    \caption{Las ramas de equilibrio frustradas (a) en la coordenada $\psi_{2}$ respecto a $\tilde{k}$ y su espectro (b) mapeado en el plano complejo. Los puntos rojos indican bifurcaciones de tipo ramificación. }
+    \label{fig:EqBranchsF_EigF}
+\end{figure}
+
+La principal novedad respecto a los casos sincronizado y antisincronizado es que estas ramas bifurcadas sirven como puentes para encontrar ramas de equilibrio con fases mixtas y ramas que no cruzan $\tilde{k}=0$, como se verá en la siguiente sección. Antes de ver las ramas que conectan estas ramas bifurcadas, es importante destacar que una solución de equilibrio de este tipo es muy importante ya que no es trivial obtener una configuración de acciones y ángulos que cumplan las condiciones de equilibrio, siendo la continuación numérica el medio más efectivo y accesible para localizarlos.
+
+Como se observa en las Figuras~\ref{fig:EqBranchF1} a \ref{fig:EqBranchF3}, las ramas de equilibrio de fase frustada se caracterizan por ser topológicamente cerradas, compuestas en cada caso por 2 ramas de equilibrio simétricas respecto a $\psi_2$ con límites en los puntos de ramificación. Siendo cerradas, se observa que no hay ramas de fase frustrada que cruzen $\tilde{k}=0$, concordando con el sistema de ecuaciones \eqref{eq:differential_system} ya que un requisito indispensable en este valor es que los ángulos $\psi_i \in \{0, \pi\}$. Reforzando el argumento del parrafo anterior acerca del mejor camino para encontrar estas soluciones.
+
+De las 3 ramas de equilibrio frustado, sólo una presenta multiestabilidad asegurada (Figura~\ref{fig:EqBranchF3}) ya que conecta 2 puntos de ramificación con espectros reales e imaginarios respectivamente. Este tipo de cambios de estabilidad genera un tipo distinto de bifurcación de hopf hamiltoniana donde hay una trancisión de un espectro tipo silla-silla a un espectro tipo foco--foco, algo que no se observa en los casos sincronizado, antisincronizado y en los equilibrios frustados $F1$ y $F2$.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.6\textwidth]{Capitulo4/figs/F1/BifBranchesF1_K.pdf}
+        \label{fig:BifBranchesF1_K}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/F2/BifBranchesF2_K.pdf}
+        \label{fig:BifBranchesF2_K}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/F3/BifBranchesF3_K.pdf}
+        \label{fig:BifBranchesF3_K}
+    }
+    \caption{Ramas de puntos de ramificación de la rama $F1$ (a), $F2$ (b) y $F3$ (c) en función de $\tilde{k}$ y $K$. Los puntos negros indican una anulación total del espectro, los naranjas una frontera de las variables $J_i$, los colores intensos representan equilibrios con un par real y los colores tenues con un par imaginario.}
+    \label{fig:BifBranchesF_K}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.6\textwidth]{Capitulo4/figs/F1/BifBranchesF1_x .pdf}
+        \label{fig:BifBranchesF1_x}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/F2/BifBranchesF2_x .pdf}
+        \label{fig:BifBranchesF2_x}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/F3/BifBranchesF3_x .pdf}
+        \label{fig:BifBranchesF3_x}
+    }
+
+    \caption{Ramas de puntos de ramificación de la rama $F1$ (a), $F2$ (b) y $F3$ (c) en función de $\tilde{k}$ y $\tilde{x}$. Los puntos negros indican una anulación total del espectro, los naranjas una frontera de las variables $J_i$, los colores intensos representan equilibrios con un par real y los colores tenues con un par imaginario.}
+    \label{fig:BifBranchesF_x}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.6\textwidth]{Capitulo4/figs/F1/BifBranchesF1_omega.pdf}
+        \label{fig:BifBranchesF1_omega}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/F2/BifBranchesF2_omega.pdf}
+        \label{fig:BifBranchesF2_omega}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/F3/BifBranchesF3_omega.pdf}
+        \label{fig:BifBranchesF3_omega}
+    }
+    \caption{Ramas de puntos de ramificación de la rama $F1$ (a), $F2$ (b) y $F3$ (c) en función de $\tilde{k}$ y $\tilde{\omega}$. Los puntos negros indican una anulación total del espectro, los naranjas una frontera de las variables $J_i$, los colores intensos representan equilibrios con un par real y los colores tenues con un par imaginario.}
+    \label{fig:BifBranchesF_omega}
+\end{figure}
+
+\section{Soluciones de equilibrio mixtas}
+
+Hay 2 tipos de soluciones mixtas: aquellas con $\psi_1 = \pi$, $\psi_2 = 0$ (identificadas con $M1$) y las que cumplen $\psi_1 = 0$, $\psi_2 = \pi$ (identificadas con $M2$). Sus respectivas ramas de equilibrio se muestran en las Figuras~\ref{fig:EqBranchM1} y~\ref{fig:EqBranchM2}, mientras que sus espectros se presentan en las Figuras~\ref{fig:EigM1} a ~\ref{fig:EigM22}.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/EqBranchM1.pdf}
+        \label{fig:EqBranchM1}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/EigM1.pdf}
+        \label{fig:EigM1}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.6\textwidth]{Capitulo4/figs/M2/EqBranchM2.pdf}
+        \label{fig:EqBranchM2}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/EigM21.pdf}
+        \label{fig:EigM21}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/EigM22.pdf}
+        \label{fig:EigM22}
+    }
+    \caption{Las ramas de equilibrio mixtas (a) y (c) en la coordenada $J_{2}$ respecto a $\tilde{k}$ y sus espectros (b) y (d) mapeados en el plano complejo respectivamente siendo (e) el espectro de la rama de color verde en (c). Los puntos azules en (a) y (c) indican bifurcaciones de punto límite, los rojos de ramificación los negros de hopf hamiltonianas mientras que los naranjas indican puntos de frontera en $J_i$.  }
+    \label{fig:EqBranchsM_EigM}
+\end{figure}
+
+La principal novedad respecto a los casos sincronizado y antisincronizado es que en el caso mixto $M2$ se tiene una rama que no cruza $\tilde{k}=0$ ya que, como se observará en la siguiente sección, esta rama se bifurca de un punto de ramificación que aparece en una de las ramas que a su vez bifurcan de los puntos de ramificación de la rama antisincronizada.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/BifBranchesM11_K .pdf}
+        \label{fig:BifBranchesM11
+            _K}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/BifBranchesM12_K .pdf}
+        \label{fig:BifBranchesM12_K}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/BifBranchesM11_x .pdf}
+        \label{fig:BifBranchesM11
+            _x}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/BifBranchesM12_x .pdf}
+        \label{fig:BifBranchesM12_x}
+    }
+    \caption{Ramas de puntos límite (azul) y puntos de ramificación (rojo) de la rama $M1$ en función de $\tilde{k}$ y $K$ ((a) y (b)) y $\tilde{x}$ ((c) y (d)).}
+    \label{fig:BifBranchesM1}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/BifBranchesM21_K.pdf}
+        \label{fig:BifBranchesM21
+            _K}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/BifBranchesM22_K.pdf}
+        \label{fig:BifBranchesM22_K}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/BifBranchesM21_x.pdf}
+        \label{fig:BifBranchesM21
+            _x}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/BifBranchesM22_x.pdf}
+        \label{fig:BifBranchesM22_x}
+    }
+    \caption{Ramas de puntos límite (azul) y puntos de ramificación (rojo) de las ramas $M2$ en función de $\tilde{k}$ y $K$ ((a) y (b)) y $\tilde{x}$ ((c) y (d)).}
+    \label{fig:BifBranchesM2}
+\end{figure}
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/BifBranchesM1_omega.pdf}
+        \label{fig:BifBranchesM1_omega}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/BifBranchesM2_omega.pdf}
+        \label{fig:BifBranchesM2_omega}
+    }
+    \caption{Ramas de puntos límite (azul) y puntos de ramificación (rojo) de la rama $M1$ (a) y de las ramas $M2$ (b) en función de $\tilde{k}$ y $\tilde{\omega}$.}
+    \label{fig:BifBranchesM_omega}
+
+\end{figure}
+
+\section{Soluciones periódicas}
+

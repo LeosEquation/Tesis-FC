@@ -3,18 +3,581 @@
 %           Capítulo 2: MARCO TEÓRICO - REVISIÓN DE LITERATURA
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\chapter{Marco teórico}
-En este capítulo, normalmete se ponen todas las ecuaciones que se van a usar en la tesis, así ya nomás se hace rferencia a la ecuación tal o "como se vió en el capítulo 2", y esas cosas.
-%inserción de codigo de Matlab
-%Es conveniente sangrarlo (los de proteco dicen "indentarlo") para que no se encime con los números  de las líneas a la izquierda
-\begin{lstlisting}[frame=single]
-    % Declaracion de las variables simbolicas
-    syms u z1 z2 z3 z4 J m M g l 
-    % Matrices involucradas
-    E = [J+m*l*l m*l*cos(z1);m*l*cos(z1) M+m] 
-    F = [m*g*l*sin(z1);u+m*l*(z3*z3)*sin(z1)] 
-    % Despeje
-    V = E\F
-\end{lstlisting}
+\chapter{Modelo}
 
-\blindtext
+En este capítulo se aborda teóricamente el modelo de bosones interactuantes
+distribuidos en tres pozos, su aproximación clásica y las herramientas de
+análisis dinámico aplicables a este sistema Hamiltoniano con conservación
+de la energía.
+
+\section{Modelo cuántico}
+
+Se considera un sistema de partículas bosónicas en un potencial periódico
+externo $ V(\vec{r}) = V(\vec{r} + \vec{r}_{\vec{l}}) $, donde $ \vec{r}_{\vec{l}}
+    = l_{1}d_{1}\vec{e}_{1} + l_{2}d_{2}\vec{e}_{2} + l_{3}d_{3}\vec{e}_{3} $ con
+$ l_{k} \in \mathbb{N} $ y $ d_{k} \in \mathbb{R} $.
+El Hamiltoniano cuántico \replaced{en}{de} segunda cuantización que resulta de este potencial,
+bajo el supuesto de interacciones débiles entre pares de partículas, está dado
+por \added{\cite{mossmann2006semiclassical}}
+
+\begin{equation}
+    \hat{H} = \int d^{3}r \hat{\Phi}^{\dagger}(\vec{r}) \left( -\frac{\hbar^{2}}{2m}
+    \Delta + V(\vec{r}) \right) \hat{\Phi}(\vec{r})
+    + \frac{g}{2} \int d^{3}r \hat{\Phi}^{\dagger}(\vec{r}) \hat{\Phi}^{\dagger}(\vec{r})
+    \hat{\Phi}(\vec{r}) \hat{\Phi}(\vec{r})\added{,}
+    \label{eq:hamiltonianbase}
+\end{equation}
+
+\noindent donde $ m $ es la masa de las partículas y $ g $ es la constante de acoplamiento
+entre ellas, la cual es positiva en el caso de interacciones repulsivas y negativa
+para interacciones atractivas \cite{mossmann2006semiclassical}. A lo largo de esta tesis, se emplearán unidades
+escaladas donde $\hbar = m = 1$.
+
+El operador de campo bosónico $ \hat{\Phi}(\vec{r}) $ puede expresarse como una
+expansión en términos de operadores de aniquilación:
+
+\begin{equation}
+    \hat{\Phi}(\vec{r}) = \sum_{n,m} \phi_{n,m}(\vec{r}) \hat{a}_{n,m}.
+    \label{eq:field_expansion}
+\end{equation}
+
+\noindent Aquí, el índice $ n $ identifica el pozo potencial \deleted{(de entre tres)}, mientras que $ m $
+se refiere a los estados excitados de cada pozo. Dado que se considera un condensado
+de Bose-Einstein a temperaturas suficientemente bajas, se asume que sólo se ocupa el
+estado fundamental ($ m = 1 $) \cite{mossmann2006semiclassical}.
+
+Al sustituir la expansión \eqref{eq:field_expansion} en \eqref{eq:hamiltonianbase} y
+despreciar los términos de cuarto orden en operadores con diferentes modos, se obtiene
+el Hamiltoniano de Bose-Hubbard para tres pozos acoplados. A diferencia del modelo lineal
+tratado en \cite{mossmann2006semiclassical}, aquí se considera una geometría anular,
+donde el primer y el último pozo están también acoplados.
+
+\begin{equation}
+    \hat{H} = \hat{H}_{0} + \hat{W},
+    \label{eq:hamiltonian_total}
+\end{equation}
+
+\noindent donde
+
+\begin{equation}
+    \begin{split}
+        \hat{H}_0 & = \omega_1 \frac{\hat{a}^{\dagger}_{1}\hat{a}_{1} + \hat{a}_{1}\hat{a}^{\dagger}_{1}}{2}
+        + \omega_2 \frac{\hat{a}^{\dagger}_{2}\hat{a}_{2} + \hat{a}_{2}\hat{a}^{\dagger}_{2}}{2}
+        + \omega_3 \frac{\hat{a}^{\dagger}_{3}\hat{a}_{3} + \hat{a}_{3}\hat{a}^{\dagger}_{3}}{2}               \\
+                  & + x_1 \left( \frac{\hat{a}^{\dagger}_{1}\hat{a}_{1} + \hat{a}_{1}\hat{a}^{\dagger}_{1}}{2}
+        \right)^2 + x_2 \left( \frac{\hat{a}^{\dagger}_{2}\hat{a}_{2} + \hat{a}_{2}\hat{a}^{\dagger}_{2}}{2}
+        \right)^2                                                                                              \\
+                  & + x_3 \left( \frac{\hat{a}^{\dagger}_{3}\hat{a}_{3} + \hat{a}_{3}\hat{a}^{\dagger}_{3}}{2}
+        \right)^2,
+    \end{split}
+    \label{eq:H0_local}
+\end{equation}
+
+\begin{equation}
+    \hat{W} = -\frac{k_{12}}{2} (\hat{a}^{\dagger}_{1}\hat{a}_{2} + \hat{a}^{\dagger}_{2}\hat{a}_{1})
+    - \frac{k_{23}}{2} (\hat{a}^{\dagger}_{2}\hat{a}_{3} + \hat{a}^{\dagger}_{3}\hat{a}_{2}) -
+    \frac{k_{31}}{2} (\hat{a}^{\dagger}_{3}\hat{a}_{1} + \hat{a}^{\dagger}_{1}\hat{a}_{3}).
+    \label{eq:W_interaction}
+\end{equation}
+
+\added{En estas expresiones, $ \hat{a}_{k} $ y $ \hat{a}^{\dagger}_{k} $ son los operadores de aniquilación
+    y creación en el pozo $ k \in \{1,2,3\} $, respectivamente, que satisfacen las relaciones de conmutación bosónicas
+    $ [\hat{a}_{k}, \hat{a}^{\dagger}_{l}] = \delta_{kl} $ y $ [\hat{a}_{k}, \hat{a}_{l}] = 0 $. Los parámetros $ \omega_{k} $
+    representan las frecuencias de oscilación en cada pozo, $ x_{k} $ son las no linealidades debidas a
+    las interacciones entre partículas en el mismo pozo, y $ k_{kl} $ son las constantes de acoplamiento entre
+    los pozos $ k $ y $ l $.}
+
+\added{Siguiendo las reglas de conmutación, se obtiene que la parte integrable $ \hat{H}_0 $ del Hamiltoniano
+    \eqref{eq:hamiltonian_total} corresponde a una matriz diagonal mientras que la parte de interacción
+    $ \hat{W} $ contiene los términos de acoplamiento entre pozos no diagonales \cite{mossmann2006semiclassical} .}
+
+\added{Para simplificar el parámetro de interacciones, se asume que las no linealidades son iguales en
+    cada pozo siguiendo la idea de \cite{mossmann2006semiclassical}, es decir, $ x_1 = x_2 = x_3 = x $, que permite
+    una comparación más directa con resultados experimentales y manteniendo las colisiones entre bosones independientes
+    del pozo.}
+
+\deleted{ Este Hamiltoniano descarta un término constante en la energía para facilitar el análisis
+    posterior. Además, se considera que los potenciales de cada pozo son iguales, es decir,
+    $ x_1 = x_2 = x_3 = x $, lo cual permite una comparación más directa con resultados
+    experimentales \cite{mossmann2006semiclassical}.}
+
+\deleted{Finalmente, se introduce el operador número total de partículas $ \hat{N} = \hat{n}_1 +
+        \hat{n}_2 + \hat{n}_3 $, el cual conmuta con el Hamiltoniano total \eqref{eq:hamiltonian_total},
+    asegurando la conservación del número de partículas en el sistema \cite{mossmann2006semiclassical}. }
+
+\section{Aproximación clásica}
+
+Para realizar un análisis clásico del sistema cuántico, se construye la aproximación
+clásica del Hamiltoniano mediante las reglas de sustitución de Heisenberg:
+
+\begin{equation}
+    \hat{a}_k \rightarrow \sqrt{I_k} e^{i \varphi_k}, \quad \hat{a}_k^{\dagger} \rightarrow \sqrt{I_k} e^{-i \varphi_k},
+    \label{eq:heisenberg_subs}
+\end{equation}
+
+\noindent donde la variable de acción clásica $ I_k $ (con unidades de $\hbar$) se relaciona con el
+número cuántico $n$ mediante
+
+\begin{equation}
+    I \leftrightarrow n + \frac{1}{2}.
+    \label{eq:action_quantum_number}
+\end{equation}
+
+Los métodos semiclásicos suelen ofrecer resultados precisos en los dos primeros órdenes de
+$\hbar$ (órdenes 0 y 1), con errores del orden de $\hbar^2$ \cite{mossmann2006semiclassical}.
+Al aplicar las sustituciones en el Hamiltoniano \eqref{eq:hamiltonian_total} y desarrollar los
+términos exponenciales, se obtiene el Hamiltoniano clásico:
+
+\begin{equation}
+    \begin{aligned}
+        H(\varphi_1, \varphi_2, \varphi_3, I_1, I_2, I_3) & = \omega_1 I_1 + \omega_2 I_2 + \omega_3 I_3
+        + x_1 I_1^2 + x_2 I_2^2 + x_3 I_3^2                                                                      \\
+                                                          & - k_{12} \sqrt{I_1 I_2} \cos(\varphi_1 - \varphi_2)  \\
+                                                          & - k_{23} \sqrt{I_2 I_3} \cos(\varphi_2 - \varphi_3)  \\
+                                                          & - k_{31} \sqrt{I_3 I_1} \cos(\varphi_3 - \varphi_1).
+    \end{aligned}
+    \label{eq:hamiltonian_classical}
+\end{equation}
+
+Este Hamiltoniano describe un sistema clásico de tres osciladores anharmónicos acoplados, expresado
+en coordenadas de acción-ángulo, con $\varphi_k \in [0, 2\pi)$, $I_k > 0$ \added{e $I_k < N$}. La parte integrable $H_0$
+del sistema (sin términos de acoplamiento) conserva las acciones, mientras que los términos de
+interacción $W$ las modifican al depender de las diferencias angulares y acoplamientos entre osciladores.
+
+El corchete de Poisson entre $H$ y el observable
+
+\begin{equation}
+    K = I_{1} + I_{2} + I_{3}
+    \label{eq:N_constant}
+\end{equation}
+
+\noindent es igual a cero, lo que corresponde con su análogo cuántico: la conservación del número total de partículas
+\cite{mossmann2006semiclassical}. Nótese que, de acuerdo con la definición \eqref{eq:action_quantum_number},
+se tiene que $K = N + 3/2$. La simetría $\{H, K\} = 0$ permite reducir el número de grados de libertad de
+tres a dos mediante una transformación canónica. Utilizando la función generadora
+
+\begin{equation}
+    G(\varphi_{1}, \varphi_{2}, \varphi_{3}, J_{1}, J_{2}, K) = J_{1}(\varphi_{1} - \varphi_{2}) +
+    J_{2}(\varphi_{3} - \varphi_{2}) + K \varphi_{2},
+    \label{eq:generating_function}
+\end{equation}
+
+\noindent con las nuevas acciones ($J_{1}, J_{2}, K$) se obtienen las siguientes transformaciones:
+
+\begin{equation}
+    \begin{split}
+        \psi_{1} & = \varphi_{1} - \varphi_{2}, \quad \psi_{2} = \varphi_{3} - \varphi_{2},
+        \quad \vartheta = \varphi_{2},                                                      \\
+        I_{1}    & = J_{1}, \quad I_{3} = J_{2},
+    \end{split}
+    \label{eq:transformation}
+\end{equation}
+
+\noindent donde ($\psi_{1}, \psi_{2}, \vartheta$) son los nuevos ángulos. El Hamiltoniano expresado
+en estas nuevas coordenadas toma la forma:
+
+\begin{equation}
+    \begin{split}
+        H & = \omega_1 J_1 + \omega_2 (K - J_1 - J_2) + \omega_3 J_2 \\
+          & + x_1 J_1^2 + x_2 (K - J_1 - J_2)^2 + x_3 J_2^2          \\
+          & - k_{12} \sqrt{J_1 (K - J_1 - J_2)} \cos\psi_1           \\
+          & - k_{23} \sqrt{J_2 (K - J_1 - J_2)} \cos\psi_2           \\
+          & - k_{31} \sqrt{J_1 J_2} \cos(\psi_2 - \psi_1),
+    \end{split}
+    \label{eq:transform_hamiltonian}
+\end{equation}
+
+\noindent observando que no hay dependencia de $\vartheta$, lo que confirma que $K$ es una constante del movimiento
+como se verá más adelante en el análisis dinámico.
+
+\section{Análisis dinámico}
+
+Para llevar a cabo el análisis dinámico del Hamiltoniano \eqref{eq:transform_hamiltonian}, es conveniente
+reducir el número de parámetros libres. Como se indicó anteriormente, se igualan los parámetros $x_k$ a un
+único parámetro $x$. Además, se fijan las frecuencias como $\omega_1 = \omega$, $\omega_2 = 0$ y $\omega_3 = -\omega$,
+\replaced{buscando una simetría de frecuencias respecto al pozo 2}{de modo que los pozos 1 y 3 tengan frecuencias
+    de igual magnitud pero con signos opuestos}. Finalmente,
+se establecen las constantes de acoplamiento $k_{12} = k_{23} = k_2$, mientras que $k_{31} = k_1$ se
+mantiene como parámetro libre. Bajo estas condiciones, el Hamiltoniano se expresa como:
+
+\begin{equation}
+    \begin{split}
+        H & = \omega ( J_1 - J_2 )                                                                                \\
+          & + x ( J_1^2 + (K - J_1 - J_2)^2 + J_2^2 )                                                             \\
+          & - k_{1} \sqrt{J_1 J_2} \cos(\psi_2 - \psi_1)                                                          \\
+          & - k_{2} \left[ \sqrt{J_1 (K - J_1 - J_2)} \cos\psi_1 + \sqrt{J_2 (K - J_1 - J_2)} \cos\psi_2 \right].
+    \end{split}
+    \label{eq:free_param_hamiltonian}
+\end{equation}
+
+Este Hamiltoniano contiene cuatro parámetros libres. El esquema del sistema correspondiente es:
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[
+            every node/.style={circle, draw, minimum size=1.2cm, font=\large},
+            thick
+        ]
+
+        % Coordenadas de los pozos (triángulo invertido)
+        \node (1) at (-2, 2) {1};
+        \node (2) at (0, 0)  {2};
+        \node (3) at (2, 2)  {3};
+
+        % Flechas dobles con etiquetas (usando latex-latex, más compatible)
+        \draw[latex-latex] (1) -- (2) node[midway, left=2pt, font=\normalsize, draw=none, shape=rectangle] {$k_{2}$};
+        \draw[latex-latex] (2) -- (3) node[midway, right=2pt, font=\normalsize, draw=none, shape=rectangle] {$k_{2}$};
+        \draw[latex-latex] (1) -- (3) node[midway, above=2pt, font=\normalsize, draw=none, shape=rectangle] {$k_{1}$};
+
+        % Frecuencias
+        \node[draw=none, fill=none, font=\small] at ($(1)+(0,1)$)    {$\omega_1 = \omega$};
+        \node[draw=none, fill=none, font=\small] at ($(2)+(0,-1)$)   {$\omega_2 = 0$};
+        \node[draw=none, fill=none, font=\small] at ($(3)+(0,1)$)    {$\omega_3 = -\omega$};
+
+        % No linealidades
+        % \node[draw=none, fill=none, font=\small] at (0,-2) {Todos los $x_j = x$};
+
+    \end{tikzpicture}
+
+    \caption{Esquema del modelo anular con acoplamientos simétricos $k_{2}$ y uno independiente $k_{1}$.}
+    \label{fig:modelo_anular}
+\end{figure}
+
+Es posible reducir un parámetro adicional dividiendo todo el Hamiltoniano entre uno de los
+parámetros. A lo largo de este trabajo, se utiliza $k_2$ como unidad de referencia. Así,
+se define:
+
+\begin{equation}
+    \begin{split}
+        \tilde{H} & = \tilde{\omega} ( J_1 - J_2 )                                                                  \\
+                  & + \tilde{x} ( J_1^2 + (K - J_1 - J_2)^2 + J_2^2 )                                               \\
+                  & - \tilde{k} \sqrt{J_1 J_2} \cos(\psi_2 - \psi_1)                                                \\
+                  & - \left[ \sqrt{J_1 (K - J_1 - J_2)} \cos\psi_1 + \sqrt{J_2 (K - J_1 - J_2)} \cos\psi_2 \right],
+    \end{split}
+    \label{eq:normalize_hamiltonian}
+\end{equation}
+
+\noindent donde $ \tilde{H} = H / k_{2} $, $ \tilde{\omega} = \omega/ k_{2} $, $ \tilde{x} = x / k_{2} $
+y $ \tilde{k} = k_{1} / k_{2} $. Por las propiedades de los corchetes de Poisson, este nuevo
+Hamiltoniano conserva las mismas propiedades dinámicas que el original \eqref{eq:transform_hamiltonian}.
+
+Para llegar a las ecuaciones diferenciales que describen la dinámica de este sistema clásico, se desarrolla
+
+\begin{equation}
+    \begin{split}
+        \tilde{F}(\tilde{\xi}, \tilde{p}) = \dot{\tilde{\xi}} = J\nabla_{\tilde{\xi}} H (\tilde{\xi}, \tilde{p}),
+    \end{split}
+    \label{eq:full_differential_system}
+\end{equation}
+
+\noindent donde $ J $ es una matriz simpléctica, $\tilde{p} = (\tilde{\omega}, \tilde{x}, \tilde{k}) \in \mathbb{R}^3$ y
+$\tilde{F}: \mathbb{R}^9 \rightarrow \mathbb{R}^6$. Si $ \tilde{\xi} = (\psi_1, \psi_2, \theta, J_1, J_2, K) \in
+    \mathcal{C}^1(\mathbb{R}, \mathbb{R}^6)$, se tienen las ecuaciones de Hamilton
+
+\begin{equation}
+    \begin{split}
+        \dot{J}_1 & = -\frac{\partial \tilde{H}}{\partial \psi_1}, \quad
+        \dot{\psi}_1 = \frac{\partial \tilde{H}}{\partial J_1}              \\
+        \dot{J}_2 & = -\frac{\partial \tilde{H}}{\partial \psi_2}, \quad
+        \dot{\psi}_2 = \frac{\partial \tilde{H}}{\partial J_2}              \\
+        \dot{K}   & = -\frac{\partial \tilde{H}}{\partial \vartheta}, \quad
+        \dot{\vartheta} = \frac{\partial \tilde{H}}{\partial K}.
+    \end{split}
+    \label{eq:dynamical_hamilton}
+\end{equation}
+
+Como el Hamiltoniano \eqref{eq:normalize_hamiltonian} no depende de \replaced{$ \vartheta $}{$ K $},
+\replaced{$ K $}{esta variable} pasa a ser un parámetro del sistema
+al no depender del tiempo \added{y $\vartheta$ es una variable cíclica}. En consecuencia, las ecuaciones
+para $\dot{\vartheta}$ y $\dot{K}$ son:
+
+\begin{equation}
+    \begin{split}
+        \dot{\vartheta} & = 2 \tilde{x} (K - J_{2} - J_{1})                                  \\
+                        & - \frac{1}{2} \left( \sqrt{ \frac{K - J_1 - J_2}{J_1} } \cos\psi_1
+        + \sqrt{\frac{K - J_1 - J_2}{J_2}} \cos\psi_2 \right),                               \\
+        \dot{K}         & = 0.
+    \end{split}
+    \label{eq:independent_variables}
+\end{equation}
+
+Por ello, el sistema \eqref{eq:full_differential_system} puede reducirse a
+
+\begin{equation}
+    \begin{split}
+        F(\xi, p) = \dot{\xi} = J\nabla_{\xi} H (\xi, p),
+    \end{split}
+    \label{eq:differential_system}
+\end{equation}
+
+\noindent donde $p = (\tilde{\omega}, \tilde{x}, \tilde{k}, K) \in \mathbb{R}^4$, $F: \mathbb{R}^8 \rightarrow \mathbb{R}^4$ y
+$ \xi = (\psi_1, \psi_2, J_1, J_2) \in \mathcal{C}^1(\mathbb{R}, \mathbb{R}^4) $. El sistema de ecuaciones diferenciales
+correspondiente es:
+
+\begin{equation}
+    \begin{split}
+        \dot{\psi}_1 & = \tilde{\omega} + 2 \tilde{x} (2J_1 + J_2 - K) - \frac{\tilde{k}}{2}  \sqrt{ \frac{J_2}{J_1} } \cos(\psi_2 - \psi_1)   \\
+                     & - \frac{1}{2} \left( \sqrt{ \frac{K - J_1 - J_2}{J_1} } - \sqrt{\frac{J_1}{K - J_1 - J_2}} \right) \cos\psi_1           \\
+                     & + \frac{1}{2} \sqrt{\frac{J_2}{K - J_1 - J_2}} \cos\psi_2,                                                              \\
+        \dot{\psi}_2 & = - \tilde{\omega} + 2 \tilde{x} (2J_2 + J_1 - K) - \frac{\tilde{k}}{2}  \sqrt{ \frac{J_1}{J_2} } \cos(\psi_2 - \psi_1) \\
+                     & - \frac{1}{2} \left( \sqrt{ \frac{K - J_1 - J_2}{J_2} } - \sqrt{\frac{J_2}{K - J_1 - J_2}} \right) \cos\psi_2           \\
+                     & + \frac{1}{2} \sqrt{\frac{J_1}{K - J_1 - J_2}} \cos\psi_1,                                                              \\
+        \dot{J}_1    & = - \sqrt{J_1(K - J_1 - J_2)} \sin\psi_1 - \tilde{k} \sqrt{J_1J_2} \sin(\psi_2 - \psi_1),                               \\
+        \dot{J}_2    & = - \sqrt{J_2(K - J_1 - J_2)} \sin\psi_2 + \tilde{k} \sqrt{J_1J_2} \sin(\psi_2 - \psi_1).
+    \end{split}
+    \label{eq:dynamical_system}
+\end{equation}
+
+\noindent Este sistema será el objeto principal de estudio en esta tesis.
+
+\section{Equilibrio}
+
+Una solución $\xi_{\text{eq}} \in \mathcal{C}^1(\mathbb{R}, \mathbb{R}^4)$ del sistema
+\eqref{eq:differential_system} se denomina de equilibrio si satisface $F(\xi_{eq}, p) = \textbf{0}$.
+Cabe señalar que este equilibrio no corresponde necesariamente a un equilibrio del sistema clásico completo descrito por el Hamiltoniano
+\eqref{eq:hamiltonian_classical}, ya que, debido a la transformación \eqref{eq:transformation},
+el equilibrio en los ángulos $\psi_i$ implica un \textbf{equilibrio relativo} de los ángulos
+$\varphi_i$ (con $i \in \{1,3\}$) respecto a la evolución del ángulo independiente $\varphi_2$.
+
+Las soluciones de equilibrio pueden clasificarse linealmente como estables, inestables o no hiperbólicas,
+dependiendo del conjunto de autovalores del jacobiano evaluado en dicha solución \added{\cite{meyer1992introduction}}.
+La clasificación es la siguiente:
+
+\begin{itemize}
+
+    \item \textbf{Estabilidad lineal:} Todas las partes reales de los autovalores del jacobiano son negativas.
+          En este caso, una pequeña perturbación induce una evolución que converge al equilibrio.
+
+    \item \textbf{Inestabilidad lineal:} Al menos un autovalor posee parte real positiva, lo que implica que
+          una pequeña perturbación aleja la trayectoria del equilibrio.
+
+    \item \textbf{No hiperbólica:} Alguno de los autovalores tiene parte real exactamente igual a cero,
+          mientras que los restantes tienen parte real menor o igual que cero. En este caso, la estabilidad
+          no puede determinarse únicamente mediante el análisis lineal, y es necesario considerar términos
+          de orden superior.
+
+\end{itemize}
+
+Sin embargo, la estructura simpléctica del jacobiano del sistema \eqref{eq:differential_system} garantiza que
+los autovalores siempre aparecen en pares simétricos respecto a los ejes real e imaginario. Es decir, si
+$\lambda$ es un autovalor, entonces también lo son $-\lambda$, $\bar{\lambda}$ y $-\bar{\lambda}$ \cite{meyer1992introduction}.
+Como consecuencia, el sistema \eqref{eq:dynamical_system} no puede presentar soluciones de equilibrio
+estables en el sentido lineal, ya que la presencia de un autovalor real negativo implica necesariamente
+la existencia de uno positivo. Además, la estabilidad lineal en este contexto supondría la existencia de disipación de energía,
+lo cual contradice la naturaleza conservativa del sistema.
+
+En los casos en que los autovalores son puramente reales o puramente imaginarios, se observan dos pares simétricos.
+Si un autovalor tiene parte real e imaginaria distintas de cero, el conjunto completo de autovalores se obtiene
+por simetría conjugada respecto a ambos ejes.
+
+Para estudiar la estabilidad de un equilibrio con autovalores puramente imaginarios (parte real nula), es necesario
+analizar el Hamiltoniano en términos de la función de Lyapunov. En tales casos, se considera que el equilibrio es estable en el
+sentido de Lyapunov si el Hamiltoniano \eqref{eq:normalize_hamiltonian} posee un máximo o mínimo local en dicho
+punto \added{y es inestable cuando posee un punto silla}, de acuerdo con el teorema de Dirichlet \cite{meyer1992introduction}.
+\replaced{Si el Hamiltoniano presenta una matriz Hessiana singular en el equilibrio, no es posible determinar la estabilidad
+    mediante los autovalores del método lineal y se requiere un análisis de orden superior para determinar la geometría del
+    Hamiltoniano en el equilibrio. En términos generales, este sigue siendo un problema abierto \cite{dos2010stability}.}
+{Si el Hamiltoniano presenta un punto silla o un punto
+    degenerado en el equilibrio con autovalores puramente imaginarios, la estabilidad no puede determinarse de manera concluyente,
+    y es necesario realizar un análisis de orden superior del Hamiltoniano. En términos generales, este sigue siendo un problema abierto \cite{dos2010stability}.}
+
+Por tanto\added{, si se adopta como función de Lyapunov el polinomio de grado 2 \( H_2 \) de la expansión de Taylor \cite{dos2010stability},}
+en este trabajo se propone la siguiente clasificación para las soluciones de equilibrio:
+
+\begin{itemize}
+
+    \item \textbf{Estable (en el sentido de Lyapunov):} Existen dos pares simétricos de autovalores puramente imaginarios
+          (parte real cero) y \added{la función de Lyapunov} tiene un mínimo o máximo local en el equilibrio. Una pequeña
+          perturbación induce oscilaciones alrededor del equilibrio, manteniendo constante la energía.
+
+    \item \textbf{Inestable:} Existe al menos un autovalor con parte real distinta de cero. Una
+          perturbación hace que el sistema se aleje del equilibrio, conservando la energía.
+
+    \item \textbf{No concluyente:} \replaced{Se presentan autovalores puramente imaginarios y la matriz
+              Hessiana de la función de Lyapunov es singular en el equilibrio. En este caso, podrían surgir inestabilidades no lineales
+              asociadas a resonancias.}{Se presentan autovalores puramente imaginarios, pero el Hamiltoniano
+              no exhibe un máximo ni un mínimo local. En este caso, podrían surgir inestabilidades no lineales
+              asociadas a resonancias.}
+
+\end{itemize}
+
+\subsection{Bifurcaciones de equilibrio}
+
+Cuando una solución de equilibrio presenta un autovalor cuya parte real e imaginaria son nulas, se
+dice que ocurre una bifurcación. A lo largo de este trabajo se considerarán dos tipos de bifurcaciones
+de equilibrio: el \textbf{punto límite} y el \textbf{punto de ramificación}.
+
+Otra bifurcación de interés es la bifurcación de Hopf; sin embargo, en sistemas Hamiltonianos su análisis es
+considerablemente más complejo, debido a la simetría de los autovalores y a las posibles inestabilidades inducidas
+por resonancias \added{\cite{lahiri2001hamiltonian}}. Por esta razón, dichas soluciones no serán abordadas en el presente trabajo.
+
+\begin{itemize}
+    \item \textbf{Punto límite: }También conocida como \textbf{saddle-node}, esta bifurcación se caracteriza por una solución de
+          equilibrio cuyo jacobiano presenta un defecto de rango igual a 1; es decir, su núcleo (espacio nulo)
+          tiene dimensión 1 \cite{govaertsbifurcations}.
+
+          Es importante destacar que, debido a la estructura simpléctica del sistema, si un autovalor
+          es cero, otro autovalor también debe serlo por simetría. No obstante, ambos comparten el mismo
+          autovector \cite{meyer1992introduction}. Por tanto, si el otro par de autovalores no es nulo, el espacio nulo del jacobiano
+          sigue siendo unidimensional.
+
+          Esto implica que, aunque el autovalor cero tenga multiplicidad algebraica 2, el autovector correspondiente
+          es único. Esta situación permite la existencia de bifurcaciones tipo punto límite.
+
+    \item \textbf{Punto de ramificación: }Esta bifurcación ocurre cuando el jacobiano de una solución de equilibrio presenta un defecto de
+          rango igual a 2; es decir, su espacio nulo es bidimensional \cite{govaertsbifurcations}.
+
+          Siguiendo la misma lógica que en el caso del punto límite, esta situación se da cuando existen dos
+          pares de autovalores nulos, cada uno con su respectivo autovector independiente. En otras palabras,
+          el núcleo del jacobiano tiene dimensión 2.
+
+\end{itemize}
+
+
+
+\section{Órbitas periódicas}
+
+Una órbita periódica de periodo $T > 0$ del sistema de ecuaciones \eqref{eq:differential_system} es una solución
+$\xi \in \mathcal{C}^1([0,T], \mathbb{R}^4)$ que satisface:
+
+\begin{equation}
+    \dot{\xi}(t) = F(\xi(t), p), \quad \xi(0) = \xi(T), \quad \forall t \in [0,T].
+    \label{eq:orbit_mean}
+\end{equation}
+
+Al igual que las soluciones de equilibrio, las órbitas periódicas pueden clasificarse según su estabilidad.
+La herramienta matemática central para este análisis es la \textbf{teoría de Floquet} \cite{meyer1992introduction}, la cual considera
+perturbaciones infinitesimales a lo largo de la órbita periódica. Para ello, se introduce una función de
+variación $v(t) \in \mathcal{C}^1([0,T], \mathbb{R}^4)$ tal que la condición inicial perturbada es:
+
+\begin{equation}
+    \tilde{\xi}(0) = \xi(0) + \epsilon v(0),
+    \label{eq:variationalorbit}
+\end{equation}
+
+\noindent y al sustituir esta condición en \eqref{eq:orbit_mean} se obtiene la ecuación variacional para $v(t)$:
+
+\begin{equation}
+    \begin{split}
+        \dot{v}(t)              & = F_{\xi}(\xi(t), p)\, v(t),                                              \\
+        F_{\xi}(\xi(t), p)_{ij} & = \left. \dfrac{\partial F_{i}}{\partial \xi_{j}} \right|_{\xi = \xi(t)}.
+    \end{split}
+    \label{eq:variationaequation}
+\end{equation}
+
+La solución de esta ecuación define un mapeo de evolución:
+
+\begin{equation}
+    v(T) = M v(0),
+    \label{eq:floquetmatrix}
+\end{equation}
+
+\noindent donde $M$ es la \textbf{matriz de Floquet}. Los autovalores de $M$ se denominan \textbf{multiplicadores de Floquet}
+y caracterizan la estabilidad de la órbita periódica. Todo sistema autónomo posee al menos un
+multiplicador igual a 1, correspondiente a la dirección tangente a la órbita.
+
+La clasificación de estabilidad es la siguiente:
+
+\begin{itemize}
+    \item \textbf{Estable:} Todos los multiplicadores de Floquet se encuentran dentro del círculo
+          unitario complejo. Si hay multiplicadores sobre el círculo, deben ser \emph{simples}
+          (es decir, con multiplicidad algebraica igual a su multiplicidad geométrica). En este caso,
+          pequeñas perturbaciones no provocan que la trayectoria se aleje de la órbita.
+
+    \item \textbf{Inestable:} Al menos un multiplicador se encuentra fuera del círculo unitario
+          complejo, lo que implica que una pequeña perturbación se amplifica con el tiempo.
+\end{itemize}
+
+En el contexto Hamiltoniano, se deben considerar propiedades adicionales. La conservación de la
+energía implica que siempre existen al menos dos multiplicadores unidad sobre el círculo unitario.
+A diferencia del caso de equilibrio, aquí los dos autovalores unidad están asociados a autovectores
+\emph{linealmente independientes}, lo cual refleja la existencia de una familia continua de órbitas
+periódicas cercanas.
+
+Los dos multiplicadores restantes aparecen con simetría respecto a la inversión y conjugación compleja:
+si $\mu$ es un multiplicador distinto de 1, entonces el conjunto completo es $\{1, 1, \mu, 1/\mu, \bar{\mu}, 1/\bar{\mu}\}$.
+Como máximo en el sistema \eqref{eq:differential_system} puede haber 4 autovalores, entonces con la simetría del conjunto
+se deduce que los autovalores con parte imaginaria no nula siempre permanecen sobre el circulo unitario complejo
+\cite{meyer1992introduction}.
+
+En la Figura \ref{fig:floquet_multipliers} se muestra la distribución típica de los multiplicadores de Floquet en el
+plano complejo para una órbita periódica en un sistema Hamiltoniano conservativo.
+
+\begin{figure}[H]
+    \centering
+    \begin{tikzpicture}[scale=3]
+        % Círculo unitario
+        \draw[thick] (0,0) circle (1);
+
+        % Ejes
+        \draw[->] (-1.5,0) -- (1.5,0) node[right] {\small $\text{Re}(z)$};
+        \draw[->] (0,-1.5) -- (0,1.5) node[above] {\small $\text{Im}(z)$};
+
+        % Etiqueta del círculo
+        \node at (0.5,0.5) {\small $|z|=1$};
+
+        % Puntos en +1 y -1
+        \fill[red] (1,0) circle (0.03) node[below right=1pt] {\small $\mu_1 = \mu_2 = 1$};
+        \fill[red] (-1,0) circle (0.03);
+
+        \fill[red] (1.2,0) circle (0.03);
+        \fill[red] (0.9,0) circle (0.03);
+        \fill[red] (0.2,0) circle (0.03);
+
+        \fill[red] (-1.2,0) circle (0.03);
+        \fill[red] (-0.9,0) circle (0.03);
+        \fill[red] (-0.2,0) circle (0.03);
+
+
+        % Otros puntos con coordenadas polares alrededor de -1
+        \foreach \angle in {30, 60, 90, 120, 150, 180, 210, 240, 270, 300, 330, 360} {
+                \fill[red] (\angle:1) circle (0.03);
+            }
+
+        \foreach \angle in {5, 15, -5, -15} {
+                \fill[red] (\angle:1) circle (0.03);
+            }
+
+        \foreach \angle in {175, 165, 185, 195} {
+                \fill[red] (\angle:1) circle (0.03);
+            }
+
+    \end{tikzpicture}
+    \caption{Distribución de los multiplicadores de Floquet en el círculo unitario}
+    \label{fig:floquet_multipliers}
+\end{figure}
+
+\subsection{Bifurcaciones de órbitas periódicas}
+
+Con base en lo discutido en la sección anterior, existen dos tipos de órbitas periódicas particularmente
+relevantes en el sistema que se está estudiando: aquellas en las que todos los multiplicadores de
+Floquet son iguales a 1, y aquellas en las que un par de multiplicadores es igual a 1 y el otro par
+es igual a $-1$. Estos dos casos están asociados a bifurcaciones específicas de órbitas periódicas:
+
+\begin{itemize}
+
+    \item \textbf{Ciclo \replaced{de ramificación}{límite}: } \replaced{Esta bifurcación ocurre cuando todos los multiplicadores de
+              Floquet son iguales a $1$. Debido a la simetría de los multiplicadores, sólo se tienen asociados 3 autovectores
+              linealmente independientes, esto es lo que permite obtener este tipo de bifurcaciones \cite{galan2007continuation}.
+              La órbita inicial de esta nueva rama de órbitas periódicas que emerge de esta bifurcación no aumenta en periodo.}
+          {Esta bifurcación ocurre cuando dos multiplicadores de Floquet son
+              iguales a 1 y están asociados a autovectores linealmente independientes. Debido a la simetría
+              espectral de los sistemas Hamiltonianos, el multiplicador $1$ aparece con multiplicidad algebraica
+              4, pero con multiplicidad geométrica 3 además que se puede simplificar un multiplicador con su autovector,
+              reduciendo el problema a un multiplicador con multiplicidad algebraica 3 y geometríca 2 \cite{galan2007continuation}.
+              Esta degeneración permite que, aun habiendo múltiples multiplicadores iguales a 1, pueda producirse una bifurcación en ese punto.}
+
+          \textbf{Duplicación de período: } \replaced{Esta bifurcación ocurre cuando dos multiplicadores de
+              Floquet son iguales a $-1$. Nuevamente por la simetría de los multiplicadores, sólo se tiene asociado 1 autovector
+              linealmente independiente a este par de autovalores \cite{galan2007continuation}.
+              La órbita inicial de esta nueva rama de órbitas periódicas que emerge de esta bifurcación duplica el periodo.}{Esta bifurcación tiene lugar cuando un multiplicador de
+              Floquet es igual a $-1$. Aunque en sistemas Hamiltonianos este multiplicador aparece por pares
+              (es decir, hay dos valores iguales a $-1$), la estructura del espacio propio, junto con la simetría
+              de los multiplicadores, permite la existencia de esta bifurcación. El resultado es una órbita
+              periódica cuyo nuevo periodo es el doble del original.}
+\end{itemize}
+
+
+
+
+

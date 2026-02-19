@@ -19,7 +19,44 @@
 \usepackage{listings}                    % PERMITE AGREGAR CÓDIGO DE LENGUAJES  DE PROGRAMACIÓN (DOCUMENTACIÓN EN GOOGLE)
 \usepackage{mathdots}                    % para el comando \iddots
 \usepackage{mathrsfs}                    % para formato de letra en ecuaciones
-\usepackage[round, sort, numbers]{natbib}  % Personalizar la bibliografía a gusto de cada quien
+\usepackage[square, sort, numbers]{natbib}  % Personalizar la bibliografía a gusto de cada quien
+\usepackage{tikz}
+\usepackage{amsthm}
+\usepackage{pgfplotstable}
+\usepackage[markup=underlined]{changes}
+\usepackage{subfigure}
+% \usepackage{subcaption}
+\definechangesauthor[name={Leo}, color=blue]{LM}
+\usepackage{booktabs} % para mejores líneas en tablas
+\usepackage[T1]{fontenc}
+\usepackage[
+  font=small,
+  labelfont=bf
+]{caption}
+\usepackage{graphicx}
+% \usepackage[T1]{fontenc}
+% \usepackage{lmodern}
+% \usepackage{algorithm}
+% \usepackage{algorithmic}
+\usetikzlibrary{arrows.meta, calc}
+\newtheorem{theorem}{Teorema}
+\usepackage[spanish,ruled,vlined]{algorithm2e} % Paquete para algoritmos en español
+\SetAlgoNlRelativeSize{0}                     % Tamaño de numeración de línea
+\SetAlgoNlRelativeSize{-1}                    % Opcional, ajustar numeración
+\SetAlgoCaptionSeparator{.}                   % Separador entre "Algoritmo 1" y título
+\SetKwInput{KwIn}{Entrada}                    % Cambia Input a Entrada
+\SetKwInput{KwOut}{Salida}                    % Cambia Output a Salida
+% Definimos que los nombres de columnas pueden contener código LaTeX
+\pgfplotstableset{
+    string type, % importante para que lea $...$ como LaTeX
+    every head row/.style={
+        before row=\toprule, after row=\midrule
+    },
+    every last row/.style={
+        after row=\bottomrule
+    }
+}
+
 
 % Note:
 % The \blindtext or \Blindtext commands throughout this template generate dummy text
@@ -27,19 +64,14 @@
 % writing thesis content.
 
 
-\include{Latex/Macros/MacroFile1}           % Archivo con funciones útiles
-
-
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                                   DATOS                                      %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\title{Título de la tesis}
-\author{Nombre Apellido1 Apellido 2} 
-\facultad{Facultad de Algo Seguramente Muy Importante}                 % Nombre de la facultad/escuela
-\escudofacultad{Latex/Classes/Escudos/fi_azul} % Aquí ponen la ruta y nombre del escudo de su facultad, actualmente, la carpeta Latex/Classes/Escudos cuenta con los siguientes escudos:
+\title{Dinámica clásica de bosones interactuantes en 3 pozos}
+\author{Leonel Mayorga López} 
+\facultad{Facultad de Ciencias}                 % Nombre de la facultad/escuela
+\escudofacultad{Latex/Classes/Escudos/fc_azul} % Aquí ponen la ruta y nombre del escudo de su facultad, actualmente, la carpeta Latex/Classes/Escudos cuenta con los siguientes escudos:
 % "fi_azul" Facultad de ingenieria en color azul
 % "fi_negro" Facultad de ingenieria en color negro
 % "fc_azul" Facultad de ciencias en color azul
@@ -47,10 +79,10 @@
 % "fmed_grande" Facultad de medicina UMSNH
 % Se agradecen sus aportaciones de escudos a jebus.velazquez@gmail.com
 
-\degree{Médic@/Ingenier@/Licenciad@}       % Carrera
-\director{Nombre Director}                 % Director de tesis
+\degree{Licenciado en Física}       % Carrera
+\director{Dr. Luis Benet Fernández}                 % Director de tesis
 %\tutor{Nombre  Tutor }                    % Tutor de tesis, si aplica
-\degreedate{2020}                          % Año de la fecha del examen
+\degreedate{2025}                          % Año de la fecha del examen
 \lugar{Ciudad Universitaria, CDMX}         % Lugar
 
 %\portadafalse                              % Portada en NEGRO, descomentar y comentar la línea siguiente si se quiere utilizar
@@ -82,16 +114,16 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
+\include{Latex/Macros/MacroFile1}           % Archivo con funciones útiles
 \maketitle									% Se redefinió este comando en el archivo de la clase para generar automáticamente la portada a partir de los datos
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                  PRÓLOGO                          %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \frontmatter
-\include{Agradecimientos/Dedicatoria}       % Comentar línea si no se usa
-\include{Agradecimientos/Agradecimientos}   % Comentar línea si no se usa 
+% \include{Agradecimientos/Dedicatoria}       % Comentar línea si no se usa
+% \include{Agradecimientos/Agradecimientos}   % Comentar línea si no se usa 
 \include{Declaracion/Declaracion}           % Comentar línea si no se usa
-\include{Resumen/Resumen}                   % Comentar línea si no se usa
+% \include{Resumen/Resumen}                   % Comentar línea si no se usa
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                   ÍNDICES                         %
@@ -111,17 +143,17 @@
 % the main text starts here with the introduction, 1st chapter,...
 \mainmatter
 \def\baselinestretch{1.5}                   % Interlineado de 1.5
-\include{Capitulo1/introduccion}            % ~10 páginas - Explicar el propósito de la tesis
+% \include{Capitulo1/introduccion}            % ~10 páginas - Explicar el propósito de la tesis
 \include{Capitulo2/marco_teorico}           % ~20 páginas - Poner un contexto a la tesis, hacer referencia a trabajos actuales en el tema
 \include{Capitulo3/diseno_experimento}      % ~20 páginas - Explicar el problema en específico que se va a resolver, la metodología y experimentos/métodos utilizados
 \include{Capitulo4/resultados_y_analisis}   % ~20 páginas - Presentar los resultados tal cual son, y analizarlos.
-\include{Capitulo5/conclusiones}            % ~5 páginas - Resumir lo que se hizo y lo que no y comentar trabajos futuros sobre el tema
+% \include{Capitulo5/conclusiones}            % ~5 páginas - Resumir lo que se hizo y lo que no y comentar trabajos futuros sobre el tema
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                   APÉNDICES                       %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\appendix
-\include{Apendice1/Apendice1}               % Colocar los circuitos, manuales, código fuente, pruebas de teoremas, etc.
+% \appendix
+% \include{Apendice1/Apendice1}               % Colocar los circuitos, manuales, código fuente, pruebas de teoremas, etc.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %                   REFERENCIAS                     %
