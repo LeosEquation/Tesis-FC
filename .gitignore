@@ -223,3 +223,6 @@ TSWLatexianTemp*
 *.log
 *.aux
 *.aux
+
+.tmp.driveupload/
+
