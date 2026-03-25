@@ -717,7 +717,7 @@ Para visualizar la dinámica del sistema en el espacio de fases, en este trabajo
 \((\psi_2, J_2)\), de modo que el análisis se reduce a la intersección de una hipersuperficie de energía \(H = E\)
 con la superficie \(\psi_1 = 0\). En esta intersección pueden coexistir varias ramas de energía que cumplen
 \(H = E\), por lo que la dinámica se restringe a los puntos donde la velocidad de cruce en \(J_1\) es positiva
-y la curvatura de la energía respecto a \(J_1\) satisface una determinada condición de concavidad \cite{mossmann2006semiclassical}.
+\deleted{ y la curvatura de la energía respecto a \(J_1\) satisface una determinada condición de concavidad} \cite{mossmann2006semiclassical}.
 
 Formalmente, las condiciones utilizadas para construir la sección de Poincaré de interés son:
 
@@ -725,8 +725,8 @@ Formalmente, las condiciones utilizadas para construir la sección de Poincaré 
     \begin{aligned}
          & \psi_1 \in \{0, \pi\},                                      \\
          & \tilde{H}(\psi_1, \psi_2, J_1, J_2) = \tilde{E},            \\
-         & \frac{\partial \tilde{H}}{\partial J_1} = \dot{\psi}_1 > 0, \\
-         & \frac{\partial^2 \tilde{H}}{\partial J_1^2} > 0.
+         & \frac{\partial \tilde{H}}{\partial J_1} = \dot{\psi}_1 > 0. \\
+         & \deleted{ \frac{\partial^2 \tilde{H}}{\partial J_1^2} > 0.}
     \end{aligned}
 \end{equation}
 
@@ -735,7 +735,7 @@ De manera explícita:
     \item La superficie de Poincaré se toma en \(\psi_1 = 0\) o en \(\psi_1 = \pi\), dependiendo de la situación.
     \item Se restringe a la hipersuperficie de energía \(\tilde{H} = \tilde{E}\).
     \item Se consideran solo los puntos donde la velocidad de cruce de \(J_1\) es positiva: \(\dot{\psi}_1 > 0\).
-    \item Se seleccionan los puntos donde la energía es localmente convexa respecto a \(J_1\): \(\partial^2 \tilde{H} / \partial J_1^2 > 0\).
+    \item \deleted{Se seleccionan los puntos donde la energía es localmente convexa respecto a \(J_1\): \(\partial^2 \tilde{H} / \partial J_1^2 > 0\).}
 \end{enumerate}
 
 En esta sección, la dinámica del sistema puede visualizarse mediante distintos tipos de comportamiento en el espacio de fases:
@@ -776,7 +776,62 @@ donde los polos corresponden a los valores extremos de \(J_2\) (es decir, \(J_2 
 y el ecuador representa el valor intermedio \(J_2 = K/2\). Esta representación facilita la visualización
 y el análisis de la dinámica del sistema en el espacio de fases.
 
+La sección de Poincaré semiclásica permite establecer una conexión entre la dinámica clásica y el régimen cuántico a través del principio de correspondencia. En particular, cuando la sección presenta una estructura completamente regular, caracterizada por toros invariantes y órbitas periódicas, se espera que los autoestados cuánticos correspondientes a energías cercanas reflejen esta organización regular. En contraste, cuando la sección está dominada por una dinámica caótica, los autoestados en el régimen cuántico tienden a mostrar propiedades características del caos cuántico.
 
+En sistemas hamiltonianos con una contribución no integrable, la situación más común es la aparición de secciones mixtas, donde coexisten toros invariantes, órbitas periódicas y regiones caóticas. En este caso, el espectro cuántico asociado suele contener tanto estados regulares como estados caóticos en intervalos de energía cercanos, reflejando la estructura mixta del espacio de fases clásico. \cite{mossmann2006semiclassical,habib1998decoherence}
+
+Desde esta perspectiva, los autoestados cuánticos tienden a localizarse en las regiones del espacio de fases compatibles con su naturaleza dinámica. En particular, los estados regulares se concentran alrededor de las regiones donde existen toros invariantes, mientras que los estados caóticos se distribuyen sobre las regiones caóticas accesibles del espacio de fases. Por lo tanto, la geometría de las secciones de Poincaré en torno a los equilibrios permite inferir de manera cualitativa la estructura del espectro cuántico en el régimen semiclásico.
+
+\section{Clasificación de equilibrios según combinaciones de fase}
+
+En sistemas bosónicos acoplados descritos en términos de variables acción--ángulo, la dinámica depende de manera crucial de las diferencias de fase entre los distintos modos. Estas combinaciones de fase determinan la estructura de los términos de acoplamiento en el Hamiltoniano efectivo y, por lo tanto, juegan un papel fundamental en la localización de soluciones de equilibrio y en la organización global del espacio de fases.
+
+En términos de $\psi_i$, los equilibrios del sistema pueden clasificarse de acuerdo con las relaciones de fase que satisfacen. Las configuraciones más relevantes son las siguientes.
+
+\subsection{Equilibrios sincronizados}
+
+Los equilibrios sincronizados corresponden a configuraciones en las que las diferencias de fase entre los modos son nulas,
+
+\begin{equation}
+    \psi_1 = \psi_2 = 0.
+\end{equation}
+
+En esta situación todos los modos oscilan en fase, lo cual implica una configuración completamente coherente del sistema. En el espacio de fases clásico, este tipo de equilibrio suele asociarse con configuraciones altamente simétricas y con regiones regulares dominadas por movimiento cuasiperiódico.
+
+\subsection{Equilibrios antisincronizados}
+
+Los equilibrios antisincronizados están definidos por diferencias de fase iguales a $\pi$,
+\begin{equation}
+    \psi_1 = \psi_2 = \pi.
+\end{equation}
+
+En esta configuración los modos oscilan con desfases de $\pi$, produciendo una estructura dinámica distinta a la del caso sincronizado. Dependiendo de los parámetros del sistema, estos equilibrios pueden presentar diferentes tipos de estabilidad lineal y generar estructuras complejas en el espacio de fases.
+
+\subsection{Equilibrios mixtos}
+
+Las configuraciones mixtas corresponden a situaciones en las que una de las diferencias de fase es nula mientras que la otra es igual a $\pi$,
+\begin{equation}
+    (\psi_1,\psi_2) = (\pi,0) \quad \text{o} \quad (0,\pi).
+\end{equation}
+
+Estas soluciones representan estados intermedios entre los regímenes completamente sincronizados y completamente antisincronizados. Desde el punto de vista dinámico, estas configuraciones suelen emerger mediante bifurcaciones de las ramas anteriores y contribuyen a enriquecer la estructura global del espacio de fases.
+
+\subsection{Equilibrios de fase frustrada}
+
+Finalmente, existen soluciones de equilibrio para las cuales las diferencias de fase no toman valores triviales,
+\begin{equation}
+    \psi_1, \psi_2 \notin \{0,\pi\}.
+\end{equation}
+
+Estos equilibrios se conocen como equilibrios de fase frustrada. Su aparición está asociada típicamente a procesos de bifurcación de las soluciones sincronizadas o antisincronizadas y reflejan una competencia entre los distintos términos de acoplamiento presentes en el Hamiltoniano. En el espacio de fases clásico, estas soluciones suelen estar relacionadas con regiones donde la dinámica puede adquirir una estructura más compleja.
+
+% \subsection{Importancia de las combinaciones de fase en el régimen cuántico}
+
+% La introducción de combinaciones relativas de fase no sólo simplifica el análisis clásico del sistema, sino que también resulta fundamental para interpretar la dinámica en el régimen cuántico. En efecto, en sistemas bosónicos de muchos cuerpos la fase global carece de significado físico, mientras que las diferencias de fase determinan las propiedades de interferencia y coherencia entre los distintos modos.
+
+% Desde la perspectiva semiclásica, las configuraciones de fase que caracterizan a los equilibrios definen las regiones del espacio de fases alrededor de las cuales se organizan las trayectorias clásicas. Debido al principio de correspondencia, estas estructuras clásicas influyen directamente en la organización de los autoestados cuánticos, los cuales tienden a localizarse en las regiones del espacio de fases compatibles con su dinámica subyacente.
+
+% Por lo tanto, identificar correctamente las combinaciones de fase asociadas a los distintos tipos de equilibrio es esencial para establecer una conexión clara entre la estructura del espacio de fases clásico y las propiedades del espectro cuántico del sistema.
 
 
 

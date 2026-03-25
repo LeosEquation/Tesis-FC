@@ -4,9 +4,10 @@
 
 \subsection{Ramas de equilibrio}
 
-Los resultados obtenidos mediante la continuación numérica de las soluciones de equilibrio se muestran en la Figura~\ref{fig:EqBranchsS_EigS}. En este caso se presentan los equilibrios sincronizados, definidos por la condición $\psi_1=\psi_2=0$, o equivalentemente $\varphi_1=\varphi_2=\varphi_3$. Estas ramas están asociadas al equilibrio inicial
+Los resultados obtenidos mediante la continuación numérica de las soluciones de equilibrio se muestran en la Figura~\ref{fig:EqBranchsS_EigS}. En este caso se consideran los equilibrios sincronizados, definidos por la condición $\psi_1=\psi_2=0$, o equivalentemente $\varphi_1=\varphi_2=\varphi_3$. Las ramas mostradas se originan en el equilibrio inicial
 
-\[ \tilde{\xi}_{S} =
+\[
+    \tilde{\xi}_{S} =
     \begin{pmatrix}
         \psi_1 \\
         \psi_2 \\
@@ -19,10 +20,10 @@ Los resultados obtenidos mediante la continuación numérica de las soluciones d
         0           \\
         10.61523562 \\
         9.67612394
-    \end{pmatrix}
+    \end{pmatrix},
 \]
 
-en $\tilde{k}=0$ donde $\tilde{x} = 0.2$, $\tilde{\omega} = 0.2$ y $K=31.5$.
+\noindent evaluado en $\tilde{k}=0$, donde $\tilde{x}=0.2$, $\tilde{\omega}=0.2$ y $K=31.5$.
 
 \begin{figure}[htbp]
     \centering
@@ -35,16 +36,17 @@ en $\tilde{k}=0$ donde $\tilde{x} = 0.2$, $\tilde{\omega} = 0.2$ y $K=31.5$.
         \label{fig:EigS}
     }
     \caption{
-        (a) Ramas de equilibrio sincronizadas proyectadas en la coordenada $J_{2}$ en función de $\tilde{k}$.
-        (b) Espectro lineal correspondiente, proyectado en el plano complejo positivo en función de $\tilde{k}$.
-        Los puntos azules en (a) indican bifurcaciones de punto límite, los rojos bifurcaciones de ramificación, los negros bifurcaciones de Hopf hamiltoniana y los naranjas puntos en los que la solución alcanza la frontera del sistema~\eqref{eq:dynamical_system}.
-        Las bifurcaciones de Hopf hamiltoniana y los puntos de frontera se identifican de manera aproximada a partir de los valores más cercanos disponibles en la rama.
-        Los puntos azules en (b) indican que el espectro está en el plano imaginario o real mientras que los rojos indican que el espectro es un número complejo con componentes imaginaria y real no nulas.
+        (a) Ramas de equilibrio sincronizadas proyectadas en la coordenada $J_2$ como función de $\tilde{k}$.
+        (b) Espectro lineal correspondiente proyectado en el semiplano complejo positivo.
     }
     \label{fig:EqBranchsS_EigS}
 \end{figure}
 
-La simbología empleada en las gráficas (que será utilizada de manera análoga en las siguientes secciones) consiste en una letra mayúscula que identifica el tipo de equilibrio, un superíndice que indica la clase espectral y un subíndice que señala el número de direcciones linealmente inestables.
+En la Figura~\ref{fig:EqBranchsS_EigS}(a) se indican con puntos azules las bifurcaciones de punto límite, con puntos rojos las bifurcaciones de ramificación, con puntos negros las bifurcaciones de Hopf hamiltoniana y con puntos naranjas aquellos valores del parámetro para los cuales la solución alcanza la frontera del sistema~\eqref{eq:dynamical_system}. Las bifurcaciones de Hopf hamiltoniana y los puntos de frontera se identifican de manera aproximada mediante los valores discretos más cercanos disponibles en la rama.
+
+En la Figura~\ref{fig:EqBranchsS_EigS}(b) los puntos azules indican que el espectro se encuentra sobre el eje real o imaginario, mientras que los puntos rojos corresponden a autovalores complejos con partes real e imaginaria simultáneamente no nulas.
+
+La simbología utilizada en las gráficas —que se empleará de manera análoga en las secciones siguientes— consiste en una letra mayúscula que identifica el tipo de equilibrio, un superíndice que indica la clase espectral y un subíndice que señala el número de direcciones linealmente inestables.
 
 La continuación numérica revela la presencia de una bifurcación de punto límite, una bifurcación de ramificación y dos bifurcaciones de Hopf hamiltoniana. Estas últimas se localizan de forma aproximada mediante los puntos más cercanos en la discretización de la rama.
 
@@ -52,15 +54,17 @@ La estructura de bifurcaciones permite distinguir tres regiones relevantes en el
 
 (i) Una región $\tilde{k} < -5.64675235$ en la que no existen equilibrios asociados a $\tilde{\xi}_{S}$.
 
-(ii) Una región intermedia $-5.64675235 \leq \tilde{k} \leq -0.53981353$ caracterizada por la coexistencia de equilibrios con distintos tipos de estabilidad lineal.
+(ii) Una región intermedia $-5.64675235 \leq \tilde{k} \leq -0.53981353$, caracterizada por la coexistencia de equilibrios con distintos tipos de estabilidad lineal.
 
 (iii) Una región $-0.53981353 < \tilde{k} < 100$ en la que los equilibrios asociados no presentan direcciones linealmente inestables.
 
-En este contexto, adquiere particular interés la interpretación física e implementación experimental de valores $\tilde{k}<0$, ya que es en esta región donde se observa la mayor diversidad de configuraciones espectrales para los equilibrios sincronizados.
+En este contexto resulta de particular interés la interpretación física y la posible implementación experimental de valores $\tilde{k}<0$, ya que en esta región se observa la mayor diversidad de configuraciones espectrales para los equilibrios sincronizados.
+
+Por esta razón, cuando $\tilde{k}<0$ se interpreta que el acoplamiento de tunelaje correspondiente experimenta un cambio efectivo de signo. En consecuencia, mientras que los tunelajes entre los otros pares de pozos minimizan su contribución energética cuando las diferencias de fase satisfacen $\psi_1=\psi_2=0$, el tunelaje entre los pozos $1$ y $3$ presenta un comportamiento distinto: en este caso, la contribución de tunelaje se minimiza cuando la diferencia de fase cumple $\varphi_3-\varphi_1=\pi$ \cite{gallemi2015fragmented}.
 
 \subsection{Ramas de bifurcación}
 
-La continuación numérica de las bifurcaciones de punto límite y de ramificación respecto a un segundo parámetro conduce a las ramas mostradas en la Figura~\ref{fig:BifBranchesS}.
+La continuación numérica de las bifurcaciones de punto límite y de ramificación con respecto a un segundo parámetro conduce a las ramas mostradas en la Figura~\ref{fig:BifBranchesS}.
 
 \begin{figure}[htbp]
     \centering
@@ -73,31 +77,33 @@ La continuación numérica de las bifurcaciones de punto límite y de ramificaci
         \label{fig:BifBranchesS_omega}
     }
     \caption{
-        Ramas de bifurcaciones asociadas a los equilibrios sincronizados en función de dos parámetros:
+        Ramas de bifurcación asociadas a los equilibrios sincronizados en función de dos parámetros:
         (a) $\tilde{k}$ y $K\tilde{x}$,
         (b) $\tilde{\omega}$.
-        Las curvas azules corresponden a bifurcaciones de punto límite, las rojas a bifurcaciones de ramificación y los círculos naranjas indican la intersección con la frontera del dominio permitido para las acciones $J_i$. La línea vertical discontinua corresponde a las bifurcaciones iniciales y las continuas corresponden a regiones donde una o más bifurcaciones colapsan en la frontera. Una curva continua en estas ramas indica que el autovalor libre es puramente imaginario.
     }
     \label{fig:BifBranchesS}
 \end{figure}
 
-El análisis de las regiones delimitadas por estas ramas permite construir un diagrama de fases en el espacio de parámetros. En particular, pueden identificarse tres dominios cualitativamente distintos:
+En estas ramas, las curvas azules corresponden a bifurcaciones de punto límite y las rojas a bifurcaciones de ramificación. Los círculos naranjas indican la intersección con la frontera del dominio permitido para las acciones $J_i$. La línea vertical discontinua marca la localización de las bifurcaciones iniciales, mientras que las curvas continuas indican regiones donde una o más bifurcaciones colapsan en la frontera del dominio. En estos segmentos el autovalor libre permanece puramente imaginario.
 
-(i) La región situada por debajo de la rama de puntos límite, donde no existen equilibrios que asociados a $\tilde{\xi}_S$.
+El análisis de las regiones delimitadas por estas ramas permite construir un diagrama de fases en el espacio de parámetros. En particular pueden distinguirse tres dominios cualitativamente distintos:
+
+(i) La región situada por debajo de la rama de puntos límite, donde no existen equilibrios asociados a $\tilde{\xi}_S$.
 
 (ii) La región comprendida entre las ramas de punto límite y de ramificación, en la que coexisten equilibrios con diferentes configuraciones espectrales.
 
-(iii) La región por encima de la rama de ramificación, donde las soluciones presentes carecen de direcciones linealmente inestables.
+(iii) La región situada por encima de la rama de ramificación, donde las soluciones presentes carecen de direcciones linealmente inestables.
 
-Es importante enfatizar que esta clasificación sólo es válida en los intervalos de parámetros donde coexisten simultáneamente las ramas de punto límite y de ramificación. Si alguna de ellas desaparece al alcanzar la frontera del dominio mientras la otra persiste, el carácter dinámico del sistema por encima o por debajo de la rama restante no puede determinarse únicamente a partir de la estructura de bifurcaciones y requiere un análisis directo de las ramas de equilibrio emergentes.
+Es importante señalar que esta clasificación sólo es válida en los intervalos de parámetros donde coexisten simultáneamente las ramas de punto límite y de ramificación. Si alguna de ellas desaparece al alcanzar la frontera del dominio mientras la otra persiste, el carácter dinámico del sistema por encima o por debajo de la rama restante no puede determinarse únicamente a partir de la estructura de bifurcaciones y requiere un análisis directo de las ramas de equilibrio emergentes.
 
 \section{Soluciones de equilibrio antisincronizadas}
 
 \subsection{Ramas de equilibrio}
 
-Los resultados obtenidos mediante la continuación numérica de las soluciones de equilibrio se muestran en la Figura~\ref{fig:EqBranchsAS_EigAS}. En este caso se presentan los equilibrios antisincronizados, definidos por la condición $\psi_1=\psi_2=\pi$, o equivalentemente $\varphi_1-\varphi_2=\varphi_2-\varphi_3=\pi$. Estas ramas están asociadas al equilibrio inicial
+Los resultados obtenidos mediante la continuación numérica de las soluciones de equilibrio se muestran en la Figura~\ref{fig:EqBranchsAS_EigAS}. En este caso se consideran los equilibrios antisincronizados, definidos por la condición $\psi_1=\psi_2=\pi$, o equivalentemente $\varphi_1-\varphi_2=\varphi_2-\varphi_3=\pi$. Las ramas mostradas se originan en el equilibrio inicial
 
-\[ \tilde{\xi}_{AS} =
+\[
+    \tilde{\xi}_{AS} =
     \begin{pmatrix}
         \psi_1 \\
         \psi_2 \\
@@ -110,8 +116,8 @@ Los resultados obtenidos mediante la continuación numérica de las soluciones d
         \pi         \\
         10.48320631 \\
         11.53887971
-    \end{pmatrix}
-\].
+    \end{pmatrix}.
+\]
 
 \begin{figure}[htbp]
     \centering
@@ -124,29 +130,29 @@ Los resultados obtenidos mediante la continuación numérica de las soluciones d
         \label{fig:EigAS}
     }
     \caption{
-        (a) Ramas de equilibrio sincronizadas proyectadas en la coordenada $J_{2}$ en función de $\tilde{k}$.
-        (b) Espectro lineal correspondiente, proyectado en el plano complejo positivo en función de $\tilde{k}$.
+        (a) Ramas de equilibrio antisincronizadas proyectadas en $J_2$ en función de $\tilde{k}$.
+        (b) Espectro lineal correspondiente en el semiplano complejo positivo.
     }
     \label{fig:EqBranchsAS_EigAS}
 \end{figure}
 
-La continuación numérica revela la presencia de tres bifurcaciones de punto límite y dos de ramificación. Un aumento respecto al caso sincronizando, sugeriendo una mayor diversidad dinámica para esta configuración.
+La continuación numérica revela la presencia de tres bifurcaciones de punto límite y dos bifurcaciones de ramificación, lo que representa un incremento respecto al caso sincronizado y sugiere una mayor diversidad dinámica para esta configuración.
 
-La estructura de bifurcaciones permite distinguir tres regiones relevantes en el parámetro $\tilde{k}$:
+La estructura de bifurcaciones permite distinguir cuatro regiones relevantes en el parámetro $\tilde{k}$:
 
 (i) Una región $\tilde{k} < -10.67047749$ en la que no existen equilibrios asociados a $\tilde{\xi}_{AS}$.
 
-(ii) Una región intermedia $-10.67047749 \leq \tilde{k} \leq -4.63201573$ caracterizada por la coexistencia de un par de equilibrios con distintos tipos de estabilidad lineal.
+(ii) Una región $-10.67047749 \leq \tilde{k} \leq -4.63201573$ caracterizada por la coexistencia de un par de equilibrios con distintos tipos de estabilidad lineal.
 
-(iii) Una región intermedia  $-4.63201573 \leq \tilde{k} \leq 5.20065292$ caracterizada por la coexistencia de hasta 4 equilibrios con distintos tipos de estabilidad lineal y con puntos de ramificación.
+(iii) Una región $-4.63201573 \leq \tilde{k} \leq 5.20065292$ en la que pueden coexistir hasta cuatro equilibrios con diferentes configuraciones espectrales, incluyendo puntos de ramificación.
 
-(iv) Una región $5.20065292 < \tilde{k}$ en la vuelven a desaparecer equilibrios asociados.
+(iv) Una región $\tilde{k} > 5.20065292$ en la que nuevamente desaparecen los equilibrios asociados.
 
-Para esta configuración antisincronizada, las soluciones se encuentran acotadas en $[-10.67047749, 5.20065292]$.
+En consecuencia, las soluciones antisincronizadas se encuentran acotadas al intervalo $\tilde{k}\in[-10.67047749,\,5.20065292]$.
 
 \subsection{Ramas de bifurcación}
 
-La continuación numérica de las bifurcaciones de punto límite y de ramificación antisincronizados se muestran en la Figura~\ref{fig:BifBranchesAS}.
+La continuación numérica de las bifurcaciones de punto límite y de ramificación antisincronizadas conduce a las ramas mostradas en la Figura~\ref{fig:BifBranchesAS}.
 
 \begin{figure}[htbp]
     \centering
@@ -159,28 +165,30 @@ La continuación numérica de las bifurcaciones de punto límite y de ramificaci
         \label{fig:BifBranchesAS_omega}
     }
     \caption{
-        Ramas de bifurcaciones asociadas a los equilibrios sincronizados en función de dos parámetros:
-        (a) $\tilde{k}$ y $K\tilde{x}$,
-        (b) $\tilde{\omega}$. La curva discontinua indica que el autovalor libre en la bifurcación es real y un círculo negro indica aproximadamente que el espectro de la bifurcación se anula por completo.
+        Ramas de bifurcación asociadas a los equilibrios antisincronizados en función de
+        (a) $\tilde{k}$ y $K\tilde{x}$, y
+        (b) $\tilde{\omega}$.
     }
     \label{fig:BifBranchesAS}
 \end{figure}
 
-El análisis de las regiones delimitadas por estas ramas permite construir un diagrama de fases en el espacio de parámetros. En particular, pueden identificarse tres dominios cualitativamente distintos:
+El análisis de las regiones delimitadas por estas ramas permite construir un diagrama de fases en el espacio de parámetros. En particular, pueden distinguirse tres dominios cualitativamente distintos:
 
-(i) La región situada por debajo de la rama de puntos límite más baja donde no existen equilibrios asociados a $\tilde{\xi}_{AS}$.
+(i) La región situada por debajo de la rama de puntos límite inferior, donde no existen equilibrios asociados a $\tilde{\xi}_{AS}$.
 
-(i) La región situada por debajo de la rama de puntos límite más alta y por arriba de la rama de puntos límite más baja, donde existe una multiestabilidad de equilibrios asociados.
+(ii) La región comprendida entre las dos ramas de punto límite, en la que se presenta multiestabilidad de equilibrios.
 
-(iii) La región situada por arriba de la rama de puntos límite más alta, donde no existen equilibrios asociados.
+(iii) La región situada por encima de la rama de puntos límite superior, donde nuevamente no existen equilibrios asociados.
 
-En esta continuación se introduce una nueva bifurcación para el parámetro $K\tilde{x}$ donde el espectro se anula por completo y geométricamente delimita el diagrama a una región donde se crean puntos de ramificación a partir de puntos límite o visceversa. Esta es la bifurcación de codimensión más alta que se puede obtener en este sistema de 2 grados de libertad y por esto mismo no hay un método lineal de continuación para obtener un diagrama de fases respecto a 3 parámetros, que es el total de parámetros libres del sistema.
+En esta continuación aparece además un punto especial en el parámetro $K\tilde{x}$ en el cual el espectro lineal de la bifurcación se anula completamente. Geométricamente, este punto delimita la región del espacio de parámetros donde las bifurcaciones de ramificación pueden emerger a partir de bifurcaciones de punto límite, o viceversa.
+
+Este punto corresponde a la bifurcación de mayor codimensión accesible en el sistema, el cual posee dos grados de libertad efectivos. Debido a ello, no existe un procedimiento de continuación lineal que permita construir directamente un diagrama de fases en el espacio completo de tres parámetros libres del sistema.
 
 \section{Soluciones de equilibrio con fase frustrada}
 
 \subsection{Ramas de equilibrio}
 
-Los resultados obtenidos mediante la continuación se muestran en la Figura~\ref{fig:EqBranchsF_EigF}. Los equilibrios de fase frustrada están definidos por la condición $\psi_1, \psi_2 \notin \{0, \pi\}$. Estas ramas están asociadas a los 3 puntos de ramificación vistos hasta el momento.
+Los resultados obtenidos mediante la continuación numérica se muestran en la Figura~\ref{fig:EqBranchsF_EigF}. Los equilibrios de fase frustrada se caracterizan por satisfacer $\psi_1,\psi_2 \notin \{0,\pi\}$ y emergen a partir de los puntos de ramificación identificados en las secciones anteriores.
 
 \begin{figure}[htbp]
     \centering
@@ -209,33 +217,35 @@ Los resultados obtenidos mediante la continuación se muestran en la Figura~\ref
         \label{fig:EigF3}
     }
     \caption{
-        (a), (c) y (e): Ramas de equilibrio de fase frustrada proyectadas en la coordenada $\psi_{2}$ en función de $\tilde{k}$.
-        (b), (d), (f): Espectro lineal respectivo, proyectado en el plano complejo positivo en función de $\tilde{k}$.
+        Ramas de equilibrio de fase frustrada y sus espectros lineales correspondientes:
+        (a)-(b) $F1$, (c)-(d) $F2$ y (e)-(f) $F3$.
     }
     \label{fig:EqBranchsF_EigF}
 \end{figure}
 
-La continuación numérica revela que estas ramas de fase frustrada no tienen puntos límite, sin embargo los puntos de ramificación que tienen funcionan para delimitarlos puesto que la rama se vuelve cíclica respecto a $\tilde{k}$ y simétrica respecto a $\psi_2$, además de que los equilibrios $F3$ tiene un par de bifurcaciones especial tipo Hopf Hamiltoniana donde el autovalor complejo converge al eje real.
+La continuación numérica muestra que las ramas de fase frustrada no presentan bifurcaciones de punto límite. En cambio, cada familia de soluciones se encuentra delimitada por puntos de ramificación, a partir de los cuales emergen estas soluciones. Como consecuencia, las ramas resultan cíclicas respecto a $\tilde{k}$ y presentan una simetría respecto a la coordenada $\psi_2$.
 
-La estructura de bifurcaciones permite distinguir tres regiones relevantes en el parámetro $\tilde{k}$:
+En particular, la familia $F3$ presenta un par de bifurcaciones especiales de tipo Hopf hamiltoniana, en las cuales un par de autovalores complejos conjugados colisiona con el eje real.
 
-(i) Una región $\tilde{k} \leq -10.47455272$ en la que no existen equilibrios con fase frustrada.
+La estructura de bifurcaciones permite identificar varios intervalos relevantes del parámetro $\tilde{k}$:
 
-(ii) Una región intermedia $-10.47455272 < \tilde{k} < -0.53981353$ donde existen equilibrios tipo $F1$.
+(i) $\tilde{k} \leq -10.47455272$: no existen equilibrios con fase frustrada.
 
-(iii) Una región intermedia $-0.53981353 \leq \tilde{k} \leq 0.0788721$ en la que no existen equilibrios con fase frustrada.
+(ii) $-10.47455272 < \tilde{k} < -0.53981353$: existen equilibrios tipo $F1$.
 
-(iv) Una región intermedia $0.0788721 < \tilde{k} < 0.0821060$ donde existen equilibrio tipo $F2$ siendo la más angosta de todas.
+(iii) $-0.53981353 \leq \tilde{k} \leq 0.0788721$: no existen equilibrios con fase frustrada.
 
-(v) Una región intermedia $0.0821060 \leq \tilde{k} \leq 0.44773865$ donde no existen equilibrios con fase frustrada.
+(iv) $0.0788721 < \tilde{k} < 0.0821060$: aparecen equilibrios tipo $F2$, en el intervalo más estrecho de existencia.
 
-(vi) Una región intermedia $0.44773865 < \tilde{k} < 17.73123079 $ donde existen equilibrio tipo $F3$ siendo la más ancha de todas y la única con múltiples tipos de estabilidad siendo resultado de conectar 2 puntos de ramificación con autovalores real e imaginario respectivamente.
+(v) $0.0821060 \leq \tilde{k} \leq 0.44773865$: no existen equilibrios con fase frustrados.
 
-(vii) Una región intermedia $ \tilde{k} \geq 17.73123079 $ donde no existen equilibrios de fase frustrada.
+(vi) $0.44773865 < \tilde{k} < 17.73123079$: existen equilibrios tipo $F3$, correspondientes al intervalo más amplio y el único que presenta distintos tipos de estabilidad lineal.
+
+(vii) $\tilde{k} \geq 17.73123079$: no existen equilibrios con fase frustrada.
 
 \subsection{Ramas de bifurcación}
 
-La continuación numérica de las bifurcaciones de punto límite y de ramificación de fase frustrada se muestran en la Figura~\ref{fig:BifBranchesF}.
+La continuación numérica de las bifurcaciones asociadas a las soluciones de fase frustrada se muestra en la Figura~\ref{fig:BifBranchesF}.
 
 \begin{figure}[htbp]
     \centering
@@ -264,24 +274,30 @@ La continuación numérica de las bifurcaciones de punto límite y de ramificaci
         \label{fig:BifBranchesF3_omega}
     }
     \caption{
-        Ramas de bifurcaciones asociadas a los equilibrios de fase frustrada en función de dos parámetros:
-        (a) y (b) para $F1$, (c) y (d) para $F2$ y (e) y (f) para $F3$.
+        Ramas de bifurcación asociadas a los equilibrios de fase frustrada:
+        (a)-(b) $F1$, (c)-(d) $F2$ y (e)-(f) $F3$.
     }
     \label{fig:BifBranchesF}
 \end{figure}
 
-El diagrama de fases para equilibrios de fase frustrada se vuelve interesante pues estos al existir únicamente entre 2 puntos de ramificación, al ser resultado de un equilibrio bifurcado de los demás tipos, se pueden determinar las regiones de existencia.
+El diagrama de fases asociado a estas soluciones presenta una estructura particularmente clara, ya que cada familia de equilibrios frustrados existe únicamente entre dos ramas de puntos de ramificación. Debido a que estas soluciones emergen de bifurcaciones de las configuraciones sincronizadas o antisincronizadas, las curvas de ramificación delimitan directamente sus regiones de existencia en el espacio de parámetros.
 
-Por lo anterior, el diagrama de fases representa 2 regiones de interés por cada tipo de equilibrio de fase frustrada:
+De esta manera pueden distinguirse dos tipos de regiones:
 
-(i) La región situada fuera de las curvas de puntos de ramificación. Aquí no existen equilibrios frustrados.
+(i) Regiones exteriores a las curvas de ramificación, donde no existen equilibrios de fase frustrada.
 
-(ii) La región entre curvas distintas de puntos de ramificación. Aquí existen todos los equilibrios frustrados.
+(ii) Regiones comprendidas entre distintas curvas de ramificación, donde existen soluciones de fase frustrada.
 
-En estos resultados nuevamente se hace presente un espectro totalmente degenerado donde es crucial identificarlo para equilibrios de fase frustrada porque determina un valor crítico de $\tilde{x}$ donde los intervalos de equilibrios $F2$ y $F3$ se fusionan en un mismo intervalo de parámetros o las soluciones de equilibrio tienen multiestabilidad.
+Finalmente, se identifica nuevamente un punto en el que el espectro lineal se vuelve completamente degenerado. Este punto determina un valor crítico $K\tilde{x}_c \approx 2.77061497$, en el cual los intervalos de existencia de las familias $F2$ y $F3$ se fusionan en un único dominio del espacio de parámetros.
+
 \section{Soluciones de equilibrio mixtas}
 
-Hay 2 tipos de soluciones mixtas: aquellas con $\psi_1 = \pi$, $\psi_2 = 0$ (identificadas con $M1$) y las que cumplen $\psi_1 = 0$, $\psi_2 = \pi$ (identificadas con $M2$). Sus respectivas ramas de equilibrio se muestran en las Figuras~\ref{fig:EqBranchM1} y~\ref{fig:EqBranchM2}, mientras que sus espectros se presentan en las Figuras~\ref{fig:EigM1} a ~\ref{fig:EigM22}.
+\subsection{Ramas de equilibrio}
+
+Las ramas de equilibrio mixtas obtenidas mediante la continuación numérica se muestran en la Figura~\ref{fig:EqBranchsM_EigM}.
+Los equilibrios $M1$ corresponden a configuraciones donde $\psi_1 = \pi$ y $\psi_2 = 0$, mientras que los equilibrios $M2$ satisfacen $\psi_1 = 0$ y $\psi_2 = \pi$.
+
+Estas ramas están asociadas a los nuevos puntos de ramificación identificados en las ramas de equilibrio de fase frustrada. En particular, la rama $M1$ se conecta con la rama de equilibrios sincronizados $S$ a través de la familia de equilibrios frustrados $F1$, mientras que las ramas $M2$ se conectan con la rama antisincronizada $AS$ mediante las familias frustradas $F2$ y $F3$.
 
 \begin{figure}[htbp]
     \centering
@@ -305,74 +321,324 @@ Hay 2 tipos de soluciones mixtas: aquellas con $\psi_1 = \pi$, $\psi_2 = 0$ (ide
         \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/EigM22.pdf}
         \label{fig:EigM22}
     }
-    \caption{Las ramas de equilibrio mixtas (a) y (c) en la coordenada $J_{2}$ respecto a $\tilde{k}$ y sus espectros (b) y (d) mapeados en el plano complejo respectivamente siendo (e) el espectro de la rama de color verde en (c). Los puntos azules en (a) y (c) indican bifurcaciones de punto límite, los rojos de ramificación los negros de hopf hamiltonianas mientras que los naranjas indican puntos de frontera en $J_i$.  }
+    \caption{
+        Ramas de equilibrio mixtas y sus espectros lineales correspondientes.
+        (a)-(b) rama $M1$ y su espectro;
+        (c) ramas $M2$;
+        (d) espectro de la rama $M2$ azul;
+        (e) espectro de la rama $M2$ verde.
+    }
     \label{fig:EqBranchsM_EigM}
 \end{figure}
 
-La principal novedad respecto a los casos sincronizado y antisincronizado es que en el caso mixto $M2$ se tiene una rama que no cruza $\tilde{k}=0$ ya que, como se observará en la siguiente sección, esta rama se bifurca de un punto de ramificación que aparece en una de las ramas que a su vez bifurcan de los puntos de ramificación de la rama antisincronizada.
+Para los equilibrios mixtos con $\psi_2 = 0$ ($M1$) se identifican los siguientes intervalos relevantes del parámetro $\tilde{k}$:
+
+(i) $-100 < \tilde{k} < -10.47455272$: los equilibrios $M1$ no presentan direcciones linealmente inestables.
+
+(ii) $-10.47455272 \leq \tilde{k} \leq 2.95096506$: coexisten equilibrios $M1$ con distintos tipos de estabilidad lineal.
+
+(iii) $\tilde{k} > 2.95096506$: no existen equilibrios $M1$ conectados con la rama $S$ mediante puntos de ramificación.
+
+Para los equilibrios mixtos con $\psi_2 = \pi$ ($M2$) se distinguen las siguientes regiones:
+
+(i) $\tilde{k} < -12.31830770$: no existen equilibrios asociados a $\tilde{\xi}_{AS}$ mediante puntos de ramificación.
+
+(ii) $-12.31830770 \leq \tilde{k} \leq 3.92370986$: coexisten hasta cuatro equilibrios mixtos $M2$ con distintos tipos de espectro lineal.
+
+(iii) $3.92370986 \leq \tilde{k} \leq 10.79405718$: coexiste un par de equilibrios $M2$ con diferentes propiedades espectrales.
+
+(iv) $\tilde{k} > 10.79405718$: subsiste una rama que no cruza $\tilde{k}=0$ y que no presenta puntos límite que permitan determinar paramétricamente su origen o terminación; esta rama colapsa en la frontera del sistema.
+
+\subsection{Ramas de bifurcación}
+
+La continuación de las bifurcaciones de punto límite y de ramificación asociadas a las soluciones $M1$ y $M2$ produce los diagramas de fases mostrados en la Figura~\ref{fig:BifBranchesM}.
 
 \begin{figure}[htbp]
     \centering
     \subfigure[]{
-        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/BifBranchesM11_K .pdf}
-        \label{fig:BifBranchesM11
-            _K}
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/BifBranchesM1_Kx.pdf}
+        \label{fig:BifBranchesM1_Kx}
     }
-    \subfigure[]{
-        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/BifBranchesM12_K .pdf}
-        \label{fig:BifBranchesM12_K}
-    }
-    \subfigure[]{
-        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/BifBranchesM11_x .pdf}
-        \label{fig:BifBranchesM11
-            _x}
-    }
-    \subfigure[]{
-        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/BifBranchesM12_x .pdf}
-        \label{fig:BifBranchesM12_x}
-    }
-    \caption{Ramas de puntos límite (azul) y puntos de ramificación (rojo) de la rama $M1$ en función de $\tilde{k}$ y $K$ ((a) y (b)) y $\tilde{x}$ ((c) y (d)).}
-    \label{fig:BifBranchesM1}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
-    \subfigure[]{
-        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/BifBranchesM21_K.pdf}
-        \label{fig:BifBranchesM21
-            _K}
-    }
-    \subfigure[]{
-        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/BifBranchesM22_K.pdf}
-        \label{fig:BifBranchesM22_K}
-    }
-    \subfigure[]{
-        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/BifBranchesM21_x.pdf}
-        \label{fig:BifBranchesM21
-            _x}
-    }
-    \subfigure[]{
-        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/BifBranchesM22_x.pdf}
-        \label{fig:BifBranchesM22_x}
-    }
-    \caption{Ramas de puntos límite (azul) y puntos de ramificación (rojo) de las ramas $M2$ en función de $\tilde{k}$ y $K$ ((a) y (b)) y $\tilde{x}$ ((c) y (d)).}
-    \label{fig:BifBranchesM2}
-\end{figure}
-
-\begin{figure}[htbp]
-    \centering
     \subfigure[]{
         \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M1/BifBranchesM1_omega.pdf}
         \label{fig:BifBranchesM1_omega}
     }
     \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/BifBranchesM2_Kx.pdf}
+        \label{fig:BifBranchesM2_Kx}
+    }
+    \subfigure[]{
         \includegraphics[width=0.45\textwidth]{Capitulo4/figs/M2/BifBranchesM2_omega.pdf}
         \label{fig:BifBranchesM2_omega}
     }
-    \caption{Ramas de puntos límite (azul) y puntos de ramificación (rojo) de la rama $M1$ (a) y de las ramas $M2$ (b) en función de $\tilde{k}$ y $\tilde{\omega}$.}
-    \label{fig:BifBranchesM_omega}
+    \caption{
+        Ramas de bifurcación asociadas a los equilibrios mixtos:
+        (a)-(b) para $M1$ y (c)-(d) para $M2$.
+    }
+    \label{fig:BifBranchesM}
+\end{figure}
+
+En el espacio de parámetros se identifican nuevamente regiones bien definidas donde coexisten soluciones de equilibrio mixtas.
+
+Para las soluciones $M1$ se distinguen tres regiones:
+
+(i) La región situada por encima de la rama de puntos límite, donde no existen equilibrios $M1$.
+
+(ii) La región comprendida entre la rama de puntos límite y la rama de puntos de ramificación, donde aparece multiestabilidad de estos equilibrios.
+
+(iii) La región situada por debajo de la rama de puntos de ramificación, donde existen equilibrios $M1$ sin direcciones linealmente inestables.
+
+Para las soluciones $M2$ se identifican las siguientes regiones:
+
+(i) La región situada por debajo de la rama de puntos límite más baja, donde no existen estos equilibrios.
+
+(ii) La región comprendida entre las dos ramas de puntos límite, donde coexisten múltiples equilibrios $M2$.
+
+(iii) La región situada por encima de la rama de bifurcación más alta, donde la existencia de equilibrios $M2$ no está garantizada. En particular, si la rama superior corresponde a puntos de ramificación, no puede determinarse hasta qué punto se extiende la rama de equilibrio antes de colapsar en la frontera del sistema. En contraste, cuando la rama superior corresponde a puntos límite, esta corta las ramas de equilibrio e impide la existencia de soluciones asociadas.
+
+Finalmente, aparece un resultado particularmente relevante: el valor crítico $K\tilde{x} \approx 20.97810981$, donde ocurre una bifurcación de espectro nulo. Como se ha observado en casos anteriores, este tipo de bifurcación corresponde a la intersección entre una rama de puntos límite y una rama de puntos de ramificación, lo que sugiere la aparición de nuevos puntos de ramificación en el sistema.
+
+\section{Transiciones de fase}
+
+Las regiones del espacio de parámetros delimitadas por las bifurcaciones descritas anteriormente no solo determinan la existencia o multiplicidad de soluciones de equilibrio, sino también cambios cualitativos en la dinámica clásica del sistema. En particular, el tipo de espectro lineal asociado a cada equilibrio determina la geometría local del espacio de fases y, por tanto, la organización global de las trayectorias dinámicas.
+
+Para caracterizar estas geometrías se consideran secciones de Poincaré esféricas representativas de cada tipo de equilibrio no degenerado. En la Figura~\ref{fig:Poincare} se muestran ejemplos de dichas secciones para los distintos tipos de espectros lineales posibles. Estas estructuras permiten visualizar la organización del espacio de fases en la vecindad de los equilibrios y sirven como punto de partida para interpretar las transiciones entre distintos regímenes dinámicos del sistema.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/poincare/PSCC.png}
+        \label{fig:PSCC}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/poincare/PSSC.png}
+        \label{fig:PSSC}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/poincare/PSFF.png}
+        \label{fig:PSFF}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/poincare/PSSS}
+        \label{fig:PSSS}
+    }
+    \caption{Secciones de Poincaré representativas de los distintos tipos de espectros de equilibrio no degenerados.
+        (a) equilibrio centro--centro,
+        (b) equilibrio silla--centro,
+        (c) equilibrio foco--foco y
+        (d) equilibrio silla--silla.
+        Los puntos azules indican la posición de los equilibrios.
+        Las secciones (a)--(c) se toman en $\psi_1 = 0$, mientras que (d) corresponde a $\psi_1 = \pi$.}
+    \label{fig:Poincare}
+\end{figure}
+
+Las bifurcaciones discutidas anteriormente separan regiones del espacio de parámetros donde la geometría del espacio de fases es cualitativamente similar a alguna de las mostradas en la Figura~\ref{fig:Poincare}. En particular, las regiones de multiestabilidad comprendidas entre puntos de ramificación y puntos límite corresponden a dominios donde pueden coexistir equilibrios con distintos tipos de espectro, dando lugar a diferentes organizaciones del espacio de fases.
+
+Cada uno de estos tipos de equilibrio implica propiedades dinámicas específicas:
+
+\begin{itemize}
+
+    \item \textbf{Centro--Centro.}
+          La presencia de un equilibrio de tipo centro--centro implica la existencia de familias de órbitas cuasiperiódicas que lo rodean. En la sección de Poincaré estas trayectorias aparecen como curvas cerradas que corresponden a toros invariantes. En consecuencia, la dinámica en esta región del espacio de fases es predominantemente regular.
+
+    \item \textbf{Silla--Centro.}
+          Un equilibrio de este tipo introduce una dirección hiperbólica asociada a una variedad inestable. En la sección de Poincaré aparecen separatrices que delimitan regiones donde la dinámica puede volverse caótica.
+
+    \item \textbf{Foco--Foco.}
+          La presencia de un equilibrio foco--foco implica inestabilidades en ambas direcciones dinámicas, lo que conduce típicamente a la formación de un mar caótico alrededor del equilibrio.
+
+    \item \textbf{Silla--Silla.}
+          Este tipo de equilibrio introduce direcciones hiperbólicas en ambas direcciones dinámicas, generando estructuras separatrices que favorecen la aparición de dinámica caótica en la sección de Poincaré.
+
+\end{itemize}
+
+Estas estructuras clásicas tienen una interpretación directa en el régimen cuántico a través del principio de correspondencia cuántico--clásica \cite{mossmann2006semiclassical,habib1998decoherence,Giraldo_2022}. En regiones del espacio de fases dominadas por toros invariantes, como ocurre en la vecindad de equilibrios centro--centro, los estados propios del sistema tienden a organizarse en familias cuánticas regulares asociadas a dichas estructuras cuasiperiódicas. En contraste, cuando el espacio de fases presenta regiones caóticas extensas, los estados propios correspondientes se distribuyen sobre estas regiones y exhiben propiedades características del caos cuántico.
+
+% Una manifestación importante de esta correspondencia se observa en las estadísticas espectrales del sistema. En regímenes dominados por dinámica regular, los niveles de energía tienden a presentar estadísticas de tipo Poisson, reflejando la ausencia de correlaciones entre niveles. Por el contrario, cuando la dinámica clásica es caótica, las separaciones entre niveles muestran distribuciones del tipo Wigner--Dyson, características de sistemas cuánticos caóticos.
+
+En consecuencia, las regiones de multiestabilidad identificadas en los diagramas de bifurcación resultan particularmente relevantes desde el punto de vista cuántico, ya que en ellas coexisten estructuras regulares y caóticas del espacio de fases. Esto sugiere que, para dichos valores de los parámetros, el espectro cuántico puede contener simultáneamente familias de estados regulares asociados a toros invariantes y estados con propiedades estadísticas características del caos cuántico.
+
+Por lo tanto, las bifurcaciones analizadas anteriormente no solo marcan cambios en la estructura de los equilibrios clásicos, sino que también delimitan transiciones entre distintos regímenes dinámicos cuya firma puede observarse en la organización del espectro cuántico del sistema.
+
+\section{Soluciones de órbitas periódicas}
+
+Como se mencionó en el capítulo anterior, las órbitas periódicas son densas en todo el régimen de energías, por lo que no es posible continuarlas directamente respecto a un parámetro físico del sistema. Para superar esta limitación, se introduce un parámetro artificial $\lambda$, que siempre en una órbita periódica es nulo, y se presentan los resultados en términos del Hamiltoniano efectivo $\tilde{H}$.
+
+Los resultados de dicha continuación se muestran en la Figura~\ref{fig:OrbitBranches}, donde se representan las distintas ramas de órbitas periódicas en función del Hamiltoniano efectivo y su periodo.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/OrbitBranches/OrbitBranches.pdf}
+    \caption{Ramas de órbitas periódicas en función del Hamiltoniano efectivo $\tilde{H}$ y el periodo $T$. Cada curva corresponde a una familia de soluciones obtenidas mediante continuación numérica a partir de una órbita inicial.}
+    \label{fig:OrbitBranches}
+\end{figure}
+
+Las órbitas iniciales empleadas para generar cada una de estas ramas se muestran en la Figura~\ref{fig:InitialOrbits}, donde se presentan secciones de Poincaré representativas.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/InitialOrbits/E45.pdf}
+        \label{fig:E45}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/InitialOrbits/E180_1.pdf}
+        \label{fig:E180_1}
+    }
+
+    ```
+    \subfigure[]{
+        \includegraphics[width=0.6\textwidth]{Capitulo4/figs/InitialOrbits/E180_2.png}
+        \label{fig:E180_2}
+    }
+    \caption{
+        Secciones de Poincaré correspondientes a las órbitas iniciales utilizadas en la continuación de las ramas mostradas en la Figura~\ref{fig:OrbitBranches}. En particular:
+        (a) órbitas iniciales de las ramas 1 y 2 (colores azul y rojo, respectivamente) en una sección plana;
+        (b) órbita inicial de la rama 3 (color verde) en una sección plana;
+        (c) órbitas iniciales de las ramas 4 y 5 (colores naranja y amarillo, respectivamente) en una sección esférica.}
+    \label{fig:InitialOrbits}
+    ```
 
 \end{figure}
 
-\section{Soluciones periódicas}
+Como se observa en la Figura~\ref{fig:OrbitBranches}, las ramas de órbitas periódicas primarias presentan cambios de estabilidad de acuerdo con la teoría de Floquet. En consecuencia, se identifican dos tipos de bifurcaciones: duplicación de periodo y ramificación de ciclos. No obstante, este último tipo se considera únicamente de manera aproximada, debido a la ausencia de un método robusto de continuación basado en disparo múltiple. Por esta razón, el presente trabajo se centra en el análisis y continuación de las bifurcaciones de duplicación de periodo.
+
+Adicionalmente, se identifica la presencia de una órbita heteroclínica a una energía efectiva aproximada $\tilde{E}_H = 86.78935728$. La evidencia más fuerte de la presencia de al menos una órbita heteroclínica se observa en la Figura~\ref{fig:FloquetLog}, donde se aprecia un comportamiento exponencial del multiplicador de Floquet inestable respecto al periodo
+\[
+    |\mu_{u}(T)| = A \exp(\alpha T)
+\]
+en los periodos más altos de cada rama que son en la energía $E_H$. En principio, una órbita heteroclínica podría continuarse numéricamente respecto a $\tilde{k}$; sin embargo, su cálculo preciso requiere técnicas más avanzadas para evitar fallas numéricas consecuentes de la inestabilidad orbital que crece exponencialmente. El desarrollo de estos métodos avanzados se encuentra fuera del alcance de este trabajo. A pesar de ello, es posible inferir que las ramas asociadas al mínimo de energía (ramas 1 y 2) desaparecen al aproximarse a $\tilde{E}_H$, al transformarse en órbitas heteroclínicas. Este proceso da lugar a la aparición de nuevas ramas (4, 5 y 6), las cuales se conectan con soluciones cercanas al máximo de energía. Como se observa en las secciones de Poincaré de la Figura~\ref{fig:InitialOrbits}, estas órbitas tienden hacia los polos de la esfera, correspondientes a los estados límite en los que el pozo 3 se encuentra completamente lleno o vacío. En este sentido, la conexión heteroclínica actúa como una barrera dinámica entre las órbitas asociadas al mínimo y al máximo de energía.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/OrbitBranches/FloquetLog.pdf}
+    \caption{Gráfica logarítmica del multiplicador de Floquet inestable $\mu_u$ respecto al periodo $T$.}
+    \label{fig:FloquetLog}
+\end{figure}
+
+Una diferencia fundamental entre las ramas ligadas a los mínimos y a los máximos de energía radica en la naturaleza de los equilibrios a partir de los cuales emergen. En el caso del mínimo de energía, las órbitas nacen de un equilibrio bien definido y sin direcciones inestables. En contraste, las ramas cercanas a los polos de la esfera presentan una dinámica más compleja, debido a la indeterminación de la variable angular $\psi_2$ en dichas regiones.
+
+En particular, en el mínimo de energía existen dos frecuencias características, cada una asociada a las ramas 1 y 2. En términos del parámetro artificial introducido en la Ecuación~\eqref{eq:Orbit_System}, esto implica que para $\lambda = 0$ ocurre una bifurcación tipo Hopf doble \cite{Meijer2011}, de la cual emergen simultáneamente dos familias distintas de órbitas periódicas. Esta bifurcación tipo Hopf doble también puede ser continuada numéricamente respecto a $\tilde{k}$ en el contexto de la Ecuación~\eqref{eq:Orbit_System}, pero requiere técnicas numéricas avanzadas al ser de codimensión 2 \cite{Meijer2011} que se salen del alcance de este trabajo.
+
+Por lo anterior, no se abordará el estudio exhaustivo de todas las ramas que nacen en ciclos de duplicación de periodo a partir de las cinco ramas principales; en su lugar, el análisis se centrará en la estabilidad de dichas ramas y en la continuación de sus ciclos de duplicación de periodo. No obstante, se considera una excepción en dos casos particulares: las bifurcaciones de duplicación de periodo asociadas a las ramas 1 y 5, previas a las inestabilidades que conducen a la conexión heteroclínica. Estas bifurcaciones serán analizadas en detalle en una sección posterior, donde se interpretarán como parte de una posible cascada de duplicación de periodo.
+
+\section{Espacio de fases en ciclos de duplicación de periodo}
+
+El comportamiento del espacio de fases en un ciclo de duplicación de periodo se ilustra en la Figura~\ref{fig:FlipPointSections}, donde se muestran secciones de Poincaré representativas en las tres regiones características: antes, durante y después de la bifurcación.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipPointSections/EFP_0.pdf}
+        \label{fig:EFP_0}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipPointSections/EFP_1.pdf}
+        \label{fig:EFP_1}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.7\textwidth]{Capitulo4/figs/FlipPointSections/EFP_2.pdf}
+        \label{fig:EFP_2}
+    }
+    \caption{
+        Secciones de Poincaré que ilustran la estructura del espacio de fases en una bifurcación de duplicación de periodo:
+        (a) régimen previo a la bifurcación, donde se observa un único punto fijo estable (centro);
+        (b) en la energía crítica de bifurcación, donde el punto fijo pierde estabilidad (indicado en azul) y se vuelve no hiperbólico;
+        (c) régimen posterior a la bifurcación, donde el punto fijo original es inestable y aparecen dos nuevos puntos fijos estables asociados a la órbita de periodo doble.}
+    \label{fig:FlipPointSections}
+\end{figure}
+
+Esta transición se manifiesta de forma clara en la estructura local del espacio de fases. Antes de la bifurcación, la órbita periódica estable aparece como un centro, rodeado por toros cerrados. En la energía crítica, estos toros comienzan a deformarse y a comprimirse en una dirección. En el punto de bifurcación, el centro se vuelve inestable mientras que emergen dos nuevos centros estables, dispuestos de manera simétrica en la sección.
+
+La identificación de este cambio estructural resulta fundamental, ya que marca la transición entre dos regímenes cualitativamente distintos del espacio de fases. En particular, el sistema pasa de presentar una única región regular organizada alrededor de un centro, a una configuración con dos islas de estabilidad separadas por una órbita inestable. Desde el punto de vista del sistema cuántico correspondiente, esta reorganización del espacio de fases semiclásico se refleja en una modificación de la estructura de los estados cuánticos: por debajo de la energía crítica, se tiene una única familia de estados resonantes localizados; mientras que, por encima de esta, emergen dos familias simétricas de estados localizados, cada una asociada a una de las nuevas islas de estabilidad y caracterizadas por una estructura de resonancia distinta a la del régimen previo.
+
+\section{Espacio de fases alrededor de ciclos de ramificación y heteroclínicos}
+
+Como se mencionó anteriormente, además de los ciclos de duplicación de periodo, existen otras órbitas de interés: los ciclos de ramificación y las órbitas heteroclínicas, identificadas en la Figura~\ref{fig:OrbitBranches}. Dado que el cómputo numérico preciso de estos dos tipos de órbitas queda fuera del alcance de este trabajo, se consideran sus energías de manera aproximada. Esto permite analizar cualitativamente los cambios en el espacio de fases en vecindades de dichas energías, aun sin disponer de la localización exacta de las órbitas.
+
+\subsection{Ciclos de ramificación}
+
+Los cambios en el espacio de fases asociados a estos ciclos se muestran en la Figura~\ref{fig:BranchPointSection}.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/BranchPointSection/EBPC_0.pdf}
+        \label{fig:EBPC_0}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/BranchPointSection/EBPC_2.pdf}
+        \label{fig:EBPC_2}
+    }
+    \caption{
+        Secciones de Poincaré representativas del comportamiento del espacio de fases alrededor de un ciclo de ramificación:
+        (a) sección plana a una energía previa a la bifurcación y
+        (b) sección plana a una energía posterior a la bifurcación.}
+    \label{fig:BranchPointSection}
+\end{figure}
+
+Como se observa, a diferencia de los ciclos de duplicación de periodo —que ocurren dentro de regiones regulares—, en este caso la órbita inestable posterior a la bifurcación se encuentra inmersa en una región caótica del espacio de fases. Este comportamiento es consistente con el hecho de que los ciclos de ramificación considerados dan lugar a órbitas inestables que evolucionan hacia la formación de una conexión heteroclínica.
+
+\subsection{Ciclo heteroclínico}
+
+Los cambios en el espacio de fases asociados a la órbita heteroclínica se muestran en la Figura~\ref{fig:HeteroclinicConnection}.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/HeteroclinicConnection/EHC_0.png}
+        \label{fig:EHC_0}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/HeteroclinicConnection/EHC_1_1.png}
+        \label{fig:EHC_1_1}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/HeteroclinicConnection/EHC_1_2.png}
+        \label{fig:EHC_1_2}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/HeteroclinicConnection/EHC_2.png}
+        \label{fig:EHC_2}
+    }
+    \caption{
+        Secciones de Poincaré representativas del espacio de fases en torno a la conexión heteroclínica:
+        (a) sección esférica a una energía menor;
+        (b) sección esférica (vista frontal) cercana a $E_H$;
+        (c) sección esférica (vista posterior) en la misma energía;
+        (d) sección esférica a una energía mayor.}
+    \label{fig:HeteroclinicConnection}
+\end{figure}
+
+En este caso, el cambio estructural asociado a la órbita heteroclínica resulta particularmente evidente. Como se ha discutido, este tipo de órbitas se caracteriza por la coexistencia de direcciones fuertemente estables e inestables, reflejadas en multiplicadores de Floquet que tienden, respectivamente, a cero e infinito. Desde el punto de vista geométrico, esto se traduce en la formación de una estructura que organiza globalmente el espacio de fases, actuando como una frontera entre regiones de comportamiento regular y caótico.
+
+Esta propiedad es especialmente relevante en el contexto cuántico. La presencia de una conexión heteroclínica sugiere la coexistencia de dinámicas clásicas cualitativamente distintas dentro de un mismo régimen energético, lo que puede reflejarse en la aparición de estados cuánticos con características mixtas, es decir, con soporte tanto en regiones regulares como en regiones caóticas del espacio de fases. En este sentido, la órbita heteroclínica no solo delimita regiones dinámicas en el sistema clásico, sino que también desempeña un papel organizador en la estructura de los estados cuánticos asociados.
+
+\section{Cascada de duplicación de periodo y caos}
+
+
+\section{Ramas de ciclos de duplicación de periodo}
+
+
+
+
+
+
+
+
+
+Dado que el objetivo de este trabajo es analizar el comportamiento del sistema modulando el tunelaje de los pozos 1 y 3, se necesita obtener mediante la continuación ramas de doblamientos de periodo respecto a $\tilde{k}$.
+
+Esta ocasión, no se tiene una estructura clara que diferencie cada bifurcación como lo fue la combinación de fases en los equilibrios, por lo tanto el análisis se hará por rama.
+
+% \subsubsection{Rama de órbitas periódicas azul}
+
+El diagrama de energía--parámetro para estas bifurcaciones se muestra en la Figura~\ref{fig:FlipBranches1}
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/orbits/FlipBranches1.pdf}
+    \caption{Ramas de doblamientos de periodo correspondientes a la rama azul en la Figura~\ref{fig:OrbitBranches}.}
+    \label{fig:FlipBranches1}
+\end{figure}
 

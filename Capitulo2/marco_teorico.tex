@@ -370,35 +370,18 @@ En los casos en que los autovalores son puramente reales o puramente imaginarios
 Si un autovalor tiene parte real e imaginaria distintas de cero, el conjunto completo de autovalores se obtiene
 por simetría conjugada respecto a ambos ejes.
 
-Para estudiar la estabilidad de un equilibrio con autovalores puramente imaginarios (parte real nula), es necesario
-analizar el Hamiltoniano en términos de la función de Lyapunov. En tales casos, se considera que el equilibrio es estable en el
-sentido de Lyapunov si el Hamiltoniano \eqref{eq:normalize_hamiltonian} posee un máximo o mínimo local en dicho
-punto \added{y es inestable cuando posee un punto silla}, de acuerdo con el teorema de Dirichlet \cite{meyer1992introduction}.
-\replaced{Si el Hamiltoniano presenta una matriz Hessiana singular en el equilibrio, no es posible determinar la estabilidad
-    mediante los autovalores del método lineal y se requiere un análisis de orden superior para determinar la geometría del
-    Hamiltoniano en el equilibrio. En términos generales, este sigue siendo un problema abierto \cite{dos2010stability}.}
-{Si el Hamiltoniano presenta un punto silla o un punto
-    degenerado en el equilibrio con autovalores puramente imaginarios, la estabilidad no puede determinarse de manera concluyente,
-    y es necesario realizar un análisis de orden superior del Hamiltoniano. En términos generales, este sigue siendo un problema abierto \cite{dos2010stability}.}
+\deleted{Para estudiar la estabilidad de un equilibrio con autovalores puramente imaginarios (parte real nula), es necesario analizar el Hamiltoniano en términos de la función de Lyapunov. En tales casos, se considera que el equilibrio es estable en el sentido de Lyapunov si el Hamiltoniano \eqref{eq:normalize_hamiltonian} posee un máximo o mínimo local en dicho punto y es inestable cuando posee un punto silla, de acuerdo con el teorema de Dirichlet \cite{meyer1992introduction}. Si el Hamiltoniano presenta un punto silla o un punto degenerado en el equilibrio con autovalores puramente imaginarios, la estabilidad no puede determinarse de manera concluyente, y es necesario realizar un análisis de orden superior del Hamiltoniano. En términos generales, este sigue siendo un problema abierto \cite{dos2010stability}.}
 
-Por tanto\added{, si se adopta como función de Lyapunov el polinomio de grado 2 \( H_2 \) de la expansión de Taylor \cite{dos2010stability},}
-en este trabajo se propone la siguiente clasificación para las soluciones de equilibrio:
-
+Por tanto, \deleted{si se adopta como función de Lyapunov el polinomio de grado 2 \( H_2 \) de la expansión de Taylor \cite{dos2010stability},} en este trabajo se propone la siguiente clasificación para las soluciones de equilibrio \added{ de acuerdo a su espectro simpléctico: }
 \begin{itemize}
-
-    \item \textbf{Estable (en el sentido de Lyapunov):} Existen dos pares simétricos de autovalores puramente imaginarios
-          (parte real cero) y \added{la función de Lyapunov} tiene un mínimo o máximo local en el equilibrio. Una pequeña
-          perturbación induce oscilaciones alrededor del equilibrio, manteniendo constante la energía.
-
-    \item \textbf{Inestable:} Existe al menos un autovalor con parte real distinta de cero. Una
-          perturbación hace que el sistema se aleje del equilibrio, conservando la energía.
-
-    \item \textbf{No concluyente:} \replaced{Se presentan autovalores puramente imaginarios y la matriz
-              Hessiana de la función de Lyapunov es singular en el equilibrio. En este caso, podrían surgir inestabilidades no lineales
-              asociadas a resonancias.}{Se presentan autovalores puramente imaginarios, pero el Hamiltoniano
-              no exhibe un máximo ni un mínimo local. En este caso, podrían surgir inestabilidades no lineales
-              asociadas a resonancias.}
-
+    \item \textbf{Centro--Centro ($CC$):}
+          \added{Equilibrios cuyo espectro lineal está formado por dos pares de autovalores puramente imaginarios. En este caso la dinámica lineal es oscilatoria en ambas direcciones del espacio de fases.}
+    \item \textbf{Silla--Centro ($SC$):}
+          \added{Equilibrios que poseen un par de autovalores puramente imaginarios y un par de autovalores reales. Esto introduce una dirección estable/ inestable junto con una dirección oscilatoria.}
+    \item \textbf{Silla--Silla ($SS$):}
+          \added{Equilibrios cuyo espectro contiene dos pares de autovalores reales, lo que implica la presencia de dos direcciones hiperbólicas en el espacio de fases.}
+    \item \textbf{Foco--Foco ($FF$):}
+          \added{Equilibrios caracterizados por un autovalor complejo conjugado simpléctico. Esto produce una dinámica espiral hiperbólica en el espacio de fases.}
 \end{itemize}
 
 \subsection{Bifurcaciones de equilibrio}
@@ -409,7 +392,7 @@ de equilibrio: el \textbf{punto límite} y el \textbf{punto de ramificación}.
 
 Otra bifurcación de interés es la bifurcación de Hopf; sin embargo, en sistemas Hamiltonianos su análisis es
 considerablemente más complejo, debido a la simetría de los autovalores y a las posibles inestabilidades inducidas
-por resonancias \added{\cite{lahiri2001hamiltonian}}. Por esta razón, dichas soluciones no serán abordadas en el presente trabajo.
+por resonancias \added{\cite{lahiri2001hamiltonian}}. Por esta razón, dichas soluciones no serán abordadas \added{más allá de una aproximación} en el presente trabajo.
 
 \begin{itemize}
     \item \textbf{Punto límite: }También conocida como \textbf{saddle-node}, esta bifurcación se caracteriza por una solución de
