@@ -571,13 +571,17 @@ Los cambios en el espacio de fases asociados a estos ciclos se muestran en la Fi
         \label{fig:EBPC_2}
     }
     \caption{
-        Secciones de Poincaré representativas del comportamiento del espacio de fases alrededor de un ciclo de ramificación:
-        (a) sección plana a una energía previa a la bifurcación y
-        (b) sección plana a una energía posterior a la bifurcación.}
+        Secciones de Poincaré representativas del espacio de fases en torno a un ciclo de ramificación:
+        (a) energía previa a la bifurcación y
+        (b) energía posterior a la bifurcación.}
     \label{fig:BranchPointSection}
 \end{figure}
 
-Como se observa, a diferencia de los ciclos de duplicación de periodo —que ocurren dentro de regiones regulares—, en este caso la órbita inestable posterior a la bifurcación se encuentra inmersa en una región caótica del espacio de fases. Este comportamiento es consistente con el hecho de que los ciclos de ramificación considerados dan lugar a órbitas inestables que evolucionan hacia la formación de una conexión heteroclínica.
+Para estos ciclos de ramificación, de acuerdo con la Figura~\ref{fig:OrbitBranches}, se observa que aparecen previos a una serie de inestabilidades que conducen a la formación de una órbita heteroclínica. A diferencia de los ciclos de duplicación de periodo, no se identifican pares de bifurcaciones que delimiten un intervalo de estabilidad bien definido para estas ramas de órbitas periódicas.
+
+En este caso, las órbitas inestables presentan multiplicadores de Floquet reales positivos, lo cual indica la presencia de inestabilidad hiperbólica. Estas órbitas preceden a la formación de estructuras heteroclínicas en el espacio de fases.
+
+En consecuencia, es esperable que las secciones de Poincaré muestren un incremento en la complejidad dinámica al cruzar estas energías críticas, asociado al crecimiento exponencial de perturbaciones en torno a las órbitas inestables.
 
 \subsection{Ciclo heteroclínico}
 
@@ -616,29 +620,363 @@ Esta propiedad es especialmente relevante en el contexto cuántico. La presencia
 
 \section{Cascada de duplicación de periodo y caos}
 
+La primera cascada de duplicaciones de periodo se presenta en la rama 1 de la Figura~\ref{fig:OrbitBranches}, correspondiente a aquella previa a las inestabilidades que conducen a la órbita heteroclínica asociada. Al continuar numéricamente esta rama, así como las ramas que emergen de la bifurcación y aquellas que la preceden, se obtienen los siguientes valores de energía:
 
-\section{Ramas de ciclos de duplicación de periodo}
+\input{Capitulo4/figs/FlipCascade1/feigenbaum_table.tex}
 
-
-
-
-
-
-
-
-
-Dado que el objetivo de este trabajo es analizar el comportamiento del sistema modulando el tunelaje de los pozos 1 y 3, se necesita obtener mediante la continuación ramas de doblamientos de periodo respecto a $\tilde{k}$.
-
-Esta ocasión, no se tiene una estructura clara que diferencie cada bifurcación como lo fue la combinación de fases en los equilibrios, por lo tanto el análisis se hará por rama.
-
-% \subsubsection{Rama de órbitas periódicas azul}
-
-El diagrama de energía--parámetro para estas bifurcaciones se muestra en la Figura~\ref{fig:FlipBranches1}
+\noindent donde se observa una convergencia de tipo Feigenbaum (ver, por ejemplo, \cite{feigenbaum1978quantitative}) dada por
+\[
+    \delta_n = \dfrac{\tilde{H}_{n} - \tilde{H}_{n-1}}{\tilde{H}_{n-1} - \tilde{H}_{n-2}},
+\]
+lo cual constituye evidencia de una cascada de duplicación de periodo en este punto, como también se ilustra en la Figura~\ref{fig:FlipCascade1}.
 
 \begin{figure}[htbp]
     \centering
-    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/orbits/FlipBranches1.pdf}
-    \caption{Ramas de doblamientos de periodo correspondientes a la rama azul en la Figura~\ref{fig:OrbitBranches}.}
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade1/FlipCascade11.pdf}
+        \label{fig:FlipCascade11}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade1/FlipCascade12.pdf}
+        \label{fig:FlipCascade12}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade1/FlipCascade13.pdf}
+        \label{fig:FlipCascade13}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade1/FlipCascade14.pdf}
+        \label{fig:FlipCascade14}
+    }
+    \caption{
+        Ramas de órbitas periódicas que ilustran la cascada de duplicación de periodo en la rama 1. Se muestra la aparición sucesiva de órbitas de periodo duplicado conforme aumenta la energía.}
+    \label{fig:FlipCascade1}
+\end{figure}
+
+Para contrastar la estructura del espacio de fases asociada a órbitas inestables asociadas a una cascada de duplicación de periodo respecto a las órbitas inestables entre 2 ciclos de duplicación de periodo en la misma rama, se construyen las secciones de Poincaré correspondientes en la Figura~\ref{fig:FlipCascade1Sections}.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade1/EFPC1_0.pdf}
+        \label{fig:EFPC1_0}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade1/EFPC1_1.pdf}
+        \label{fig:EFPC1_1}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade1/EFPC1_2.pdf}
+        \label{fig:EFPC1_2}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade1/EFPC1_3.pdf}
+        \label{fig:EFPC1_3}
+    }
+    \caption{
+        Evolución de la sección de poincaré en la cascada de bifurcaciones de la rama 1.
+        (a) Órbita estable (círculo azul) de la rama principal.
+        (b) Órbita estable de 2-Periodo (círculos azules) de a primer rama emergente.
+        (c) Órbita estable de 4-Periodo (círculos azules) de la segunda rama emergente.
+        (d) Región después de la cascada en $E \approx 66.31491256$ de acuerdo a la Tabla~\ref{tab:FlipCascade1}.}
+    \label{fig:FlipCascade1Sections}
+\end{figure}
+
+Como se observa, estos ciclos de duplicación de periodo son relevantes, ya que las órbitas periódicas con un par de multiplicadores de Floquet de signo negativo se localizan en regiones caóticas del espacio de fases. Esto contrasta con otros escenarios de duplicación de periodo, en los que dichas órbitas inestables aparecen inmersas en regiones dominadas por toros invariantes, actuando como estructuras tipo vértice inestable (Figura~\ref{fig:FlipPointSections}).
+
+Asimismo, la cascada está asociada con la aparición de estructuras fractales en el espacio de fases para energías dentro de la región de acumulación. Este fenómeno puede dar lugar a trayectorias que exhiben comportamiento cuasiperiódico durante intervalos finitos de tiempo antes de transitar hacia regiones caóticas (véase, por ejemplo, \cite{strogatz2018nonlinear, ott2002chaos}).
+
+Desde el punto de vista cuántico, la presencia de regiones caóticas en el régimen semiclásico, inducidas por cascadas de duplicación de periodo, sugiere la posible existencia de autoestados cuánticos con características caóticas en el espectro de energías cercano a esta región, para la configuración de parámetros considerada \cite{mossmann2006semiclassical, habib1998decoherence}.
+
+La segunda cascada de bifurcaciones se presenta en la Tabla~\ref{tab:FlipCascade2} y en la Figura~\ref{fig:FlipCascade2}, correspondiente a la bifurcación de duplicación de periodo en la rama 3 de órbitas periódicas de la Figura~\ref{fig:OrbitBranches}.
+
+\input{Capitulo4/figs/FlipCascade2/feigenbaum_table.tex}
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade2/FlipCascade21.pdf}
+        \label{fig:FlipCascade21}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade2/FlipCascade22.pdf}
+        \label{fig:FlipCascade22}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade2/FlipCascade23.pdf}
+        \label{fig:FlipCascade23}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade2/FlipCascade24.pdf}
+        \label{fig:FlipCascade24}
+    }
+    \caption{
+        Ramas de órbitas periódicas que ilustran la cascada de duplicación de periodo en la rama 3. Se muestra la aparición sucesiva de órbitas de periodo duplicado conforme aumenta la energía.}
+    \label{fig:FlipCascade2}
+\end{figure}
+
+En este caso, únicamente se logró seguir la cascada hasta la sexta bifurcación, aún lejos del valor de $\delta_n$ alcanzado en la Tabla~\ref{tab:FlipCascade2}. Por ello, se propone como una posible cascada de duplicación de periodo, apoyándose en la estructura observada en las secciones de Poincaré de la Figura~\ref{fig:FlipCascade2Sections}.
+
+\begin{figure}[htbp]
+    \centering
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade2/EFPC2_0.pdf}
+        \label{fig:EFPC2_0}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade2/EFPC2_1.pdf}
+        \label{fig:EFPC2_1}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade2/EFPC2_2.pdf}
+        \label{fig:EFPC2_2}
+    }
+    \subfigure[]{
+        \includegraphics[width=0.45\textwidth]{Capitulo4/figs/FlipCascade2/EFPC2_4.pdf}
+        \label{fig:EFPC2_4}
+    }
+    \caption{
+        Evolución de la sección de poincaré en la cascada de bifurcaciones.
+        (a) Órbita estable (azul) de la rama principal.
+        (b) Órbita estable de 2-Periodo (azul) de a primer rama emergente.
+        (c) Órbita estable de 4-Periodo (azul) de la segunda rama emergente.
+        (d) Región después de la cascada en $E \approx 111.55409430$ de acuerdo a la Tabla~\ref{tab:FlipCascade2}.
+    }
+    \label{fig:FlipCascade2Sections}
+\end{figure}
+
+Gracias a estas dos cascadas, asociadas a ramas principales que emergen de extremos de energía, se tiene que para $\tilde{k} = 0$ existen intervalos de energía donde podrían aparecer autoestados cuánticos con características caóticas.
+
+\section{Ramas de ciclos de duplicación de periodo}
+
+Dado que el objetivo de este trabajo es analizar el comportamiento del sistema al modular el tunelaje entre los pozos 1 y 3, resulta necesario obtener, mediante continuación numérica, ramas de ciclos de duplicación de periodo en función del parámetro $\tilde{k}$.
+
+A diferencia del caso de los equilibrios, donde la combinación de fases permite clasificar claramente las bifurcaciones, en este contexto no se dispone de una estructura análoga. Por ello, el análisis se realizará de manera individual para cada rama.
+
+\subsection{Rama de órbitas periódicas 1}
+
+El diagrama de energía en función del parámetro asociado a estas bifurcaciones se muestra en la Figura~\ref{fig:FlipBranches1}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/FlipBranches/FlipBranches1.pdf}
+    \caption{Ramas de ciclos de duplicación de periodo asociadas a la rama de órbitas periódicas 1 mostrada en la Figura~\ref{fig:OrbitBranches}.}
     \label{fig:FlipBranches1}
 \end{figure}
 
+Un resultado relevante de este diagrama es la localización de un nuevo ciclo de duplicación de periodo en $\tilde{k} = 0$, el cual está topológicamente conectado con los ciclos de la rama 1, pero no se origina como bifurcación de ninguna de las ramas mostradas en la Figura~\ref{fig:OrbitBranches}. Este hecho sugiere una estructura global más compleja en el espacio de fases, cuya interpretación podría requerir un análisis más detallado.
+
+Por otro lado, al avanzar hacia valores $\tilde{k} > 0$, estas ramas presentan una dificultad numérica importante: las órbitas se aproximan a la frontera del espacio de fases, lo que complica su continuación. Este comportamiento se ilustra en la Figura~\ref{fig:FlipBranches1B}, donde se muestra la distancia mínima a la frontera, definida como
+\[
+    \mathrm{min}\{d(\tilde{\xi}(t), B)\} = \mathrm{min}\{J_{1}(t), J_{2}(t), K - J_{1}(t) - J_{2}(t)\},
+\]
+para algún $t \in [0, T]$.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/FlipBranches/FlipBranches1B.pdf}
+    \caption{Distancia mínima a la frontera del espacio de fases para las ramas mostradas en la Figura~\ref{fig:FlipBranches1}.}
+    \label{fig:FlipBranches1B}
+\end{figure}
+
+En la región $\tilde{k} < 0$, las bifurcaciones asociadas a esta rama se encuentran acotadas en el siguiente sentido:
+
+(i) Para $\tilde{k} < -8.52338727$, no se observan bifurcaciones relacionadas con la rama 1.
+
+(ii) Para $-8.52338727 \leq \tilde{k} < -0.10373183$, se observan entre una y dos bifurcaciones.
+
+(iii) Para $-0.10373183 \leq \tilde{k} \leq 0.22140271$, se observan entre tres y cuatro bifurcaciones.
+
+(iv) Para $\tilde{k} > 0.22140271$, se observan nuevamente entre una y dos bifurcaciones, hasta que las órbitas se aproximan a la frontera del sistema.
+
+Dentro de este comportamiento, destacan los siguientes puntos:
+
+(i) En $\tilde{k} \approx -8.52338727$, la rama asociada al ciclo de duplicación de menor energía presenta un punto de retorno.
+
+(ii) En $\tilde{k} \approx -0.10373183$, la rama asociada al ciclo de mayor energía presenta un comportamiento análogo.
+
+(iii) En $\tilde{k} \approx 0.22140271$, las ramas asociadas a los ciclos de menor energía desaparecen en la región de bajas energías.
+
+La región (iii) presenta la mayor diversidad de estructuras periódicas asociadas a la rama 1, lo que la convierte en una zona de particular interés. En particular, podría ser relevante para estudios cuánticos del sistema, donde la coexistencia de múltiples estructuras clásicas suele reflejarse en propiedades espectrales no triviales (aquí convendría añadir una cita general sobre cuantización semiclásica o sistemas mixtos).
+
+Por otro lado, la región (i) resulta de interés debido a que, al aumentar $|\tilde{k}|$, el sistema tiende a aproximarse a un sistema efectivo de dos pozos, lo cual reduce la complejidad dinámica y el número de inestabilidades presentes cerca de $\tilde{k}=0$ \cite{gallemi2015fragmented}.
+
+Uno de los ciclos de duplicación de periodo presentes en esta rama corresponde a la primera cascada analizada en la sección anterior. Debido a que el costo computacional de la continuación aumenta significativamente con el periodo y el número de nodos, se realizó la continuación únicamente de dos ciclos adicionales a partir del ciclo inicial. Los resultados se muestran en la Figura~\ref{fig:FlipCascade1Branches}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/FlipCascadeBranches.pdf}
+    \caption{Ramas correspondientes a los tres primeros ciclos de duplicación de periodo reportados en la Tabla~\ref{tab:FlipCascade1}.}
+    \label{fig:FlipCascade1Branches}
+\end{figure}
+
+Como se ha mencionado, cuando $|\tilde{k}|$ es grande, el sistema se aproxima a un sistema de dos pozos. En este régimen, es razonable esperar que las regiones caóticas asociadas a la cascada de duplicación de periodo pierdan estructura conforme $\tilde{k}$ se aleja de cero. Este comportamiento se observa en la Figura~\ref{fig:FlipCascade1Branches}, donde los primeros tres ciclos comienzan a separarse y a perder la organización característica de la cascada.
+
+Esto sugiere que la energía crítica asociada a la acumulación de duplicaciones de periodo se desplaza en el espacio de parámetros, dificultando la observación de la transición al caos a partir de estos ciclos iniciales.
+
+\subsection{Rama de órbitas periódicas 2}
+
+Las ramas de ciclos de duplicación de periodo asociadas a la rama 2 se muestran en la Figura~\ref{fig:FlipBranches2}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/FlipBranches/FlipBranches2.pdf}
+    \caption{Ramas de ciclos de duplicación de periodo asociadas a la rama de órbitas periódicas 2 mostrada en la Figura~\ref{fig:OrbitBranches}.}
+    \label{fig:FlipBranches2}
+\end{figure}
+
+A diferencia de la rama 1, en este caso se observa un intervalo bien definido en el parámetro $\tilde{k}$ donde existen ciclos de duplicación de periodo asociados a la rama 2. En particular:
+
+(i) Para $\tilde{k} < -0.15086646$, no se observan ciclos de duplicación de periodo.
+
+(ii) Para $-0.15086646 \leq \tilde{k} \leq 0.12870211$, se observan hasta dos ciclos de duplicación.
+
+(iii) Para $0.12870211 < \tilde{k} < 0.22796687$, se observa un único ciclo de duplicación.
+
+(iv) Para $0.22796687 \leq \tilde{k} \leq 0.24888140$, se observan nuevamente hasta dos ciclos de duplicación.
+
+(v) Para $\tilde{k} > 0.24888140$, no se observan ciclos de duplicación de periodo.
+
+Dentro de este intervalo, destacan los siguientes puntos:
+
+(i) En $\tilde{k} \approx -0.15086646$, las ramas presentan un punto de retorno.
+
+(ii) En $\tilde{k} \approx 0.12870211$, se observa un ciclo de duplicación con periodo relativamente grande.
+
+(iii) En $\tilde{k} \approx 0.22796687$, aparece también un ciclo de duplicación con periodo elevado.
+
+(iv) En $\tilde{k} \approx 0.24888140$, se identifica otro punto de retorno de las ramas.
+
+Estas regiones delimitan zonas de interés dinámico. En particular, las regiones (ii) y (iv) corresponden a valores de $\tilde{k}$ donde se observa una mayor diversidad de ciclos asociados a la rama 2, mientras que la región (iii) presenta una estructura más simple.
+
+En este caso, se observa un comportamiento distinto al de la rama 1: las ramas no se interrumpen debido a la cercanía a la frontera del espacio de fases, sino porque sus periodos crecen significativamente, sugiriendo un comportamiento de tipo asintótico. Esto se muestra en la Figura~\ref{fig:FlipBranches2T}, donde se presenta la dependencia del periodo respecto a $\tilde{k}$.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/FlipBranches/FlipBranches2T.pdf}
+    \caption{Periodo de las ramas de ciclos de duplicación de periodo mostradas en la Figura~\ref{fig:FlipBranches2}.}
+    \label{fig:FlipBranches2T}
+\end{figure}
+
+La presencia de ciclos de duplicación con periodos crecientes sugiere la posible existencia de órbitas con tiempos característicos muy grandes sin que necesariamente se observe una pérdida inmediata de estabilidad. En particular, en los casos estudiados, los multiplicadores de Floquet parecen permanecer organizados en pares cercanos a $+1$ y $-1$, lo cual indicaría una dinámica marginalmente estable (aquí convendría respaldar con una referencia sobre bifurcaciones de tipo flip y comportamiento cercano a multiplicadores $\pm 1$).
+
+Este comportamiento motiva la exploración más profunda de estas ramas mediante continuación numérica, con el objetivo de identificar ciclos de duplicación con periodos cada vez mayores y caracterizar su posible acumulación en el espacio de parámetros.
+
+\subsection{Rama de órbitas periódicas 3}
+
+Las ramas de ciclos de duplicación de periodo asociadas a la rama 3 se muestran en la Figura~\ref{fig:FlipBranches3}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/FlipBranches/FlipBranches3.pdf}
+    \caption{Ramas de ciclos de duplicación de periodo asociadas a la rama de órbitas periódicas 3 mostrada en la Figura~\ref{fig:OrbitBranches}.}
+    \label{fig:FlipBranches3}
+\end{figure}
+
+De manera similar a lo observado en la rama 1, estas ramas terminan en una región cercana a la frontera del espacio de fases, lo que dificulta su continuación numérica. Este comportamiento se ilustra en la Figura~\ref{fig:FlipBranches3B}, donde se muestra la distancia mínima a la frontera.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/FlipBranches/FlipBranches3B.pdf}
+    \caption{Distancia mínima a la frontera del espacio de fases para las ramas mostradas en la Figura~\ref{fig:FlipBranches3}.}
+    \label{fig:FlipBranches3B}
+\end{figure}
+
+Debido a esta limitación, el análisis de esta rama es más restringido. En particular, se identifica la siguiente región:
+
+(i) Para $\tilde{k} > 5.19141972$, no se observan ciclos de duplicación de periodo asociados a la rama 3.
+
+El punto $\tilde{k} \approx 5.19141972$ corresponde a un punto de retorno de las ramas. Para valores menores de $\tilde{k}$, las órbitas se aproximan considerablemente a la frontera del espacio de fases, lo que impide determinar con certeza si existen soluciones que continúen más allá en una región extremadamente cercana a dicha frontera.
+
+A pesar de estas limitaciones, esta rama resulta de particular interés, ya que el ciclo de duplicación de periodo asociado da lugar a una cascada, como se reporta en la Tabla~\ref{tab:FlipCascade2}. Por esta razón, se realizó la continuación de los tres primeros ciclos de duplicación asociados a esta cascada. Los resultados correspondientes se presentan en la Figura~\ref{fig:FlipCascade3Branches}.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.6\textwidth]{Capitulo4/figs/FlipCascade3Branches.pdf}
+%     \caption{Ramas correspondientes a los tres primeros ciclos de duplicación de periodo asociados a la rama 3 (véase la Tabla~\ref{tab:FlipCascade1}).}
+%     \label{fig:FlipCascade3Branches}
+% \end{figure}
+
+
+
+\subsection{Rama de órbitas periódicas 4}
+
+Las ramas de ciclos de duplicación de periodo asociadas a la rama 4 se muestran en la Figura~\ref{fig:FlipBranches4}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/FlipBranches/FlipBranches4.pdf}
+    \caption{Ramas de ciclos de duplicación de periodo asociadas a la rama de órbitas periódicas 4 mostrada en la Figura~\ref{fig:OrbitBranches}.}
+    \label{fig:FlipBranches4}
+\end{figure}
+
+A partir de este diagrama, se identifican dos regiones principales en el parámetro $\tilde{k}$:
+
+(i) Para $-9.73147578 \leq \tilde{k} < -0.96208550$, se observan dos ciclos de duplicación de periodo. En este intervalo, el ciclo de mayor energía está relacionado con el ciclo de menor energía en $\tilde{k} = 0$.
+
+(ii) Para $-0.96208550 < \tilde{k} \leq 9.87723986$, se observan nuevamente dos ciclos de duplicación; sin embargo, la estructura de las ramas cambia: el ciclo de mayor energía se conecta con el ciclo de mayor energía en el régimen $\tilde{k} > 0$.
+
+Existe un valor particular, $\tilde{k} \approx -0.96208550$, en el cual las ramas intercambian su orden relativo en energía. En las cercanías de este valor, ambos ciclos aparecen en una misma sección de Poincaré y a una energía aproximadamente igual, $\tilde{E} \approx 89.03759527$.
+
+Este comportamiento sugiere la presencia de una reorganización de las ramas en el espacio de fases, posiblemente asociada a una bifurcación global o a un cambio en la estructura de las variedades invariantes (aquí convendría respaldar con una referencia sobre reconexión de ramas o bifurcaciones globales en sistemas Hamiltonianos).
+
+La sección de Poincaré correspondiente a esta configuración se muestra en la Figura~\ref{fig:FlipBranches4Poincare}.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.6\textwidth]{Capitulo4/figs/FlipBranches/FlipBranches4Poincare.pdf}
+%     \caption{Sección de Poincaré en $\tilde{k} \approx -0.96208550$, donde se observa la coexistencia de los ciclos de duplicación de periodo a energías similares.}
+%     \label{fig:FlipBranches4Poincare}
+% \end{figure}
+
+\subsection{Rama de órbitas periódicas 5}
+
+Las ramas de ciclos de duplicación de periodo asociadas a la rama 5 se muestran en la Figura~\ref{fig:FlipBranches5}.
+
+\begin{figure}[htbp]
+    \centering
+    \includegraphics[width=0.6\textwidth]{Capitulo4/figs/FlipBranches/FlipBranches5.pdf}
+    \caption{Ramas de ciclos de duplicación de periodo asociadas a la rama de órbitas periódicas 5 mostrada en la Figura~\ref{fig:OrbitBranches}.}
+    \label{fig:FlipBranches5}
+\end{figure}
+
+A partir de este diagrama, se identifican las siguientes regiones en el parámetro $\tilde{k}$:
+
+(i) Para $-9.98616768 \leq \tilde{k} < -7.10468978$, se observa un único ciclo de duplicación de periodo, relacionado con el ciclo de menor energía en $\tilde{k} = 0$.
+
+(ii) Para $-7.10468978 \leq \tilde{k} < -1.06256668$, se observan hasta tres ciclos de duplicación de periodo.
+
+(iii) Para $-1.06256668 < \tilde{k} \leq 5.72572796$, se observan nuevamente hasta tres ciclos de duplicación, aunque con un cambio en la estructura de las ramas.
+
+(iv) Para $5.72572796 < \tilde{k} \leq 9.99088052$, se observa un único ciclo de duplicación de periodo, ahora relacionado con el ciclo de mayor energía en $\tilde{k} = 0$.
+
+Dentro de este comportamiento, destacan los siguientes valores de $\tilde{k}$:
+
+(i) En $\tilde{k} \approx -7.10468978$, la rama asociada al ciclo de duplicación de mayor energía presenta un punto de retorno.
+
+(ii) En $\tilde{k} \approx -1.06256668$, dos ramas se intersectan en el plano $(\tilde{H}, \tilde{k})$, lo que sugiere la coexistencia de ambos ciclos en una misma sección de Poincaré.
+
+(iii) En $\tilde{k} \approx 5.72572796$, la rama asociada al ciclo de menor energía presenta un comportamiento análogo, con la aparición de un punto de retorno.
+
+La sección de Poincaré correspondiente a la configuración (ii) se muestra en la Figura~\ref{fig:FlipBranches5Poincare}.
+
+% \begin{figure}[htbp]
+%     \centering
+%     \includegraphics[width=0.6\textwidth]{Capitulo4/figs/FlipBranches/FlipBranches5Poincare.pdf}
+%     \caption{Sección de Poincaré en $\tilde{k} \approx -1.06256668$, donde se observa la coexistencia de dos ciclos de duplicación de periodo a energías similares.}
+%     \label{fig:FlipBranches5Poincare}
+% \end{figure}
+
+\section{Comparación global de las ramas de ciclos de duplicación de periodo}
+
+El análisis de las ramas de ciclos de duplicación de periodo asociadas a las distintas familias de órbitas periódicas revela una estructura dinámica rica y heterogénea en el espacio de parámetros. En particular, cada rama presenta mecanismos característicos que determinan tanto la existencia de las bifurcaciones como su organización en energía y en el espacio de fases.
+
+Por un lado, la rama 1 muestra un comportamiento compatible con una cascada de duplicación de periodo, en la que se observa una acumulación progresiva de bifurcaciones que sugiere una transición hacia el caos. No obstante, este proceso se ve limitado por la proximidad a la frontera del espacio de fases, lo que introduce restricciones tanto dinámicas como numéricas en la continuación de las ramas.
+
+En contraste, la rama 2 exhibe un comportamiento distinto, caracterizado por un crecimiento significativo del periodo de las órbitas sin que estas alcancen la frontera del sistema. Este hecho sugiere la posible aproximación a estructuras globales del espacio de fases, como conexiones homoclínicas o heteroclínicas, o bien a regímenes de estabilidad marginal asociados a multiplicadores de Floquet cercanos a $\pm 1$. En este caso, la transición dinámica parece estar dominada por la geometría global del sistema más que por mecanismos locales de bifurcación.
+
+Por otro lado, la rama 3 combina características de los casos anteriores, ya que presenta una cascada de duplicación de periodo que, sin embargo, se ve truncada por la cercanía a la frontera del espacio de fases. Esto sugiere que la frontera no solo actúa como una limitación técnica en la continuación numérica, sino también como un elemento relevante en la organización de la dinámica.
+
+Las ramas 4 y 5, por su parte, ponen de manifiesto procesos de reorganización más complejos. En la rama 4 se observa un intercambio en el orden relativo de las ramas en energía, lo que sugiere una posible reconexión en el espacio de fases o un cambio en la estructura de las variedades invariantes. En la rama 5, además, se identifican intersecciones en el plano $(\tilde{H}, \tilde{k})$ que indican la coexistencia de múltiples ciclos de duplicación de periodo con energías similares, reflejando un régimen de multiestructura dinámica.
+
+En conjunto, estos resultados muestran que la modulación del parámetro $\tilde{k}$ induce una amplia variedad de comportamientos en el sistema, que van desde cascadas de duplicación de periodo hasta la influencia de estructuras globales y la coexistencia de múltiples soluciones periódicas. Esto pone de manifiesto la complejidad del sistema de tres pozos en geometría anular, y sugiere que su dinámica no puede ser descrita por un único mecanismo de transición, sino por la interacción de varios procesos no lineales que dependen de la región del espacio de parámetros considerada.
